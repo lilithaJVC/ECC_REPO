@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Banner section -->
+<div class="banner">
+    <h1 class="display-4">Entrepreneurship Support Platform</h1>
+
+    <div class="marquee-container">
+        <marquee behavior="scroll" direction="left">
+            <span>Welcome to Entrepreneurship Support Platform!Make a Change in your life, We Are Here To Assist you</span>
+        </marquee>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-bar">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+</div>
+
+<div class="text-center">
+    <!-- Increase the size of the image using width and height -->
+    <img src="~/images/ECC_Home_Page.png" alt="Sample Image" style="width: px; height: auto;" class="img-fluid" />
+</div>
+
+<!-- Footer section -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 ECC. All Rights Reserved.</p>
+        <p>Follow us on <a href="#">Social Media</a></p>
+    </div>
+</footer>
+
+<style>
+    /* Banner styling */
+    .banner {
+        width: 100%;
+        background-color: #4CAF50; /* Dark green background for the banner */
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-bottom: 20px;
+        position: relative; /* Make the banner a positioned container */
+    }
+
+    .banner h1 {
+        font-size: 3rem; /* Adjust font size as needed */
+        font-weight: bold;
+        font-style: italic;
+        margin: 0;
+    }
+
+    /* Search bar styling */
+    .search-container {
+        position: absolute;
+        top: 20px; /* Adjust as needed */
+        right: 20px; /* Adjust as needed */
+        display: flex;
+        align-items: center;
+    }
+
+    .search-bar {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        width: 200px; /* Adjust width as needed */
+    }
+
+    .search-button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #4CAF50;
+        cursor: pointer;
+    }
+
+    .search-button:hover {
+        background-color: #ddd;
+    }
+
+    /* Footer styling */
+    .footer {
+        background-color: #f1f1f1; /* Light grey background for the footer */
+        color: #333; /* Dark text color */
+        text-align: center;
+        padding: 20px 0;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .footer a {
+        color: #4CAF50; /* Green color for links */
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+</style>
