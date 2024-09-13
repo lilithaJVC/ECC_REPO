@@ -2,6 +2,8 @@
 {
     public class StudentRegistration
     {
+        public StudentRegistration() { }
+
         public StudentRegistration(string firstname, string lastname, string email, string password)
         {
             Firstname = firstname;
