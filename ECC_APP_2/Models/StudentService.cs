@@ -24,5 +24,17 @@ namespace ECC_APP_2.Models
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> LoginStudent(StudentLogIn student)
+        {
+            var content = new StringContent(
+                JsonSerializer.Serialize(student),
+                System.Text.Encoding.UTF8,
+                "application/json");
+
+            var response = await _httpClient.PostAsync("api/Student/Login", content); // Adjust the endpoint as needed
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }

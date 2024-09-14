@@ -12,6 +12,13 @@ public class Program
             client.BaseAddress = new Uri("https://localhost:7187/"); // Correct base URL for your API
         });
 
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+        });
 
 
         builder.Services.AddControllersWithViews();
@@ -23,6 +30,8 @@ public class Program
         {
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
+            app.UseSession();
+
         }
 
         app.UseHttpsRedirection();

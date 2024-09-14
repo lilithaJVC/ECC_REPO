@@ -1,8 +1,8 @@
-using ECC_APP_2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using ECC_APP_2.Models;
 
 namespace ECC_APP_2.Controllers
 {
@@ -11,7 +11,6 @@ namespace ECC_APP_2.Controllers
         private readonly StudentService _studentService;
         private readonly ILogger<HomeController> _logger;
 
-        // Ensure there is only one constructor, with all necessary dependencies
         public HomeController(StudentService studentService, ILogger<HomeController> logger)
         {
             _studentService = studentService;
@@ -44,7 +43,54 @@ namespace ECC_APP_2.Controllers
             return View(model);  // Pass the model back to the view in case of errors
         }
 
+        public IActionResult StLogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StLogIn(StudentLogIn model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var isSuccess = await _studentService.LoginStudent(model);
+            if (isSuccess)
+            {
+                ViewBag.Message = "Login successful!";
+                // Redirect to another page or dashboard after successful login
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Message = "Login failed. Please check your email and password.";
+                return View(model);
+            }
+        }
+
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult UploadCentre()
+        {
+            return View();
+        }
+
+        public IActionResult Networking()
+        {
+            return View();
+        }
+
+        public IActionResult InResourcesdex()
+        {
+            return View();
+        }
+
+        public IActionResult Bussiness_Showcase()
         {
             return View();
         }

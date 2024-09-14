@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var firstName = ViewBag.FirstName as string;
 }
 
 <!-- Banner section -->
@@ -8,9 +9,15 @@
 
     <div class="marquee-container">
         <marquee behavior="scroll" direction="left">
-            <span>Welcome to Entrepreneurship Support Platform!Make a Change in your life, We Are Here To Assist you</span>
+            <span>Welcome to Entrepreneurship Support Platform! Make a Change in your life, We Are Here To Assist you</span>
         </marquee>
     </div>
+
+    <!-- Display personalized welcome message -->
+    @if (!string.IsNullOrEmpty(firstName))
+    {
+        <h2>Welcome, @firstName!</h2>
+    }
 
     <!-- Search Bar -->
     <div class="search-container">
@@ -44,12 +51,12 @@
         position: relative; /* Make the banner a positioned container */
     }
 
-    .banner h1 {
-        font-size: 3rem; /* Adjust font size as needed */
-        font-weight: bold;
-        font-style: italic;
-        margin: 0;
-    }
+        .banner h1 {
+            font-size: 3rem; /* Adjust font size as needed */
+            font-weight: bold;
+            font-style: italic;
+            margin: 0;
+        }
 
     /* Search bar styling */
     .search-container {
@@ -78,9 +85,9 @@
         cursor: pointer;
     }
 
-    .search-button:hover {
-        background-color: #ddd;
-    }
+        .search-button:hover {
+            background-color: #ddd;
+        }
 
     /* Footer styling */
     .footer {
@@ -93,12 +100,12 @@
         width: 100%;
     }
 
-    .footer a {
-        color: #4CAF50; /* Green color for links */
-        text-decoration: none;
-    }
+        .footer a {
+            color: #4CAF50; /* Green color for links */
+            text-decoration: none;
+        }
 
-    .footer a:hover {
-        text-decoration: underline;
-    }
+            .footer a:hover {
+                text-decoration: underline;
+            }
 </style>
