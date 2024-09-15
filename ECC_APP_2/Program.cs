@@ -5,11 +5,19 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+
+
         // Register HttpClient and StudentService
         builder.Services.AddHttpClient<StudentService>(client =>
         {
             client.BaseAddress = new Uri("https://localhost:7187/"); // Correct base URL for your API
         });
+
+        builder.Services.AddHttpClient<FundingGuideService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7187/"); // Your API base URL
+        });
+
 
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession(options =>

@@ -9,7 +9,18 @@ namespace ECC_APP_2.Controllers
 {
     public class StudentRegistrationController : Controller
     {
-        
+        private readonly StudentService _studentService;
+        private readonly ILogger<HomeController> _logger;
+
+        public StudentRegistrationController(StudentService studentService, ILogger<HomeController> logger)
+        {
+            _studentService = studentService;
+            _logger = logger;
+        }
+
+
+
+
         public IActionResult Index()
         {
             return View();

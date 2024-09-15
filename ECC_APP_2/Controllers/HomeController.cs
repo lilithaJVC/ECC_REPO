@@ -91,7 +91,7 @@ namespace ECC_APP_2.Controllers
             return View();
         }
 
-        public IActionResult InResourcesdex()
+        public IActionResult Resources()
         {
             return View();
         }
@@ -111,5 +111,42 @@ namespace ECC_APP_2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        //funding guide code 
+
+        public IActionResult FundingGuide()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FundingGuide(FundingGuideTemplate model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var fundingGuideService = new FundingGuideService(new HttpClient());
+            var isSuccess = await fundingGuideService.SaveFundingGuide(model);
+            if (isSuccess)
+            {
+                ViewBag.Message = "Funding Guide saved successfully!";
+            }
+            else
+            {
+                ViewBag.Message = "Failed to save Funding Guide. Please try again.";
+            }
+
+            return View(model);
+        }
+
+
+        public IActionResult LoadPartialView(string partialViewName)
+        {
+            return PartialView(partialViewName);
+        }
+
     }
 }

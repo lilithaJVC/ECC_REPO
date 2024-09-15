@@ -1,5 +1,44 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ECC_APP_2.Models.FundingGuideTemplate
+
 @{
+    ViewData["Title"] = "Resources";
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css"> <!-- Link to your CSS file -->
+    <style>
+        .center-italic {
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="center-italic">Resources</h1>
+
+    <!-- Container to load partial views dynamically -->
+    <div id="dynamic-content">
+        @await Html.PartialAsync("_FundingGuidePartial") <!-- Initially load the FundingGuide partial -->
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Dynamically load partial views when buttons are clicked
+            $('#load-funding').click(function () {
+                $('#dynamic-content').load('/Home/LoadPartialView?partialViewName=_FundingGuidePartial');
+            });
+
+            $('#load-business').click(function () {
+                $('#dynamic-content').load('/Home/LoadPartialView?partialViewName=_BusinessProposalPartial');
+            });
+        });
+    </script>
+</body>
+</html>
