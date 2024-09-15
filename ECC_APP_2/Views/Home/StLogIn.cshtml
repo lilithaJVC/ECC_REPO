@@ -4,19 +4,23 @@
     ViewData["Title"] = "StLogIn";
 }
 
-<h1>StLogIn</h1>
+<!-- Blur background container -->
+<div class="background-blur"></div>
 
-<h4>StudentLogIn</h4>
-<hr />
-@if (ViewBag.Message != null)
-{
-    <div class="alert alert-info">
-        @ViewBag.Message
-    </div>
-}
+<!-- Form container with centered form and heading -->
+<div class="form-container">
+    <div class="form-content">
+        <h1 class="text-center">StLogIn</h1>
+        <h4 class="text-center">Student Log In</h4>
+        <hr />
 
-<div class="row">
-    <div class="col-md-4">
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
+
         <form asp-action="StLogIn" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -33,12 +37,53 @@
                 <input type="submit" value="Log In" class="btn btn-primary" />
             </div>
         </form>
+        <div class="text-center mt-3">
+            <a asp-action="Index">Back to List</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<!-- CSS styling -->
+<style>
+    /* Create a blur effect on the background */
+    .background-blur {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/path/to/your/background-image.jpg'); /* Add background image */
+        background-size: cover;
+        background-position: center;
+        filter: blur(10px); /* Apply blur effect */
+        z-index: -1; /* Keep it behind the form */
+    }
+
+    /* Center the form container */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+        z-index: 1;
+    }
+
+    .form-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+        width: 100%;
+        max-width: 400px; /* Limit form width */
+        text-align: center;
+    }
+
+    /* Ensure page doesn't scroll */
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+</style>
 
 @section Scripts {
     @{

@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var firstName = ViewBag.FirstName as string;
+    var userEmail = ViewBag.UserEmail as string;
 }
 
 <!-- Banner section -->
@@ -14,9 +14,9 @@
     </div>
 
     <!-- Display personalized welcome message -->
-    @if (!string.IsNullOrEmpty(firstName))
+    @if (!string.IsNullOrEmpty(userEmail))
     {
-        <h2>Welcome, @firstName!</h2>
+        <h2>Welcome, @userEmail!</h2>
     }
 
     <!-- Search Bar -->

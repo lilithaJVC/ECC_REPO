@@ -59,8 +59,11 @@ namespace ECC_APP_2.Controllers
             var isSuccess = await _studentService.LoginStudent(model);
             if (isSuccess)
             {
+                // Store the email in session
+                HttpContext.Session.SetString("UserEmail", model.Email);
+
                 ViewBag.Message = "Login successful!";
-                // Redirect to another page or dashboard after successful login
+                // Redirect to the Index action after successful login
                 return RedirectToAction("Index");
             }
             else
@@ -72,6 +75,9 @@ namespace ECC_APP_2.Controllers
 
         public IActionResult Index()
         {
+            // Retrieve the email from session
+            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
+
             return View();
         }
 

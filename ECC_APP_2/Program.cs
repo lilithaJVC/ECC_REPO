@@ -1,5 +1,4 @@
 using ECC_APP_2.Models;
-
 public class Program
 {
     public static void Main(string[] args)
@@ -20,7 +19,6 @@ public class Program
             options.Cookie.IsEssential = true;
         });
 
-
         builder.Services.AddControllersWithViews();
 
         var app = builder.Build();
@@ -30,14 +28,14 @@ public class Program
         {
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
-            app.UseSession();
-
         }
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
+        app.UseSession(); // Add this line to use sessions
+
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
