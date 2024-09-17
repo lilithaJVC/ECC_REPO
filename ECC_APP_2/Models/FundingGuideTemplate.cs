@@ -6,8 +6,9 @@
         public FundingGuideTemplate() { }
 
         // Parameterized constructor
-        public FundingGuideTemplate(string fundingPurpose, int amountRequested, string bussinessOverview, string bussinessName, string mission, string bussinessModel, string totalFunding, string useOfFunds, string expenses, string profitability, string industry, string competitors, string marketTrends, string keyMembersandRoles, string keyMilestones, string timeline, string risks, string riskPlan, string summary, string name, string email, string phoneNumber)
+        public FundingGuideTemplate(int fundingGuideId, string fundingPurpose, int amountRequested, string bussinessOverview, string bussinessName, string mission, string bussinessModel, string totalFunding, string useOfFunds, string expenses, string profitability, string industry, string competitors, string marketTrends, string keyMembersandRoles, string keyMilestones, string timeline, string risks, string riskPlan, string summary, string name, string email, string phoneNumber)
         {
+            FundingGuideId = fundingGuideId;
             FundingPurpose = fundingPurpose;
             AmountRequested = amountRequested;
             BussinessOverview = bussinessOverview;
@@ -32,6 +33,7 @@
             this.phoneNumber = phoneNumber;
         }
 
+        public int FundingGuideId { get; set; } // Add this property
         public string FundingPurpose { get; set; }
         public int AmountRequested { get; set; }
         public String BussinessOverview { get; set; }

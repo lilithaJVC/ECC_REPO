@@ -217,11 +217,24 @@
                             color: white;
                         }
                 </style>
+                <form asp-action="FundingGuide" method="post">
+                    <div class="btn-group">
+                        <input type="submit" value="Save Template" class="btn btn-baby-green mx-2" />
+                    </div>
+                </form>
 
-                <div class="btn-group">
-                    <input type="submit" value="Save Template" class="btn btn-baby-green mx-2" />
-                    <input type="submit" value="Download Template" class="btn btn-baby-green mx-2" />
-                </div>
+                <form asp-action="DownloadTemplate" method="get">
+                    <div class="btn-group">
+                        <input type="submit" value="Download Template" class="btn btn-baby-green mx-2" />
+                    </div>
+                </form>
+
+                <form asp-action="Resources" method="get">
+                    <div class="btn-group">
+                        <input type="submit" value="Back" class="btn btn-baby-green mx-2" />
+                    </div>
+                </form>
+
 
             </form>
         </div>

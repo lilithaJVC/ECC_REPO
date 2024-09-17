@@ -2,6 +2,8 @@ using ECC_APP_2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ECC_APP_2.Controllers
@@ -9,15 +11,18 @@ namespace ECC_APP_2.Controllers
     public class HomeController : Controller
     {
         private readonly StudentService _studentService;
-        private readonly BusinessProposalService _businessProposalService; // Corrected name
+        private readonly BusinessProposalService _businessProposalService;
+        private readonly FundingGuideService _fundingGuideService; // Added funding guide service
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(StudentService studentService, BusinessProposalService businessProposalService, ILogger<HomeController> logger)
+        public HomeController(StudentService studentService, BusinessProposalService businessProposalService, FundingGuideService fundingGuideService, ILogger<HomeController> logger)
         {
             _studentService = studentService;
-            _businessProposalService = businessProposalService; // Corrected name
+            _businessProposalService = businessProposalService;
+            _fundingGuideService = fundingGuideService; // Initialize funding guide service
             _logger = logger;
         }
+
 
         public IActionResult RegisterStudent()
         {
@@ -148,7 +153,68 @@ namespace ECC_APP_2.Controllers
         public IActionResult LoadPartialView(string partialViewName)
         {
             return PartialView(partialViewName);
+
+
         }
+
+        public IActionResult DownloadTemplate()
+        {
+            // Define the ID for the funding guide you want to fetch
+            int fundingGuideId = 1; // Replace with the actual ID or logic to get the ID
+            var fileName = "BusinessProposalTemplate.docx";
+
+            // Fetch the content asynchronously
+            var fileContentTask = GenerateTemplateContent(fundingGuideId);
+            fileContentTask.Wait(); // Wait for the task to complete synchronously
+            var fileContent = fileContentTask.Result;
+
+            // Create a file stream for the content
+            var fileStream = new MemoryStream(Encoding.UTF8.GetBytes(fileContent));
+
+            // Return the file as a download
+            return File(fileStream, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
+        }
+
+        // Helper method to generate or fetch the template content
+        private async Task<string> GenerateTemplateContent(int id)
+        {
+            var fundingGuide = await _fundingGuideService.GetFundingGuideById(id);
+
+            if (fundingGuide == null)
+            {
+                return "Funding guide not found.";
+            }
+
+         
+            return $"Funding Guide Template \n   \nFunding Guide ID: {fundingGuide.FundingGuideId}\n" +
+                   $"Funding Purpose: {fundingGuide.FundingPurpose}\n" +
+                       $"Bussiness Overview: {fundingGuide.BussinessOverview}\n" +
+                         $"Business name: {fundingGuide.BussinessName}\n" +
+                           $"Mission: {fundingGuide.Mission}\n" +
+                             $"BussinessModel {fundingGuide.BussinessModel}\n" +
+                               $"TotalFunding: {fundingGuide.TotalFunding}\n" +
+                                 $"UseOfFunds: {fundingGuide.UseOfFunds}\n" +
+                                   $"Expenses: {fundingGuide.expenses}\n" +
+
+                                     $"Profitability: {fundingGuide.Profitability}\n" +
+                                       $"Industry: {fundingGuide.industry}\n" +
+                                         $"Competitors: {fundingGuide.Competitors}\n" +
+                                           $"MarketTrends: {fundingGuide.marketTrends}\n" +
+                                             $"KeyMembersAndRoles: {fundingGuide.keyMembersandRoles}\n" +
+                                               $"KeyMilestones: {fundingGuide.keyMilestones}\n" +
+                                                 $"Timeline: {fundingGuide.Timeline}\n" +
+                                                   $"Risks: {fundingGuide.Risks}\n" +
+                                                     $"RiskPlan: {fundingGuide.RiskPlan}\n" +
+
+                                                      $"Summary: {fundingGuide.summary}\n" +
+                                                       $"Name: {fundingGuide.name}\n" +
+                                                        $"Email: {fundingGuide.email}\n" +
+                                                         $"PhoneNumber: {fundingGuide.phoneNumber}\n" +
+                                                        
+                   $"Amount Requested: {fundingGuide.AmountRequested}";
+        }
+
+
 
         // Business Proposal code
 
