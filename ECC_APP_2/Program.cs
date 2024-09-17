@@ -18,6 +18,10 @@ public class Program
             client.BaseAddress = new Uri("https://localhost:7187/"); // Your API base URL
         });
 
+        builder.Services.AddHttpClient<BusinessProposalService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7187/"); // Your API base URL
+        });
 
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession(options =>

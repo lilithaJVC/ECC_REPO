@@ -1,19 +1,21 @@
+using ECC_APP_2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using ECC_APP_2.Models;
 
 namespace ECC_APP_2.Controllers
 {
     public class HomeController : Controller
     {
         private readonly StudentService _studentService;
+        private readonly BusinessProposalService _businessProposalService; // Corrected name
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(StudentService studentService, ILogger<HomeController> logger)
+        public HomeController(StudentService studentService, BusinessProposalService businessProposalService, ILogger<HomeController> logger)
         {
             _studentService = studentService;
+            _businessProposalService = businessProposalService; // Corrected name
             _logger = logger;
         }
 
@@ -42,6 +44,8 @@ namespace ECC_APP_2.Controllers
 
             return View(model);  // Pass the model back to the view in case of errors
         }
+
+        // Student login code
 
         public IActionResult StLogIn()
         {
@@ -112,8 +116,7 @@ namespace ECC_APP_2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        //funding guide code 
+        // Funding Guide code
 
         public IActionResult FundingGuide()
         {
@@ -142,11 +145,38 @@ namespace ECC_APP_2.Controllers
             return View(model);
         }
 
-
         public IActionResult LoadPartialView(string partialViewName)
         {
             return PartialView(partialViewName);
         }
 
+        // Business Proposal code
+
+        public IActionResult BusinessProposal()
+        {
+            // Render the BusinessProposal form view
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BusinessProposal(BussinessProposalTemplate model) // Corrected model name
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var isSuccess = await _businessProposalService.SaveBusinessProposal(model);
+            if (isSuccess)
+            {
+                ViewBag.Message = "Business proposal successfully captured.";
+            }
+            else
+            {
+                ViewBag.Message = "Failed to save Business Proposal. Please try again.";
+            }
+
+            return View(model);  // Pass the model back to the view in case of errors
+        }
     }
 }

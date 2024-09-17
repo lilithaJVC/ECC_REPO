@@ -1,0 +1,74 @@
+﻿@model ECC_APP_2.Models.BussinessProposalTemplate
+
+@{
+    ViewData["Title"] = "BusinessProposal";
+}
+
+<h1>Business Proposal</h1>
+
+<h4>BussinessProposalTemplate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="BusinessProposal" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ExecutiveSummary" class="control-label"></label>
+                <input asp-for="ExecutiveSummary" class="form-control" />
+                <span asp-validation-for="ExecutiveSummary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Introduction" class="control-label"></label>
+                <input asp-for="Introduction" class="form-control" />
+                <span asp-validation-for="Introduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProposedSolution" class="control-label"></label>
+                <input asp-for="ProposedSolution" class="form-control" />
+                <span asp-validation-for="ProposedSolution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="problemSolution" class="control-label"></label>
+                <input asp-for="problemSolution" class="form-control" />
+                <span asp-validation-for="problemSolution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BudgetandPenalties" class="control-label"></label>
+                <input asp-for="BudgetandPenalties" class="form-control" />
+                <span asp-validation-for="BudgetandPenalties" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Benefits" class="control-label"></label>
+                <input asp-for="Benefits" class="form-control" />
+                <span asp-validation-for="Benefits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TermsandConditions" class="control-label"></label>
+                <input asp-for="TermsandConditions" class="form-control" />
+                <span asp-validation-for="TermsandConditions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Appendix" class="control-label"></label>
+                <input asp-for="Appendix" class="form-control" />
+                <span asp-validation-for="Appendix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save Proposal" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div class="text-success">
+            @ViewBag.Message
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
