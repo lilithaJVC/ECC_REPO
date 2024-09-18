@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var userEmail = ViewBag.UserEmail as string;
+   
 }
 
 <!-- Banner section -->
@@ -13,17 +13,8 @@
         </marquee>
     </div>
 
-    <!-- Display personalized welcome message -->
-    @if (!string.IsNullOrEmpty(userEmail))
-    {
-        <h2>Welcome, @userEmail!</h2>
-    }
+  
 
-    <!-- Search Bar -->
-    <div class="search-container">
-        <input type="text" placeholder="Search..." class="search-bar">
-        <button type="submit" class="search-button">Search</button>
-    </div>
 </div>
 
 <div class="text-center">

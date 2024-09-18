@@ -23,6 +23,18 @@ namespace ECC_APP_2.Controllers
             _logger = logger;
         }
 
+        //administator login 
+
+        public IActionResult AdminRegistration()
+        {
+            return View();
+        }
+
+        public IActionResult AdminLogin()
+        {
+            return View();
+        }
+
 
         public IActionResult RegisterStudent()
         {
@@ -73,7 +85,7 @@ namespace ECC_APP_2.Controllers
 
                 ViewBag.Message = "Login successful!";
                 // Redirect to the Index action after successful login
-                return RedirectToAction("Index");
+                return RedirectToAction("Resources");
             }
             else
             {
@@ -84,8 +96,7 @@ namespace ECC_APP_2.Controllers
 
         public IActionResult Index()
         {
-            // Retrieve the email from session
-            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
+          
 
             return View();
         }
@@ -102,6 +113,8 @@ namespace ECC_APP_2.Controllers
 
         public IActionResult Resources()
         {
+            // Retrieve the email from session
+            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
             return View();
         }
 

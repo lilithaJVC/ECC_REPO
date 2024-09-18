@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "RegisterStudent";
+    Layout = null;
 }
 
 @if (ViewBag.Message != null)
@@ -11,82 +12,56 @@
     </div>
 }
 
-<div class="background-blur"></div> <!-- This will hold the blurred background -->
-<!-- Form container including the heading and form -->
-<div class="form-container">
-    <div class="form-content">
-        <h1 class="text-center">Register Student</h1> <!-- Center the heading -->
-        <form asp-action="RegisterStudent" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Firstname" class="control-label"></label>
-                <input asp-for="Firstname" class="form-control" />
-                <span asp-validation-for="Firstname" class="text-danger"></span>
+<!-- Include Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+<!-- Background image for the page -->
+<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
+    <!-- Registration form container -->
+    <div class="flex items-center justify-center min-h-screen bg-background">
+        <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
+            <!-- Centering the logo -->
+            <div class="flex justify-center mb-4">
+                <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="w-16 h-16" />
             </div>
-            <div class="form-group">
-                <label asp-for="Lastname" class="control-label"></label>
-                <input asp-for="Lastname" class="form-control" />
-                <span asp-validation-for="Lastname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" type="password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
-            </div>
-        </form>
+
+            <!-- Display message if any -->
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+
+            <!-- Registration form -->
+            <form asp-action="RegisterStudent" method="post" class="mt-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-4">
+                    <input asp-for="Firstname" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="First Name" required />
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Lastname" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Last Name" required />
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Email" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Email Address" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Password" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Password" type="password" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="w-full bg-lime-500 text-black py-2 rounded-md hover:bg-lime-600">Register</button>
+            </form>
+
+            <!-- Footer links -->
+            <p class="mt-4 text-center text-sm text-muted-foreground">
+                Already have an account? <a href="/Home/StLogIn" class="text-blue-500 hover:underline">Login now</a>
+            </p>
+        </div>
     </div>
-</div>
-
-<style>
-    /* Create a blur effect on the background */
-    .background-blur {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('/path/to/your/background-image.jpg'); /* Background image */
-        background-size: cover;
-        background-position: center;
-        filter: blur(10px); /* Apply blur only to the background */
-        z-index: -1; /* Keep it behind the form */
-    }
-
-    /* Center the form container */
-    .form-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; /* Full viewport height */
-    }
-
-    .form-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow for depth */
-        width: 100%;
-        max-width: 400px; /* Limit the width of the form */
-        z-index: 1; /* Keep the form above the background */
-        text-align: center; /* Center content inside */
-    }
-
-    /* Ensure the page doesn't scroll */
-    body {
-        margin: 0;
-        overflow: hidden;
-    }
-
-    /* Center the heading */
-    .text-center {
-        text-align: center;
-    }
-</style>
+</body>

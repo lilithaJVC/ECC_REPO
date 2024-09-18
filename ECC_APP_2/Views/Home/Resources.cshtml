@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Resources";
+    var userEmail = ViewBag.UserEmail as string;
 }
 
 <!DOCTYPE html>
@@ -17,9 +18,39 @@
             font-style: italic;
         }
 
+        .small-welcome {
+            text-align: center;
+            font-size: 14px; /* Adjust the font size here */
+            color: #555; /* Optional: add a softer color */
+        }
+
+        /* Search bar styling */
+        .search-container {
+            position: absolute;
+            top: 20px;
+            right: 20px; /* Adjust distance from the right edge */
+        }
+
+        .search-bar {
+            padding: 5px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         .button-container {
             display: flex;
             gap: 20px; /* Space between the buttons */
+            justify-content: center; /* Center the buttons */
         }
 
         .resource-button img {
@@ -36,23 +67,34 @@
     </style>
 </head>
 <body>
+    <!-- Search Bar at Top Right -->
+    <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-bar">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+
+    <!-- Centered Resources Heading -->
     <h1 class="center-italic">Resources</h1>
+
+    <!-- Display personalized welcome message in smaller font below the heading -->
+    @if (!string.IsNullOrEmpty(userEmail))
+    {
+        <h2 class="small-welcome">Welcome, @userEmail!</h2>
+    }
 
     <!-- Container for the image buttons -->
     <div class="button-container">
         <!-- Funding Guide Button -->
-       
         <form asp-controller="Home" asp-action="FundingGuide" method="get" class="resource-button">
             <button type="submit">
-                <img src="~/images/funding3.jpg" alt="Funding Guide" />
+                <img src="~/images/fundingguide.jpeg" alt="Funding Guide" />
             </button>
-         
         </form>
 
         <!-- Business Proposal Button -->
         <form asp-controller="Home" asp-action="BusinessProposal" method="get" class="resource-button">
             <button type="submit">
-                <img src="~/images/businessproposal.jpg" alt="Business Proposal" />
+                <img src="~/images/businessproposal.jpeg" alt="Business Proposal" />
             </button>
         </form>
     </div>

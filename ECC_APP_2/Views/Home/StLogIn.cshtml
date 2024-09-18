@@ -2,91 +2,102 @@
 
 @{
     ViewData["Title"] = "StLogIn";
+    Layout = null;
 }
 
-<!-- Blur background container -->
-<div class="background-blur"></div>
-
-<!-- Form container with centered form and heading -->
-<div class="form-container">
-    <div class="form-content">
-        <h1 class="text-center">StLogIn</h1>
-        <h4 class="text-center">Student Log In</h4>
-        <hr />
-
-        @if (ViewBag.Message != null)
-        {
-            <div class="alert alert-info">
-                @ViewBag.Message
-            </div>
+<!-- Include Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+<script type="text/javascript">
+    window.tailwind.config = {
+        darkMode: ['class'],
+        theme: {
+            extend: {
+                colors: {
+                    border: 'hsl(var(--border))',
+                    input: 'hsl(var(--input))',
+                    ring: 'hsl(var(--ring))',
+                    background: 'hsl(var(--background))',
+                    foreground: 'hsl(var(--foreground))',
+                    primary: {
+                        DEFAULT: 'hsl(var(--primary))',
+                        foreground: 'hsl(var(--primary-foreground))'
+                    },
+                    secondary: {
+                        DEFAULT: 'hsl(var(--secondary))',
+                        foreground: 'hsl(var(--secondary-foreground))'
+                    },
+                    destructive: {
+                        DEFAULT: 'hsl(var(--destructive))',
+                        foreground: 'hsl(var(--destructive-foreground))'
+                    },
+                    muted: {
+                        DEFAULT: 'hsl(var(--muted))',
+                        foreground: 'hsl(var(--muted-foreground))'
+                    },
+                    accent: {
+                        DEFAULT: 'hsl(var(--accent))',
+                        foreground: 'hsl(var(--accent-foreground))'
+                    },
+                    popover: {
+                        DEFAULT: 'hsl(var(--popover))',
+                        foreground: 'hsl(var(--popover-foreground))'
+                    },
+                    card: {
+                        DEFAULT: 'hsl(var(--card))',
+                        foreground: 'hsl(var(--card-foreground))'
+                    }
+                }
+            }
         }
+    };
+</script>
 
-        <form asp-action="StLogIn" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<!-- Background image for the page -->
+<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
+    <!-- Login form container -->
+    <div class="flex items-center justify-center min-h-screen bg-background">
+        <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
+            <!-- Centering the logo -->
+            <div class="flex justify-center mb-4">
+                <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="w-16 h-16" />
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" type="password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+
+            <!-- Display message if any -->
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+
+            <!-- Login form -->
+            <form asp-action="StLogIn" method="post" class="mt-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-4">
+                    <input asp-for="Email" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Email Address" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Password" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Password" type="password" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="w-full bg-lime-500 text-black py-2 rounded-md hover:bg-lime-600">Log In</button>
+            </form>
+
+            <!-- Registration link -->
+            <p class="mt-4 text-center text-sm text-muted-foreground">
+                Don't have an account? <a href="/Home/RegisterStudent" class="text-blue-500 hover:underline">Register now</a>
+            </p>
+
+            <!-- Footer links -->
+            <div class="mt-2 text-center text-xs text-muted-foreground">
+                <a href="#" class="hover:underline">Privacy Policy</a> |
+                <a href="#" class="hover:underline">About</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Log In" class="btn btn-primary" />
-            </div>
-        </form>
-        <div class="text-center mt-3">
-            <a asp-action="Index">Back to List</a>
+
+            <p class="mt-2 text-center text-xs text-muted-foreground">Contact: 013545821</p>
         </div>
     </div>
-</div>
-
-<!-- CSS styling -->
-<style>
-    /* Create a blur effect on the background */
-    .background-blur {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('/path/to/your/background-image.jpg'); /* Add background image */
-        background-size: cover;
-        background-position: center;
-        filter: blur(10px); /* Apply blur effect */
-        z-index: -1; /* Keep it behind the form */
-    }
-
-    /* Center the form container */
-    .form-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; /* Full viewport height */
-        z-index: 1;
-    }
-
-    .form-content {
-        background-color: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-        width: 100%;
-        max-width: 400px; /* Limit form width */
-        text-align: center;
-    }
-
-    /* Ensure page doesn't scroll */
-    body {
-        margin: 0;
-        overflow: hidden;
-    }
-</style>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+</body>
