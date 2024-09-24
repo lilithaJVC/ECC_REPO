@@ -19,9 +19,9 @@ namespace ECC_APP_2.Models
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync("https://localhost:7187/api/FundingGuideTemplate", content);
-
             return response.IsSuccessStatusCode;
         }
+
 
         public async Task<FundingGuideTemplate> GetFundingGuideById(int id)
         {
@@ -35,5 +35,19 @@ namespace ECC_APP_2.Models
 
             return null; // or handle this case as needed
         }
+
+        public async Task<List<FundingGuideTemplate>> GetAllFundingGuides()
+        {
+            var response = await _httpClient.GetAsync("https://localhost:7187/api/FundingGuideTemplate");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<List<FundingGuideTemplate>>(jsonResponse);
+            }
+
+            return new List<FundingGuideTemplate>(); // Return an empty list if the call fails
+        }
+
     }
 }

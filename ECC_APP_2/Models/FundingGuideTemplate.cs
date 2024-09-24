@@ -5,9 +5,9 @@
         // Parameterless constructor
         public FundingGuideTemplate() { }
 
-        // Parameterized constructor
-        public FundingGuideTemplate(int fundingGuideId, string fundingPurpose, int amountRequested, string bussinessOverview, string bussinessName, string mission, string bussinessModel, string totalFunding, string useOfFunds, string expenses, string profitability, string industry, string competitors, string marketTrends, string keyMembersandRoles, string keyMilestones, string timeline, string risks, string riskPlan, string summary, string name, string email, string phoneNumber)
+        public FundingGuideTemplate(int studentNum, int fundingGuideId, string fundingPurpose, int amountRequested, string bussinessOverview, string bussinessName, string mission, string bussinessModel, string totalFunding, string useOfFunds, string expenses, string profitability, string industry, string competitors, string marketTrends, string keyMembersandRoles, string keyMilestones, string timeline, string risks, string riskPlan, string summary, string name, string email, string phoneNumber)
         {
+            StudentNum = studentNum;
             FundingGuideId = fundingGuideId;
             FundingPurpose = fundingPurpose;
             AmountRequested = amountRequested;
@@ -32,6 +32,13 @@
             this.email = email;
             this.phoneNumber = phoneNumber;
         }
+
+
+
+        // Parameterized constructor
+
+
+        public int StudentNum { get; set; } // Change from string to int
 
         public int FundingGuideId { get; set; } // Add this property
         public string FundingPurpose { get; set; }

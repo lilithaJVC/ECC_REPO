@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "StLogIn";
-    Layout = null;
+    // Layout = null;
 }
 
 <!-- Include Tailwind CSS CDN -->
@@ -54,7 +54,7 @@
 </script>
 
 <!-- Background image for the page -->
-<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
+<body class="bg-cover bg-center" style="background-image: url('https://ibb.co/qBC50CB');">
     <!-- Login form container -->
     <div class="flex items-center justify-center min-h-screen bg-background">
         <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
@@ -72,6 +72,15 @@
             <!-- Login form -->
             <form asp-action="StLogIn" method="post" class="mt-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-4">
+                    <input asp-for="studentNum" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Student ID" required />
+                    <span asp-validation-for="studentNum" class="text-danger"></span>
+                </div>
+                <div class="mb-4">
+                    <input asp-for="Firstname" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="First Name" required />
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                </div>
 
                 <div class="mb-4">
                     <input asp-for="Email" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Email Address" required />

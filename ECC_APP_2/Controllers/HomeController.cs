@@ -12,29 +12,62 @@ namespace ECC_APP_2.Controllers
     {
         private readonly StudentService _studentService;
         private readonly BusinessProposalService _businessProposalService;
-        private readonly FundingGuideService _fundingGuideService; // Added funding guide service
+        private readonly FundingGuideService _fundingGuideService;
+        private readonly AdminService _adminService;
+        private readonly MentorService _mentorService; // Add MentorService
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(StudentService studentService, BusinessProposalService businessProposalService, FundingGuideService fundingGuideService, ILogger<HomeController> logger)
+        public HomeController(StudentService studentService, BusinessProposalService businessProposalService,
+                              FundingGuideService fundingGuideService, AdminService adminService,
+                              MentorService mentorService, ILogger<HomeController> logger) // Initialize MentorService
         {
             _studentService = studentService;
             _businessProposalService = businessProposalService;
-            _fundingGuideService = fundingGuideService; // Initialize funding guide service
+            _fundingGuideService = fundingGuideService;
+            _adminService = adminService;
+            _mentorService = mentorService; // Initialize MentorService
             _logger = logger;
         }
 
-        //administator login 
 
+        // Admin registration page
         public IActionResult AdminRegistration()
         {
             return View();
         }
 
+        // Admin login page
         public IActionResult AdminLogin()
         {
             return View();
         }
 
+        // Admin login POST method
+        [HttpPost]
+        public async Task<IActionResult> AdminLogin(AdminRegistration model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Call API for admin login
+            var isSuccess = await _adminService.LoginAdmin(model);
+            if (isSuccess)
+            {
+                TempData["Message"] = "Login successful!";
+                // Redirect to a dashboard or admin panel after successful login
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["Message"] = "Login failed. Please check your email and password.";
+            }
+
+            return View(model);
+        }
+
+        //student registration 
 
         public IActionResult RegisterStudent()
         {
@@ -80,11 +113,13 @@ namespace ECC_APP_2.Controllers
             var isSuccess = await _studentService.LoginStudent(model);
             if (isSuccess)
             {
-                // Store the email in session
+                // Store the email and first name in session
                 HttpContext.Session.SetString("UserEmail", model.Email);
+                HttpContext.Session.SetString("UserFirstname", model.Firstname);
+                HttpContext.Session.SetInt32("UserID", model.studentNum);
 
                 ViewBag.Message = "Login successful!";
-                // Redirect to the Index action after successful login
+                // Redirect to the Resources action after successful login
                 return RedirectToAction("Resources");
             }
             else
@@ -94,6 +129,15 @@ namespace ECC_APP_2.Controllers
             }
         }
 
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("IsStudentLoggedIn");
+            TempData["Message"] = "You have been logged out.";
+            return RedirectToAction("Index");
+        }
+
+
         public IActionResult Index()
         {
           
@@ -101,10 +145,7 @@ namespace ECC_APP_2.Controllers
             return View();
         }
 
-        public IActionResult UploadCentre()
-        {
-            return View();
-        }
+      
 
         public IActionResult Networking()
         {
@@ -113,15 +154,14 @@ namespace ECC_APP_2.Controllers
 
         public IActionResult Resources()
         {
-            // Retrieve the email from session
-            ViewBag.UserEmail = HttpContext.Session.GetString("UserEmail");
+            // Retrieve the first name from session
+            ViewBag.UserFirstname = HttpContext.Session.GetString("UserFirstname");
             return View();
         }
 
-        public IActionResult Bussiness_Showcase()
-        {
-            return View();
-        }
+
+
+
 
         public IActionResult Privacy()
         {
@@ -149,19 +189,33 @@ namespace ECC_APP_2.Controllers
                 return View(model);
             }
 
-            var fundingGuideService = new FundingGuideService(new HttpClient());
-            var isSuccess = await fundingGuideService.SaveFundingGuide(model);
+            var studentNum = HttpContext.Session.GetInt32("UserID");
+            if (studentNum.HasValue)
+            {
+                model.StudentNum = studentNum.Value;
+            }
+            else
+            {
+                ModelState.AddModelError("", "User not logged in.");
+                return View(model);
+            }
+
+            var isSuccess = await _fundingGuideService.SaveFundingGuide(model);
             if (isSuccess)
             {
                 ViewBag.Message = "Funding Guide saved successfully!";
             }
             else
             {
+                _logger.LogError("Failed to save Funding Guide. API returned a failure response.");
                 ViewBag.Message = "Failed to save Funding Guide. Please try again.";
             }
 
             return View(model);
         }
+
+
+
 
         public IActionResult LoadPartialView(string partialViewName)
         {
@@ -257,5 +311,71 @@ namespace ECC_APP_2.Controllers
 
             return View(model);  // Pass the model back to the view in case of errors
         }
+        // Mentor login GET method
+        public IActionResult MentorLogin()
+        {
+            return View();
+        }
+
+        // Mentor login POST method
+        [HttpPost]
+        public async Task<IActionResult> MentorLogin(Mentor model) // Correct type to Mentor
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var isSuccess = await _mentorService.LoginMentor(model); // Pass the correct model
+            if (isSuccess)
+            {
+                TempData["Message"] = "Login successful!";
+                return RedirectToAction("MentorDashboard");
+            }
+            else
+            {
+                TempData["Message"] = "Login failed. Please check your email and password.";
+            }
+
+            return View(model);
+        }
+        public async Task<IActionResult> Bussiness_Showcase()
+        {
+            return View();
+        }
+
+
+        public async Task<IActionResult> MentorDashboard()
+        {
+            // Fetch all business proposals and funding guides
+            var businessProposals = await _businessProposalService.GetAllBusinessProposals();
+            var fundingGuides = await _fundingGuideService.GetAllFundingGuides();
+
+            // Create a MentorDashboardViewModel and populate it with the proposals and guides
+            var viewModel = new MentorDashboardViewModel
+            {
+                BusinessProposals = businessProposals,
+                FundingGuides = fundingGuides
+            };
+
+            // Pass the view model to the view
+            return View(viewModel);
+        }
+
+
+       
+
+        public IActionResult StudentInfo()
+        {
+            return View();
+        }
+
+        public IActionResult StudentNotification()
+        {
+            return View();
+        }
+
+        
+
     }
 }

@@ -1,7 +1,7 @@
-﻿@model ECC_APP_2.Models.AdminRegistration
+﻿@model ECC_APP_2.Models.Mentor
 
 @{
-    ViewData["Title"] = "Admin Login";
+    ViewData["Title"] = "MentorLogin";
 }
 
 @if (TempData["Message"] != null)
@@ -10,19 +10,19 @@
         @TempData["Message"]
     </div>
 }
-
-<!-- Include Tailwind CSS -->
+@* 
+// Include Tailwind CSS *@
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-
-<!-- Background image for the page -->
-<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
+@* 
+// Background image for the page
+ *@<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
     <div class="flex items-center justify-center min-h-screen bg-background">
         <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
             <div class="flex justify-center mb-4">
                 <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="w-16 h-16" />
             </div>
 
-            <form asp-action="AdminLogin" method="post" class="mt-6">
+            <form asp-action="MentorLogin" method="post" class="mt-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="mb-4">

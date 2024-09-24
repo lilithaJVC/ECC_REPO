@@ -19,4 +19,15 @@ public class BusinessProposalService
         var response = await _httpClient.PostAsJsonAsync("api/BusinessProposalTemplate", model);
         return response.IsSuccessStatusCode;
     }
+
+    public async Task<List<BussinessProposalTemplate>> GetAllBusinessProposals()
+    {
+        var response = await _httpClient.GetAsync("api/BusinessProposalTemplate");
+        if (response.IsSuccessStatusCode)
+        {
+            return await response.Content.ReadFromJsonAsync<List<BussinessProposalTemplate>>();
+        }
+        return new List<BussinessProposalTemplate>();
+    }
+
 }

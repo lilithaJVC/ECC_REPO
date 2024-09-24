@@ -1,8 +1,8 @@
 ﻿@model ECC_APP_2.Models.FundingGuideTemplate
 
 @{
-    ViewData["Title"] = "Resources";
-    var userEmail = ViewBag.UserEmail as string;
+    ViewData["Title"] = "Business & Funding Proposal Resources";
+    var userFirstname = ViewBag.UserFirstname as string;
 }
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="~/css/site.css">
     <style>
         .center-italic {
             text-align: center;
@@ -20,15 +20,16 @@
 
         .small-welcome {
             text-align: center;
-            font-size: 14px; /* Adjust the font size here */
-            color: #555; /* Optional: add a softer color */
+            font-size: 14px;
+            color: #555;
         }
 
-        /* Search bar styling */
         .search-container {
             position: absolute;
             top: 20px;
-            right: 20px; /* Adjust distance from the right edge */
+            right: 20px;
+            display: flex;
+            align-items: center; /* Align items vertically */
         }
 
         .search-bar {
@@ -47,58 +48,171 @@
             cursor: pointer;
         }
 
+        .icon {
+            width: 24px; /* Adjust size as needed */
+            height: 24px; /* Adjust size as needed */
+            margin-left: 10px; /* Space between search bar and icons */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+
         .button-container {
             display: flex;
-            gap: 20px; /* Space between the buttons */
-            justify-content: center; /* Center the buttons */
+            flex-direction: column;
+            gap: 45px;
+            margin-top: 20px;
         }
 
         .resource-button img {
             width: 200px;
             height: 200px;
-            border-radius: 10px; /* Optional: rounded corners */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .resource-button {
             border: none;
             background: none;
+            text-align: left;
+        }
+
+        .resource-button h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .upload-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .upload-status {
+            margin-top: 10px;
+            color: #28a745;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+        }
+
+        .review-button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px; /* Space between buttons */
+        }
+
+        .video-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+        }
+
+        .video-container div {
+            margin: 0 10px; /* Space between videos */
+        }
+
+        .video-container iframe {
+            width: 300px; /* Fixed width */
+            height: 200px; /* Fixed height */
+            border: none;
+        }
+
+        .video-heading {
+            font-size: 18px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Search Bar at Top Right -->
+
     <div class="search-container">
+        
+
+        <a asp-controller="Home" asp-action="StudentNotification">
+            <img src="~/images/notification2-removebg-preview (1).png" alt="Notifications" class="icon" />
+        </a>
+        <a asp-controller="Home" asp-action="StudentInfo">
+            <img src="~/images/profile2-removebg-preview (1).png" alt="Profile" class="icon" />
+        </a>
         <input type="text" placeholder="Search..." class="search-bar">
         <button type="submit" class="search-button">Search</button>
+
+
     </div>
 
-    <!-- Centered Resources Heading -->
+
     <h1 class="center-italic">Resources</h1>
 
-    <!-- Display personalized welcome message in smaller font below the heading -->
-    @if (!string.IsNullOrEmpty(userEmail))
-    {
-        <h2 class="small-welcome">Welcome, @userEmail!</h2>
-    }
+    <div class="small-welcome">
+        Welcome, @userFirstname!
+    </div>
 
-    <!-- Container for the image buttons -->
+    <div class="video-container">
+        <div>
+            <h3 class="video-heading">Learn about business proposals:</h3>
+            <iframe src="https://www.youtube.com/embed/2j3cKR28r5Q" allowfullscreen></iframe>
+        </div>
+        <div>
+            <h3 class="video-heading">Learn More About Funding Proposals:</h3>
+            <iframe src="https://www.youtube.com/embed/RMFAcdbAfqI" allowfullscreen></iframe>
+        </div>
+    </div>
+
     <div class="button-container">
         <!-- Funding Guide Button -->
-        <form asp-controller="Home" asp-action="FundingGuide" method="get" class="resource-button">
-            <button type="submit">
-                <img src="~/images/fundingguide.jpeg" alt="Funding Guide" />
-            </button>
-        </form>
+        <div class="resource-button">
+            <h3>Create Funding Proposal Here</h3>
+            <form asp-controller="Home" asp-action="FundingGuide" method="get" style="display: inline;">
+                <button type="submit">
+                    <img src="~/images/fundingguide.jpeg" alt="Funding Guide" />
+                </button>
+            </form>
+            <div style="margin-top: 10px;">
+                <small style="color: #555;">Already have a funding proposal? Upload it here for a review:</small>
+            </div>
+            <form asp-controller="Mentor" asp-action="SubmitFundingProposal" method="post" enctype="multipart/form-data">
+                <label for="funding-upload" class="upload-button" style="margin-left: 5px;">Upload Funding Proposal</label>
+                <input id="funding-upload" name="FundingFile" type="file" class="upload-input" accept=".pdf, .doc, .docx" onchange="showUploadStatus('funding-status')">
+                <div id="funding-status" class="upload-status">Funding proposal uploaded successfully!</div>
+                <button type="submit" class="review-button">Send for Review</button>
+            </form>
+        </div>
 
         <!-- Business Proposal Button -->
-        <form asp-controller="Home" asp-action="BusinessProposal" method="get" class="resource-button">
-            <button type="submit">
-                <img src="~/images/businessproposal.jpeg" alt="Business Proposal" />
-            </button>
-        </form>
+        <div class="resource-button">
+            <h3>Create Business Proposal Here</h3>
+            <form asp-controller="Home" asp-action="BusinessProposal" method="get">
+                <button type="submit">
+                    <img src="~/images/businessproposal.jpeg" alt="Business Proposal" />
+                </button>
+            </form>
+            <div style="margin-top: 10px;">
+                <small style="color: #555;">Already have a Business proposal? Upload it here for a review:</small>
+            </div>
+            <form asp-controller="Mentor" asp-action="SubmitBusinessProposal" method="post" enctype="multipart/form-data">
+                <label for="business-upload" class="upload-button" style="margin-left: 5px;">Upload Business Proposal</label>
+                <input id="business-upload" name="BusinessFile" type="file" class="upload-input" accept=".pdf, .doc, .docx" onchange="showUploadStatus('business-status')">
+                <div id="business-status" class="upload-status">Business proposal uploaded successfully!</div>
+                <button type="submit" class="review-button">Send for Review</button>
+            </form>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function showUploadStatus(statusId) {
+            document.getElementById(statusId).style.display = 'block';
+        }
+    </script>
 </body>
 </html>

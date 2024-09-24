@@ -1,0 +1,113 @@
+﻿@model ECC_APP_2.Models.MentorDashboardViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Dashboard</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .search-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .search-bar {
+            padding: 5px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment-box {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        .submit-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-bar">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+
+    <h2>Business Proposals</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Executive Summary</th>
+                <th>Introduction</th>
+               
+                <th>Mentor Feedback</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var proposal in Model.BusinessProposals)
+            {
+                <tr>
+                    <td>@proposal.ExecutiveSummary</td>
+                    <td>@proposal.Introduction</td>
+                   
+                    <td>
+                        <form action="@Url.Action("SubmitFeedback", "MentorDashboard", new { id = proposal.Id })" method="post">
+                            <textarea name="mentorComment" class="comment-box" rows="3" placeholder="Enter feedback..."></textarea>
+                            <button type="submit" class="submit-button">Submit Feedback</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Funding Guides</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Funding Purpose</th>
+                <th>Business Name</th>
+              
+                <th>Mentor Feedback</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fundingGuide in Model.FundingGuides)
+            {
+                <tr>
+                    <td>@fundingGuide.FundingPurpose</td>
+                    <td>@fundingGuide.BussinessName</td>
+                  
+                    <td>
+                        <form action="@Url.Action("SubmitFeedback", "MentorDashboard", new { id = fundingGuide.FundingGuideId })" method="post">
+                            <textarea name="mentorComment" class="comment-box" rows="3" placeholder="Enter feedback..."></textarea>
+                            <button type="submit" class="submit-button">Submit Feedback</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+

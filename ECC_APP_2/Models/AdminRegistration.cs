@@ -2,19 +2,21 @@
 {
     public class AdminRegistration
     {
-        public AdminRegistration(string firstname, string lastname, string email, string password)
+        // Parameterless constructor required for model binding
+        public AdminRegistration()
         {
-            Firstname = firstname;
-            Lastname = lastname;
+        }
+
+        public AdminRegistration(string email, string password)
+        {
             Email = email;
             Password = password;
         }
 
-        public String Firstname { get; set; }
+        // Constructor with parameters
 
-        public String Lastname { get; set; }
-        public String Email { get; set; }
-        public String Password { get; set; }
 
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
