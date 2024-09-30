@@ -18,5 +18,12 @@ namespace ECC_APP_2.Models
             var response = await _httpClient.PostAsJsonAsync("api/Mentor/Login", mentor);
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> SubmitFeedback(int proposalId, string feedback)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"api/BusinessProposals/{proposalId}/feedback", new { Feedback = feedback });
+            return response.IsSuccessStatusCode;
+        }
+
     }
 }

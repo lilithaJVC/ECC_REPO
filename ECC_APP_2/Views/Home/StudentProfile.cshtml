@@ -1,0 +1,32 @@
+﻿@model ECC_APP_2.Models.StudentProfileViewModel
+
+@{
+    ViewData["Title"] = "Student Profile";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Student Profile</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h5 class="mb-0">Profile Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label"><strong>Email:</strong></label>
+                <p class="form-control-plaintext">@Model.UserEmail</p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>First Name:</strong></label>
+                <p class="form-control-plaintext">@Model.UserFirstname</p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>User ID:</strong></label>
+                <p class="form-control-plaintext">@Model.UserID</p>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-center">
+            <small>Last updated: @DateTime.Now.ToString("MMMM dd, yyyy")</small>
+        </div>
+    </div>
+</div>

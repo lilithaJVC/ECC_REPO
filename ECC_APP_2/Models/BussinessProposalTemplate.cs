@@ -18,7 +18,10 @@
         }
 
         public int Id { get; set; }  // Add the Id property
+
+        public int studentNum { get; set; } // Change from string to int
         public string ExecutiveSummary { get; set; }
+        
         public string Introduction { get; set; }
         public string ProposedSolution { get; set; }
         public string problemSolution { get; set; }

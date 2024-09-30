@@ -17,6 +17,9 @@ namespace ECC_APP_2.Controllers
         private readonly MentorService _mentorService; // Add MentorService
         private readonly ILogger<HomeController> _logger;
 
+        // Static list to store feedback in-memory
+        private static List<Feedback> _feedbackList = new List<Feedback>();
+
         public HomeController(StudentService studentService, BusinessProposalService businessProposalService,
                               FundingGuideService fundingGuideService, AdminService adminService,
                               MentorService mentorService, ILogger<HomeController> logger) // Initialize MentorService
@@ -192,7 +195,7 @@ namespace ECC_APP_2.Controllers
             var studentNum = HttpContext.Session.GetInt32("UserID");
             if (studentNum.HasValue)
             {
-                model.StudentNum = studentNum.Value;
+                model.studentNum = studentNum.Value;
             }
             else
             {
@@ -251,34 +254,37 @@ namespace ECC_APP_2.Controllers
             {
                 return "Funding guide not found.";
             }
+            else
+            {
+                return $"Funding Guide Template \n   \nFunding Guide ID: {fundingGuide.FundingGuideId}\n" +
+                  $"Funding Purpose: {fundingGuide.fundingPurpose}\n" +
+                      $"Bussiness Overview: {fundingGuide.bussinessOverview}\n" +
+                        $"Business name: {fundingGuide.bussinessName}\n" +
+                          $"Mission: {fundingGuide.mission}\n" +
+                            $"BussinessModel {fundingGuide.bussinessModel}\n" +
+                              $"TotalFunding: {fundingGuide.totalFunding}\n" +
+                                $"UseOfFunds: {fundingGuide.useOfFunds}\n" +
+                                  $"Expenses: {fundingGuide.expenses}\n" +
 
-         
-            return $"Funding Guide Template \n   \nFunding Guide ID: {fundingGuide.FundingGuideId}\n" +
-                   $"Funding Purpose: {fundingGuide.FundingPurpose}\n" +
-                       $"Bussiness Overview: {fundingGuide.BussinessOverview}\n" +
-                         $"Business name: {fundingGuide.BussinessName}\n" +
-                           $"Mission: {fundingGuide.Mission}\n" +
-                             $"BussinessModel {fundingGuide.BussinessModel}\n" +
-                               $"TotalFunding: {fundingGuide.TotalFunding}\n" +
-                                 $"UseOfFunds: {fundingGuide.UseOfFunds}\n" +
-                                   $"Expenses: {fundingGuide.expenses}\n" +
+                                    $"Profitability: {fundingGuide.profitability}\n" +
+                                      $"Industry: {fundingGuide.industry}\n" +
+                                        $"Competitors: {fundingGuide.competitors}\n" +
+                                          $"MarketTrends: {fundingGuide.marketTrends}\n" +
+                                            $"KeyMembersAndRoles: {fundingGuide.KeyMembersandRoles}\n" +
+                                              $"KeyMilestones: {fundingGuide.keyMilestones}\n" +
+                                                $"Timeline: {fundingGuide.timeline}\n" +
+                                                  $"Risks: {fundingGuide.risks}\n" +
+                                                    $"RiskPlan: {fundingGuide.riskPlan}\n" +
 
-                                     $"Profitability: {fundingGuide.Profitability}\n" +
-                                       $"Industry: {fundingGuide.industry}\n" +
-                                         $"Competitors: {fundingGuide.Competitors}\n" +
-                                           $"MarketTrends: {fundingGuide.marketTrends}\n" +
-                                             $"KeyMembersAndRoles: {fundingGuide.keyMembersandRoles}\n" +
-                                               $"KeyMilestones: {fundingGuide.keyMilestones}\n" +
-                                                 $"Timeline: {fundingGuide.Timeline}\n" +
-                                                   $"Risks: {fundingGuide.Risks}\n" +
-                                                     $"RiskPlan: {fundingGuide.RiskPlan}\n" +
+                                                     $"Summary: {fundingGuide.summary}\n" +
+                                                      $"Name: {fundingGuide.name}\n" +
+                                                       $"Email: {fundingGuide.email}\n" +
+                                                        $"PhoneNumber: {fundingGuide.phoneNumber}\n" +
 
-                                                      $"Summary: {fundingGuide.summary}\n" +
-                                                       $"Name: {fundingGuide.name}\n" +
-                                                        $"Email: {fundingGuide.email}\n" +
-                                                         $"PhoneNumber: {fundingGuide.phoneNumber}\n" +
-                                                        
-                   $"Amount Requested: {fundingGuide.AmountRequested}";
+                  $"Amount Requested: {fundingGuide.amountRequested}";
+
+            }
+
         }
 
 
@@ -292,10 +298,21 @@ namespace ECC_APP_2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BusinessProposal(BussinessProposalTemplate model) // Corrected model name
+        public async Task<IActionResult> BusinessProposal(BussinessProposalTemplate model)
         {
             if (!ModelState.IsValid)
             {
+                return View(model);
+            }
+
+            var studentNum = HttpContext.Session.GetInt32("UserID");
+            if (studentNum.HasValue)
+            {
+                model.studentNum = studentNum.Value; // Assign the studentNum
+            }
+            else
+            {
+                ModelState.AddModelError("", "User not logged in.");
                 return View(model);
             }
 
@@ -311,6 +328,7 @@ namespace ECC_APP_2.Controllers
 
             return View(model);  // Pass the model back to the view in case of errors
         }
+
         // Mentor login GET method
         public IActionResult MentorLogin()
         {
@@ -329,6 +347,9 @@ namespace ECC_APP_2.Controllers
             var isSuccess = await _mentorService.LoginMentor(model); // Pass the correct model
             if (isSuccess)
             {
+                // Store the mentor's email in session
+                HttpContext.Session.SetString("MentorEmail", model.Email); // Assuming model has an Email property
+
                 TempData["Message"] = "Login successful!";
                 return RedirectToAction("MentorDashboard");
             }
@@ -339,6 +360,8 @@ namespace ECC_APP_2.Controllers
 
             return View(model);
         }
+
+
         public async Task<IActionResult> Bussiness_Showcase()
         {
             return View();
@@ -363,19 +386,86 @@ namespace ECC_APP_2.Controllers
         }
 
 
-       
+        public IActionResult StudentProfile()
+       {
+         // Retrieve user details from the session
+         var userEmail = HttpContext.Session.GetString("UserEmail");
+         var userFirstname = HttpContext.Session.GetString("UserFirstname");
+         var userId = HttpContext.Session.GetInt32("UserID");
 
-        public IActionResult StudentInfo()
+         // Create a view model to pass to the view
+        var model = new StudentProfileViewModel
         {
-            return View();
+        UserEmail = userEmail,
+        UserFirstname = userFirstname,
+        UserID = userId
+         };
+
+           return View(model);
         }
 
-        public IActionResult StudentNotification()
+
+
+
+
+        // SubmitFeedback Action
+        [HttpPost]
+        public IActionResult SubmitFeedback(string mentorComment, int studentNum, string mentorEmail)
         {
-            return View();
+            if (string.IsNullOrWhiteSpace(mentorComment))
+            {
+                TempData["Error"] = "Feedback cannot be empty.";
+                return RedirectToAction("MentorDashboard");
+            }
+
+            // Create a new Feedback object
+            var feedback = new Feedback
+            {
+                FeedbackText = mentorComment,
+                MentorEmail = mentorEmail,
+                StudentNumber = studentNum,
+                SubmittedAt = DateTime.Now
+            };
+
+            // Add to the static list
+            _feedbackList.Add(feedback);
+
+            TempData["Message"] = "Feedback submitted successfully!";
+            return RedirectToAction("MentorDashboard");
         }
 
-        
+        // StudentFeedback Action
+        // StudentFeedback Action
+        // StudentFeedback Action
+        public IActionResult StudentFeedback()
+        {
+            // Retrieve the logged-in student's ID from the session
+            var studentId = HttpContext.Session.GetInt32("UserID");
+
+            // Check if studentId is valid
+            if (!studentId.HasValue)
+            {
+                // Handle case where student is not logged in
+                TempData["Error"] = "You must be logged in to view feedback.";
+                return RedirectToAction("StLogIn"); // Redirect to login page if not logged in
+            }
+
+            // Filter feedback list to include only feedback for the logged-in student
+            var feedbackForStudent = _feedbackList
+                .Where(f => f.StudentNumber == studentId.Value)
+                .ToList();
+
+            // Create the view model with the filtered feedback
+            var feedbackModel = new StudentFeedbackViewModel
+            {
+                FeedbackList = feedbackForStudent
+            };
+
+            return View(feedbackModel);
+        }
+
+
+
 
     }
 }

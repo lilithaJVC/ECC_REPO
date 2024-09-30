@@ -1,113 +1,195 @@
 ﻿@model ECC_APP_2.Models.MentorDashboardViewModel
 
+@{
+    ViewData["Title"] = "Mentor Dashboard";
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentor Dashboard</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .search-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+        .feedback-textarea {
+            max-height: 100px;
+            overflow-y: auto;
         }
 
-        .search-bar {
-            padding: 5px;
-            width: 200px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        .search-input {
+            width: 50px; /* Set desired width */
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
 
         .search-button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .comment-box {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-        }
-
-        .submit-button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 20px; /* Rounded corners */
         }
     </style>
 </head>
 <body>
-    <div class="search-container">
-        <input type="text" placeholder="Search..." class="search-bar">
-        <button type="submit" class="search-button">Search</button>
+    <div class="container mt-5">
+        <!-- Display Success or Error Messages -->
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["Error"]
+            </div>
+        }
+
+        <!-- Search Bar -->
+        <div class="row mb-3">
+            <div class="col text-right">
+                <div class="input-group">
+                    <input type="text" placeholder="Search by Student Number..." class="form-control search-input" aria-label="Search" id="searchInput">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary search-button" onclick="searchProposals()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Proposals Table -->
+        <h2 class="mb-4">Business Proposals</h2>
+        <table class="table table-bordered table-striped" id="proposalsTable">
+            <thead class="thead-light">
+                <tr>
+                    <th>Student Number</th>
+                    <th>Executive Summary</th>
+                    <th>Introduction</th>
+                    <th>Problem Solution</th>
+                    <th>Proposed Solution</th>
+                    <th>Budget and Penalties</th>
+                    <th>Benefits</th>
+                    <th>Terms and Conditions</th>
+                    <th>Appendix</th>
+                    <th>Mentor Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var proposal in Model.BusinessProposals)
+                {
+                    <tr>
+                        <td>@proposal.studentNum</td>
+                        <td>@proposal.ExecutiveSummary</td>
+                        <td>@proposal.Introduction</td>
+                        <td>@proposal.problemSolution</td>
+                        <td>@proposal.ProposedSolution</td>
+                        <td>@proposal.BudgetandPenalties</td>
+                        <td>@proposal.Benefits</td>
+                        <td>@proposal.TermsandConditions</td>
+                        <td>@proposal.Appendix</td>
+                        <td>
+                            <form asp-action="SubmitFeedback" method="post">
+                                <div class="form-group">
+                                    <textarea name="mentorComment" class="form-control feedback-textarea" rows="2" placeholder="Enter feedback..." required></textarea>
+                                </div>
+                                <input type="hidden" name="studentNum" value="@proposal.studentNum" />
+                                <input type="hidden" name="mentorEmail" value="@Context.Session.GetString("MentorEmail")" />
+                                <button type="submit" class="btn btn-success">Submit Feedback</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Funding Guides Table -->
+        <h2 class="mb-4">Funding Guides</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Student Number</th>
+                    <th>Business Name</th>
+                    <th>Business Model</th>
+                    <th>Funding Purpose</th>
+                    <th>Amount Requested</th>
+                    <th>Business Overview</th>
+                    <th>Mission</th>
+                    <th>Total Funding</th>
+                    <th>Use Of Funds</th>
+                    <th>Expenses</th>
+                    <th>Profitability</th>
+                    <th>Industry</th>
+                    <th>Competitors</th>
+                    <th>Market Trends</th>
+                    <th>Key Members And Roles</th>
+                    <th>Key Milestones</th>
+                    <th>Risks</th>
+                    <th>Risk Plan</th>
+                    <th>Summary</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Mentor Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var fundingGuide in Model.FundingGuides)
+                {
+                    <tr>
+                        <td>@fundingGuide.studentNum</td>
+                        <td>@fundingGuide.bussinessName</td>
+                        <td>@fundingGuide.bussinessModel</td>
+                        <td>@fundingGuide.fundingPurpose</td>
+                        <td>@fundingGuide.amountRequested</td>
+                        <td>@fundingGuide.bussinessOverview</td>
+                        <td>@fundingGuide.mission</td>
+                        <td>@fundingGuide.totalFunding</td>
+                        <td>@fundingGuide.useOfFunds</td>
+                        <td>@fundingGuide.expenses</td>
+                        <td>@fundingGuide.profitability</td>
+                        <td>@fundingGuide.industry</td>
+                        <td>@fundingGuide.competitors</td>
+                        <td>@fundingGuide.marketTrends</td>
+                        <td>@fundingGuide.KeyMembersandRoles</td>
+                        <td>@fundingGuide.keyMilestones</td>
+                        <td>@fundingGuide.risks</td>
+                        <td>@fundingGuide.riskPlan</td>
+                        <td>@fundingGuide.summary</td>
+                        <td>@fundingGuide.name</td>
+                        <td>@fundingGuide.email</td>
+                        <td>@fundingGuide.phoneNumber</td>
+                        <td>
+                            <form asp-action="SubmitFeedback" method="post">
+                                <div class="form-group">
+                                    <textarea name="mentorComment" class="form-control feedback-textarea" rows="2" placeholder="Enter feedback..." required></textarea>
+                                </div>
+                                <input type="hidden" name="studentNum" value="@fundingGuide.studentNum" />
+                                <input type="hidden" name="mentorEmail" value="@Context.Session.GetString("MentorEmail")" />
+                                <button type="submit" class="btn btn-success">Submit Feedback</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 
-    <h2>Business Proposals</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Executive Summary</th>
-                <th>Introduction</th>
-               
-                <th>Mentor Feedback</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var proposal in Model.BusinessProposals)
-            {
-                <tr>
-                    <td>@proposal.ExecutiveSummary</td>
-                    <td>@proposal.Introduction</td>
-                   
-                    <td>
-                        <form action="@Url.Action("SubmitFeedback", "MentorDashboard", new { id = proposal.Id })" method="post">
-                            <textarea name="mentorComment" class="comment-box" rows="3" placeholder="Enter feedback..."></textarea>
-                            <button type="submit" class="submit-button">Submit Feedback</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function searchProposals() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const table = document.getElementById('proposalsTable');
+            const rows = table.getElementsByTagName('tr');
 
-    <h2>Funding Guides</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Funding Purpose</th>
-                <th>Business Name</th>
-              
-                <th>Mentor Feedback</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var fundingGuide in Model.FundingGuides)
-            {
-                <tr>
-                    <td>@fundingGuide.FundingPurpose</td>
-                    <td>@fundingGuide.BussinessName</td>
-                  
-                    <td>
-                        <form action="@Url.Action("SubmitFeedback", "MentorDashboard", new { id = fundingGuide.FundingGuideId })" method="post">
-                            <textarea name="mentorComment" class="comment-box" rows="3" placeholder="Enter feedback..."></textarea>
-                            <button type="submit" class="submit-button">Submit Feedback</button>
-                        </form>
-                    </td>
-                </tr>
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const studentNum = cells[0].textContent.toLowerCase();
+                rows[i].style.display = studentNum.includes(input) ? '' : 'none';
             }
-        </tbody>
-    </table>
+        }
+    </script>
 </body>
 </html>
-

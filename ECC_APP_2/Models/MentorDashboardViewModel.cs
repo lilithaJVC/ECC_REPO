@@ -4,5 +4,6 @@
     {
         public List<BussinessProposalTemplate> BusinessProposals { get; set; }
         public List<FundingGuideTemplate> FundingGuides { get; set; }
+
     }
 }
