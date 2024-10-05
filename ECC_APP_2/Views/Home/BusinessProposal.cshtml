@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "BusinessProposal";
+    ViewBag.HideNavbar = true;
 }
 
 <h1>Business Proposal</h1>
@@ -52,11 +53,11 @@
                 <input asp-for="Appendix" class="form-control" />
                 <span asp-validation-for="Appendix" class="text-danger"></span>
             </div>
+
+            <!-- Organizing buttons with spacing -->
             <div class="form-group">
-                <input type="submit" value="Submit Proposal" class="btn btn-primary" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Download Business Proposal" class="btn btn-primary" />
+                <input type="submit" value="Submit Proposal" class="btn btn-secondary mr-2" />
+                <input type="submit" value="Download Business Proposal" class="btn btn-secondary mr-2" />
             </div>
         </form>
 
@@ -67,14 +68,30 @@
 </div>
 
 <!-- Back button to navigate to Resources -->
-<form asp-action="Resources" method="get">
-    <div class="form-group">
+<div class="form-group">
+    <form asp-action="Resources" method="get">
         <input type="submit" value="Back to Resources" class="btn btn-secondary" />
-    </div>
-</form>
+    </form>
+</div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<style>
+    .btn-secondary {
+        background-color: #6c757d; /* Grey color */
+        color: white;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker grey on hover */
+        }
+
+    .mr-2 {
+        margin-right: 0.5rem; /* Right margin for spacing */
+    }
+</style>

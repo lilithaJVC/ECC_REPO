@@ -4,9 +4,10 @@
     {
         public BussinessProposalTemplate() { }
 
-        public BussinessProposalTemplate(int id, string executiveSummary, string introduction, string proposedSolution, string problemSolution, string budgetandPenalties, string benefits, string termsandConditions, string appendix)
+        public BussinessProposalTemplate(int id, int studentNum, string executiveSummary, string introduction, string proposedSolution, string problemSolution, string budgetandPenalties, string benefits, string termsandConditions, string appendix)
         {
-            Id = id;
+            this.id = id;
+            this.studentNum = studentNum;
             ExecutiveSummary = executiveSummary;
             Introduction = introduction;
             ProposedSolution = proposedSolution;
@@ -17,9 +18,9 @@
             Appendix = appendix;
         }
 
-        public int Id { get; set; }  // Add the Id property
+        public int id { get; set; }  
 
-        public int studentNum { get; set; } // Change from string to int
+        public int studentNum { get; set; } 
         public string ExecutiveSummary { get; set; }
         
         public string Introduction { get; set; }

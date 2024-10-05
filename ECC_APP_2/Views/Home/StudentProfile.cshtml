@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Student Profile";
+    ViewBag.HideNavbar = true;
 }
 
 <div class="container mt-5">
@@ -29,4 +30,7 @@
             <small>Last updated: @DateTime.Now.ToString("MMMM dd, yyyy")</small>
         </div>
     </div>
+</div>
+<div class="card-footer text-right">
+    <a asp-action="Resources" class="btn btn-secondary">Back to Resources</a>
 </div>

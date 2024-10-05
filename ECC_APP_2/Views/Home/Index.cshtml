@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-   
 }
 
 <!-- Banner section -->
@@ -12,15 +11,45 @@
             <span>Welcome to Entrepreneurship Support Platform! Make a Change in your life, We Are Here To Assist you</span>
         </marquee>
     </div>
-
-  
-
 </div>
 
 <div class="text-center">
-    <!-- Increase the size of the image using width and height -->
-    <img src="~/images/ECC_Home_Page.png" alt="Sample Image" style="width: px; height: auto;" class="img-fluid" />
+    <!-- Set the image to fill the screen -->
+    <img src="~/images/ECC_Home_Page.png" alt="Sample Image" class="img-fluid full-screen-image" />
 </div>
+
+<!-- News and Articles Section -->
+<section class="news-articles">
+    <div class="container">
+        <h2 class="section-title">Latest News & Articles</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="article-card">
+                    <img src="~/images/article1.1.jpg" alt="Article 1" class="article-image" />
+                    <h3><a href="https://www.forbes.com/entrepreneurs/" target="_blank">Forbes Entrepreneurship Articles</a></h3>
+                    <p>Explore insightful articles on entrepreneurship and get inspired to take your business to the next level.</p>
+                    <a href="https://www.forbes.com/entrepreneurs/" target="_blank" class="read-more">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="article-card">
+                    <img src="~/images/article2.1.jpg" alt="Article 2" class="article-image" />
+                    <h3><a href="https://www.cnbc.com/entrepreneurs/" target="_blank">CNBC Entrepreneurship Articles</a></h3>
+                    <p>Stay updated with the latest trends and tips in entrepreneurship from CNBC.</p>
+                    <a href="https://www.cnbc.com/entrepreneurs/" target="_blank" class="read-more">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="article-card">
+                    <img src="~/images/article3.1.jpg" alt="Article 3" class="article-image" />
+                    <h3><a href="https://hbr.org/1985/03/the-heart-of-entrepreneurship" target="_blank">Harvard Business Review: The Heart of Entrepreneurship</a></h3>
+                    <p>Delve into the essence of entrepreneurship with insights from Harvard Business Review.</p>
+                    <a href="https://hbr.org/1985/03/the-heart-of-entrepreneurship" target="_blank" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Footer section -->
 <footer class="footer">
@@ -39,7 +68,6 @@
         text-align: center;
         padding: 20px 0;
         margin-bottom: 20px;
-        position: relative; /* Make the banner a positioned container */
     }
 
         .banner h1 {
@@ -49,35 +77,60 @@
             margin: 0;
         }
 
-    /* Search bar styling */
-    .search-container {
-        position: absolute;
-        top: 20px; /* Adjust as needed */
-        right: 20px; /* Adjust as needed */
-        display: flex;
-        align-items: center;
+    /* Full screen image styling */
+    .full-screen-image {
+        width: 100%; /* Make the image full width */
+        height: auto; /* Keep aspect ratio */
+        max-height: 60vh; /* Limit height to 60% of the viewport height */
+        object-fit: cover; /* Ensure the image covers the area */
     }
 
-    .search-bar {
-        padding: 10px;
+    /* News and Articles Section */
+    .news-articles {
+        background-color: #f9f9f9; /* Light background for articles section */
+        padding: 40px 0;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: #4CAF50; /* Green color for the title */
+    }
+
+    .article-card {
+        background: white;
         border-radius: 5px;
-        border: none;
-        outline: none;
-        width: 200px; /* Adjust width as needed */
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
     }
 
-    .search-button {
-        padding: 10px 15px;
-        margin-left: 10px;
-        border: none;
+        .article-card:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+    .article-image {
+        width: 100%; /* Make the image responsive */
+        height: auto;
         border-radius: 5px;
-        background-color: #fff;
-        color: #4CAF50;
-        cursor: pointer;
     }
 
-        .search-button:hover {
-            background-color: #ddd;
+    .article-card h3 {
+        font-size: 1.5rem;
+        margin: 15px 0;
+        color: #333; /* Dark color for article title */
+    }
+
+    .read-more {
+        text-decoration: none;
+        color: #4CAF50; /* Green color for link */
+        font-weight: bold;
+    }
+
+        .read-more:hover {
+            text-decoration: underline; /* Underline effect on hover */
         }
 
     /* Footer styling */
