@@ -2,6 +2,7 @@ using ECC_APP_2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -148,20 +149,51 @@ namespace ECC_APP_2.Controllers
             return View();
         }
 
-      
 
-        public IActionResult Networking()
+        //networking code 
+
+
+        public async Task<IActionResult> Networking()
         {
-            return View();
+            var students = await _studentService.GetAllStudents(); // Fetch students
+            if (students == null)
+            {
+                // Handle the case where no students are found or the API call failed
+                ViewBag.ErrorMessage = "Could not retrieve students.";
+            }
+            return View(students); // Pass the list of students to the view
         }
+
+
+
+
+        //resources code 
 
         public IActionResult Resources()
         {
             // Retrieve the first name from session
             ViewBag.UserFirstname = HttpContext.Session.GetString("UserFirstname");
+
+            // Retrieve the logged-in student's ID from the session
+            var studentId = HttpContext.Session.GetInt32("UserID");
+
+            // Count new feedback
+            int newFeedbackCount = 0;
+            if (studentId.HasValue)
+            {
+                var feedbackForStudent = _feedbackList
+                    .Where(f => f.StudentNumber == studentId.Value)
+                    .ToList();
+
+                // Assuming IsRead is a property to check if feedback has been read
+                newFeedbackCount = feedbackForStudent.Count(f => !f.IsRead);
+            }
+
+            // Pass the new feedback count to the view
+            ViewBag.NewFeedbackCount = newFeedbackCount;
+
             return View();
         }
-
 
 
 
@@ -455,10 +487,14 @@ namespace ECC_APP_2.Controllers
                 .Where(f => f.StudentNumber == studentId.Value)
                 .ToList();
 
-            // Create the view model with the filtered feedback
+            // Count new feedback (this could be any logic you have to determine what's "new")
+            var newFeedbackCount = feedbackForStudent.Count(f => !f.IsRead); // Assuming IsRead is a property to check if feedback has been read
+
+            // Create the view model with the filtered feedback and new feedback count
             var feedbackModel = new StudentFeedbackViewModel
             {
-                FeedbackList = feedbackForStudent
+                FeedbackList = feedbackForStudent,
+                NewFeedbackCount = newFeedbackCount // Set the new feedback count
             };
 
             return View(feedbackModel);

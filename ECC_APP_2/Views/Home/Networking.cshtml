@@ -1,5 +1,63 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<ECC_APP_2.Models.Students>
+
 @{
+    ViewBag.Title = "Networking";
+    ViewBag.HideNavbar = true;
 }
+
+<!-- Optional: Add Bootstrap CSS for better styling -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<style>
+    /* Custom styles */
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    .profile-image {
+        width: 100%;
+        height: 200px; /* Set height to maintain aspect ratio */
+        object-fit: cover; /* Crop image to fit */
+    }
+
+    .student-info {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Welcome to the Networking Page</h1>
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var student in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x200.png?text=Profile+Image" class="card-img-top profile-image" alt="Profile Image" />
+                        <div class="card-header text-center">
+                            <h5>@student.Firstname @student.Lastname</h5>
+                        </div>
+                        <div class="card-body text-center student-info">
+                            <h6 class="text-muted">Email:</h6>
+                            <p>@student.Email</p>
+                            <a href="@Url.Action("Profile", "Students", new { id = student.StudentNum })" class="btn btn-primary">Connect <i class="fas fa-user-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                No students found.
+            </div>
+        }
+    </div>
+</div>

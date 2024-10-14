@@ -16,176 +16,121 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
             margin: 0;
-            padding: 0;
-        }
-
-        .center-italic {
-            text-align: center;
-            font-style: italic;
-            font-weight: bold; /* Make the heading bold */
-            font-size: 24px; /* Increase font size for better visibility */
-            margin-top: 20px; /* Add some margin at the top */
-        }
-
-        .importance-text {
-            text-align: center;
-            font-size: 16px;
-            color: #333;
-            margin: 15px 0;
-            font-weight: bold; /* Make text bold */
-            line-height: 1.5; /* Improves readability */
-        }
-
-        .small-welcome {
-            text-align: center;
-            font-size: 14px;
-            color: #555;
-            font-weight: bold; /* Make text bold */
+            padding: 20px;
+            background-color: #f4f4f4; /* Light background for contrast */
         }
 
         .search-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             display: flex;
-            align-items: center;
-        }
-
-        .search-bar {
-            padding: 5px;
-            width: 200px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .search-button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            justify-content: flex-end;
+            margin-bottom: 20px; /* Space between header and content */
         }
 
         .icon {
-            width: 24px;
-            height: 24px;
-            margin-left: 10px;
-            cursor: pointer;
+            width: 30px; /* Decreased size for icons */
+            height: 30px;
+            margin-left: 15px; /* Space between icons */
         }
 
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 45px;
-            margin-top: 20px;
-            padding: 0 20px; /* Add padding to the button container */
+        .top-right-container {
+            text-align: right;
         }
 
-        .resource-button img {
-            width: 200px;
-            height: 200px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 800px; /* Limit the width for readability */
+            margin: auto; /* Center align the container */
+            background: white; /* White background for contrast */
+            padding: 20px; /* Padding around content */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         }
 
-        .resource-button {
-            border: none;
-            background: none;
-            text-align: left;
+        h1.center-italic {
+            text-align: center;
+            font-style: italic;
         }
 
-            .resource-button h3 {
-                margin: 0 0 10px 0;
-                font-weight: bold; /* Make the button title bold */
-                font-size: 20px; /* Increase font size */
-            }
-
-        .upload-button {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 12px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .importance-text {
+            font-size: 1.1em; /* Slightly larger text */
+            margin-bottom: 15px; /* Space below the paragraph */
         }
 
-        .upload-input {
-            display: none;
-        }
-
-        .upload-status {
-            margin-top: 10px;
-            color: #28a745;
-            font-weight: bold;
-            display: none;
-        }
-
-        .review-button {
-            padding: 8px 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
+        .small-welcome {
+            font-size: 1.2em;
+            margin-bottom: 20px; /* Space below the welcome text */
         }
 
         .video-container {
             display: flex;
-            align-items: flex-start;
-            margin: 20px 0;
-            justify-content: center; /* Center videos horizontally */
+            justify-content: space-between; /* Space between videos */
+            margin-bottom: 20px; /* Space below video section */
         }
 
-            .video-container div {
-                margin: 0 10px;
+        iframe {
+            width: 100%; /* Full width of the container */
+            height: 200px; /* Fixed height for videos */
+            border: none; /* Remove border for a cleaner look */
+            border-radius: 8px; /* Rounded corners for videos */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around; /* Space evenly between buttons */
+            margin-top: 20px; /* Space above buttons */
+        }
+
+        .resource-button {
+            text-align: center;
+            background-color: #e9ecef; /* Light background for buttons */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: transform 0.2s; /* Animation for hover effect */
+        }
+
+            .resource-button:hover {
+                transform: scale(1.05); /* Scale up on hover */
             }
 
-            .video-container iframe {
-                width: 300px;
-                height: 200px;
-                border: none;
+            .resource-button img {
+                width: 60px; /* Decreased size for images */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10px; /* Space below images */
             }
 
-        .video-heading {
-            font-size: 18px;
-            margin-bottom: 10px;
-            font-weight: bold; /* Make video headings bold */
+        button {
+            background-color: #006400; /* Dark green button color */
+            color: white; /* White text color */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Padding for the button */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition for hover */
         }
 
-        .top-right-container {
-            position: absolute;
-            top: 20px;
-            right: 100px;
-        }
-
-        .index-button {
-            padding: 10px 20px;
-            background-color: #17a2b8;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-            .index-button:hover {
-                background-color: #138496;
+            button:hover {
+                background-color: #004d00; /* Darker shade on hover */
             }
+
+        footer {
+            text-align: center;
+            margin-top: 20px; /* Space above footer */
+            color: #777; /* Subtle color for footer text */
+        }
     </style>
 </head>
 <body>
 
     <div class="search-container">
-        <a asp-controller="Home" asp-action="StudentFeedback">
+        <a asp-controller="Home" asp-action="StudentFeedback" style="position: relative;">
             <img src="~/images/not2.png" alt="Notifications" class="icon" />
+            @if (ViewBag.NewFeedbackCount > 0)
+            {
+                <span class="badge" style="position: absolute; top: 0; right: 0; background: red; color: white; border-radius: 50%; padding: 0 5px;">
+                    @ViewBag.NewFeedbackCount
+                </span>
+            }
         </a>
 
         <a asp-controller="Home" asp-action="StudentProfile">
@@ -199,68 +144,67 @@
         </form>
     </div>
 
-    <h1 class="center-italic">Resources</h1>
+    <div class="container">
+        <h1 class="center-italic">Resources</h1>
 
-    <p class="importance-text">
-        Crafting a compelling business proposal and funding guide is essential for securing support and investment. A well-structured proposal not only outlines your vision but also demonstrates your commitment and preparedness, setting you apart in a competitive landscape.
-    </p>
+        <p class="importance-text">
+            Crafting a compelling business proposal and funding guide is essential for securing support and investment. A well-structured proposal not only outlines your vision but also demonstrates your commitment and preparedness, setting you apart in a competitive landscape.
+        </p>
 
-    <div class="small-welcome">
-        Welcome, <strong>@userFirstname!</strong>
-    </div>
-
-    <div class="video-container">
-        <div>
-            <h3 class="video-heading">Learn about business proposals:</h3>
-            <iframe src="https://www.youtube.com/embed/2j3cKR28r5Q" allowfullscreen></iframe>
+        <div class="small-welcome">
+            Welcome, <strong>@userFirstname!</strong>
         </div>
-        <div>
-            <h3 class="video-heading">Learn More About Funding Proposals:</h3>
-            <iframe src="https://www.youtube.com/embed/RMFAcdbAfqI" allowfullscreen></iframe>
-        </div>
-    </div>
 
-    <div class="button-container">
-        <!-- Funding Guide Button -->
-        <div class="resource-button">
-            <h3>Create Funding Proposal Here</h3>
-            <form asp-controller="Home" asp-action="FundingGuide" method="get" style="display: inline;">
-                <button type="submit">
-                    <img src="~/images/fundingguide.jpeg" alt="Funding Guide" />
-                </button>
-            </form>
-            <div style="margin-top: 10px;">
-                <small style="color: #555;">Already have a funding proposal? Upload it here for a review:</small>
+        <div class="video-container">
+            <div>
+                <h3 class="video-heading">Learn about business proposals:</h3>
+                <iframe src="https://www.youtube.com/embed/2j3cKR28r5Q" allowfullscreen></iframe>
             </div>
-            <form asp-controller="Mentor" asp-action="SubmitFundingProposal" method="post" enctype="multipart/form-data">
-                <label for="funding-upload" class="upload-button" style="margin-left: 5px;">Upload Funding Proposal</label>
-                <input id="funding-upload" name="FundingFile" type="file" class="upload-input" accept=".pdf, .doc, .docx" onchange="showUploadStatus('funding-status')">
-                <div id="funding-status" class="upload-status">Funding proposal uploaded successfully!</div>
-                <button type="submit" class="review-button">Send for Review</button>
-            </form>
+            <div>
+                <h3 class="video-heading">Learn More About Funding Proposals:</h3>
+                <iframe src="https://www.youtube.com/embed/RMFAcdbAfqI" allowfullscreen></iframe>
+            </div>
         </div>
 
-        <!-- Business Proposal Button -->
-        <div class="resource-button">
-            <h3>Create Business Proposal Here</h3>
-            <form asp-controller="Home" asp-action="BusinessProposal" method="get">
-                <button type="submit">
-                    <img src="~/images/businessproposal.jpeg" alt="Business Proposal" />
-                </button>
-            </form>
-            <div style="margin-top: 10px;">
-                <small style="color: #555;">Already have a Business proposal? Upload it here for a review:</small>
+        <div class="button-container">
+            <!-- Funding Guide Button -->
+            <div class="resource-button">
+                <h3>Create Funding Proposal Here</h3>
+                <form asp-controller="Home" asp-action="FundingGuide" method="get" style="display: inline;">
+                    <button type="submit">
+                        <img src="~/images/fundingguide.jpeg" alt="Funding Guide" />
+                    </button>
+                </form>
+                <div style="margin-top: 10px;">
+                    <small style="color: #555;">Already have a funding proposal? Upload it here for a review:</small>
+                </div>
+                <form asp-controller="Mentor" asp-action="SubmitFundingProposal" method="post" enctype="multipart/form-data">
+                    <!-- Include upload functionality here -->
+                </form>
             </div>
-            <form asp-controller="Mentor" asp-action="SubmitBusinessProposal" method="post" enctype="multipart/form-data">
-                <label for="business-upload" class="upload-button" style="margin-left: 5px;">Upload Business Proposal</label>
-                <input id="business-upload" name="BusinessFile" type="file" class="upload-input" accept=".pdf, .doc, .docx" onchange="showUploadStatus('business-status')">
-                <div id="business-status" class="upload-status">Business proposal uploaded successfully!</div>
-                <button type="submit" class="review-button">Send for Review</button>
-            </form>
+
+            <!-- Business Proposal Button -->
+            <div class="resource-button">
+                <h3>Create Business Proposal Here</h3>
+                <form asp-controller="Home" asp-action="BusinessProposal" method="get">
+                    <button type="submit">
+                        <img src="~/images/businessproposal.jpeg" alt="Business Proposal" />
+                    </button>
+                </form>
+                <div style="margin-top: 10px;">
+                    <small style="color: #555;">Already have a Business proposal? Upload it here for a review:</small>
+                </div>
+                <form asp-controller="Mentor" asp-action="SubmitBusinessProposal" method="post" enctype="multipart/form-data">
+                    <!-- Include upload functionality here -->
+                </form>
+            </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <footer>
+        <p>&copy; 2024 ECC Development Team. All rights reserved.</p>
+    </footer>
+
     <script>
         function showUploadStatus(statusId) {
             document.getElementById(statusId).style.display = 'block';

@@ -11,60 +11,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/site.css">
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .top-right-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .page-heading {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .sub-heading {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
         .feedback-textarea {
             max-height: 100px;
             overflow-y: auto;
         }
 
         .search-input {
-            width: 50px; /* Set desired width */
-            border-radius: 20px; /* Rounded corners */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .search-button {
-            border-radius: 20px; /* Rounded corners */
+            border-radius: 20px;
         }
 
-        .top-right-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+        .hidden-column {
+            display: none;
+        }
+
+        .table-actions button {
+            width: 100%;
+        }
+
+       //    font-size: 2.5rem;
+            }
+
+            .sub-heading {
+                font-size: 1rem;
+            } */
+        }
+
+        /* Button Icons */
+        .btn-icon {
+            margin-right: 5px;
+        }
+
+        /* Table Styling */
+        .table thead th {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+        }
+
+        /* Feedback Form Styling */
+        .feedback-form {
+            margin-top: 10px;
+        }
+
+        /* Alert Styling */
+        .alert {
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Top right button -->
+    <!-- Top right Logout button -->
     <div class="top-right-button">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Logout</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-lg">Logout</a>
     </div>
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
+        <!-- Heading -->
+        <h1 class="page-heading">Welcome to the Mentor Dashboard</h1>
+        <h2 class="sub-heading">Your guide to managing students' progress</h2>
+
         <!-- Display Success or Error Messages -->
         @if (TempData["Message"] != null)
         {
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 @TempData["Message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         }
 
         @if (TempData["Error"] != null)
         {
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 @TempData["Error"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         }
 
         <!-- Search Bar -->
-        <div class="row mb-3">
-            <div class="col text-right">
+        <div class="row mb-4">
+            <div class="col-md-6 offset-md-3">
                 <div class="input-group">
                     <input type="text" placeholder="Search by Student Number..." class="form-control search-input" aria-label="Search" id="searchInput">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-primary search-button" onclick="searchProposals()">Search</button>
+                        <button type="button" class="btn btn-primary search-button" onclick="searchProposals()">
+                            <i class="fas fa-search btn-icon"></i> Search
+                        </button>
                     </div>
                 </div>
             </div>
@@ -72,140 +148,189 @@
 
         <!-- Business Proposals Table -->
         <h2 class="mb-4">Business Proposals</h2>
-        <table class="table table-bordered table-striped" id="proposalsTable">
-            <thead class="thead-light">
-                <tr>
-                    <th>Proposal Id</th>
-                    <th>Student Number</th>
-                    <th>Executive Summary</th>
-                    <th>Introduction</th>
-                    <th>Problem Solution</th>
-                    <th>Proposed Solution</th>
-                    <th>Budget and Penalties</th>
-                    <th>Benefits</th>
-                    <th>Terms and Conditions</th>
-                    <th>Appendix</th>
-                    <th>Mentor Feedback</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var proposal in Model.BusinessProposals)
-                {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="proposalsTable">
+                <thead class="thead-dark">
                     <tr>
-                        <td>@proposal.id</td>
-                        <td>@proposal.studentNum</td>
-                        <td>@proposal.ExecutiveSummary</td>
-                        <td>@proposal.Introduction</td>
-                        <td>@proposal.problemSolution</td>
-                        <td>@proposal.ProposedSolution</td>
-                        <td>@proposal.BudgetandPenalties</td>
-                        <td>@proposal.Benefits</td>
-                        <td>@proposal.TermsandConditions</td>
-                        <td>@proposal.Appendix</td>
-                        <td>
-                            <form asp-action="SubmitFeedback" method="post">
-                                <div class="form-group">
-                                    <textarea name="mentorComment" class="form-control feedback-textarea" rows="2" placeholder="Enter feedback..." required></textarea>
-                                </div>
-                                <input type="hidden" name="studentNum" value="@proposal.studentNum" />
-                                <input type="hidden" name="mentorEmail" value="@Context.Session.GetString("MentorEmail")" />
-                                <button type="submit" class="btn btn-success">Submit Feedback</button>
-                            </form>
-                        </td>
+                        <th>Proposal ID</th>
+                        <th>Student Number</th>
+                        <th>Executive Summary</th>
+                        <th>Introduction</th>
+                        <th>Problem Solution</th>
+                        <th>Proposed Solution</th>
+                        <th>Budget and Penalties</th>
+                        <th>Benefits</th>
+                        <th>Terms and Conditions</th>
+                        <th>Appendix</th>
+                        <th>Mentor Feedback</th>
+                        <th>Actions</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var proposal in Model.BusinessProposals)
+                    {
+                        <tr>
+                            <td>@proposal.id</td>
+                            <td>@proposal.studentNum</td>
+                            <!-- Hidden columns -->
+                            <td class="hidden-column">@proposal.ExecutiveSummary</td>
+                            <td class="hidden-column">@proposal.Introduction</td>
+                            <td class="hidden-column">@proposal.problemSolution</td>
+                            <td class="hidden-column">@proposal.ProposedSolution</td>
+                            <td class="hidden-column">@proposal.BudgetandPenalties</td>
+                            <td class="hidden-column">@proposal.Benefits</td>
+                            <td class="hidden-column">@proposal.TermsandConditions</td>
+                            <td class="hidden-column">@proposal.Appendix</td>
+                            <td>
+                                <form asp-action="SubmitFeedback" method="post" class="feedback-form">
+                                    <div class="form-group">
+                                        <textarea name="mentorComment" class="form-control feedback-textarea" rows="2" placeholder="Enter feedback..." required></textarea>
+                                    </div>
+                                    <input type="hidden" name="studentNum" value="@proposal.studentNum" />
+                                    <input type="hidden" name="mentorEmail" value="@Context.Session.GetString("MentorEmail")" />
+                                    <button type="submit" class="btn btn-success btn-block">Submit Feedback</button>
+                                </form>
+                            </td>
+                            <td class="table-actions">
+                                <button class="btn btn-info btn-block" onclick="toggleColumns(this)" aria-expanded="false">
+                                    <i class="fas fa-plus btn-icon"></i> Show Details
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
         <!-- Funding Guides Table -->
         <h2 class="mb-4">Funding Guides</h2>
-        <table class="table table-bordered table-striped">
-            <thead class="thead-light">
-                <tr>
-                    <th>Proposal ID</th>
-                    <th>Student Number</th>
-                    <th>Business Name</th>
-                    <th>Business Model</th>
-                    <th>Funding Purpose</th>
-                    <th>Amount Requested</th>
-                    <th>Business Overview</th>
-                    <th>Mission</th>
-                    <th>Total Funding</th>
-                    <th>Use Of Funds</th>
-                    <th>Expenses</th>
-                    <th>Profitability</th>
-                    <th>Industry</th>
-                    <th>Competitors</th>
-                    <th>Market Trends</th>
-                    <th>Key Members And Roles</th>
-                    <th>Key Milestones</th>
-                    <th>Risks</th>
-                    <th>Risk Plan</th>
-                    <th>Summary</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Mentor Feedback</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var fundingGuide in Model.FundingGuides)
-                {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="fundingGuidesTable">
+                <thead class="thead-dark">
                     <tr>
-                        <td>@fundingGuide.FundingGuideId</td>
-                        <td>@fundingGuide.studentNum</td>
-                        <td>@fundingGuide.bussinessName</td>
-                        <td>@fundingGuide.bussinessModel</td>
-                        <td>@fundingGuide.fundingPurpose</td>
-                        <td>@fundingGuide.amountRequested</td>
-                        <td>@fundingGuide.bussinessOverview</td>
-                        <td>@fundingGuide.mission</td>
-                        <td>@fundingGuide.totalFunding</td>
-                        <td>@fundingGuide.useOfFunds</td>
-                        <td>@fundingGuide.expenses</td>
-                        <td>@fundingGuide.profitability</td>
-                        <td>@fundingGuide.industry</td>
-                        <td>@fundingGuide.competitors</td>
-                        <td>@fundingGuide.marketTrends</td>
-                        <td>@fundingGuide.KeyMembersandRoles</td>
-                        <td>@fundingGuide.keyMilestones</td>
-                        <td>@fundingGuide.risks</td>
-                        <td>@fundingGuide.riskPlan</td>
-                        <td>@fundingGuide.summary</td>
-                        <td>@fundingGuide.name</td>
-                        <td>@fundingGuide.email</td>
-                        <td>@fundingGuide.phoneNumber</td>
-                        <td>
-                            <form asp-action="SubmitFeedback" method="post">
-                                <div class="form-group">
-                                    <textarea name="mentorComment" class="form-control feedback-textarea" rows="2" placeholder="Enter feedback..." required></textarea>
-                                </div>
-                                <input type="hidden" name="studentNum" value="@fundingGuide.studentNum" />
-                                <input type="hidden" name="mentorEmail" value="@Context.Session.GetString("MentorEmail")" />
-                                <button type="submit" class="btn btn-success">Submit Feedback</button>
-                            </form>
-                        </td>
+                        <th>Proposal ID</th>
+                        <th>Student Number</th>
+                        <th>Business Name</th>
+                        <th>Business Model</th>
+                        <th>Funding Purpose</th>
+                        <th>Amount Requested</th>
+                        <th>Business Overview</th>
+                        <th>Mission</th>
+                        <th>Total Funding</th>
+                        <th>Use Of Funds</th>
+                        <th>Expenses</th>
+                        <th>Profitability</th>
+                        <th>Industry</th>
+                        <th>Competitors</th>
+                        <th>Market Trends</th>
+                        <th>Key Members And Roles</th>
+                        <th>Key Milestones</th>
+                        <th>Risks</th>
+                        <th>Risk Plan</th>
+                        <th>Summary</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Mentor Feedback</th>
+                        <th>Actions</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var fundingGuide in Model.FundingGuides)
+                    {
+                        <tr>
+                            <td>@fundingGuide.FundingGuideId</td>
+                            <td>@fundingGuide.studentNum</td>
+                            <!-- Hidden columns -->
+                            <td class="hidden-column">@fundingGuide.bussinessName</td>
+                            <td class="hidden-column">@fundingGuide.bussinessModel</td>
+                            <td class="hidden-column">@fundingGuide.fundingPurpose</td>
+                            <td class="hidden-column">@fundingGuide.amountRequested</td>
+                            <td class="hidden-column">@fundingGuide.bussinessOverview</td>
+                            <td class="hidden-column">@fundingGuide.mission</td>
+                            <td class="hidden-column">@fundingGuide.totalFunding</td>
+                            <td class="hidden-column">@fundingGuide.useOfFunds</td>
+                            <td class="hidden-column">@fundingGuide.expenses</td>
+                            <td class="hidden-column">@fundingGuide.profitability</td>
+                            <td class="hidden-column">@fundingGuide.industry</td>
+                            <td class="hidden-column">@fundingGuide.competitors</td>
+                            <td class="hidden-column">@fundingGuide.marketTrends</td>
+                            <td class="hidden-column">@fundingGuide.KeyMembersandRoles</td>
+                            <td class="hidden-column">@fundingGuide.keyMilestones</td>
+                            <td class="hidden-column">@fundingGuide.risks</td>
+                            <td class="hidden-column">@fundingGuide.riskPlan</td>
+                            <td class="hidden-column">@fundingGuide.summary</td>
+                            <td class="hidden-column">@fundingGuide.name</td>
+                            <td class="hidden-column">@fundingGuide.email</td>
+                            <td class="hidden-column">@fundingGuide.phoneNumber</td>
+                            <td>
+                                <form asp-action="SubmitFeedback" method="post" class="feedback-form">
+                                    <div class="form-group">
+                                        <textarea name="mentorComment" class="form-control feedback-textarea" rows="2" placeholder="Enter feedback..." required></textarea>
+                                    </div>
+                                    <input type="hidden" name="studentNum" value="@fundingGuide.studentNum" />
+                                    <input type="hidden" name="mentorEmail" value="@Context.Session.GetString("MentorEmail")" />
+                                    <button type="submit" class="btn btn-success btn-block">Submit Feedback</button>
+                                </form>
+                            </td>
+                            <td class="table-actions">
+                                <button class="btn btn-info btn-block" onclick="toggleColumns(this)" aria-expanded="false">
+                                    <i class="fas fa-plus btn-icon"></i> Show Details
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Function to search Business Proposals by Student Number
         function searchProposals() {
             const input = document.getElementById('searchInput').value.toLowerCase();
             const table = document.getElementById('proposalsTable');
             const rows = table.getElementsByTagName('tr');
 
-            for (let i = 1; i < rows.length; i++) {
+            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header row
                 const cells = rows[i].getElementsByTagName('td');
-                const studentNum = cells[0].textContent.toLowerCase();
+                const studentNum = cells[1].textContent.toLowerCase(); // Student Number is in the second column (index 1)
                 rows[i].style.display = studentNum.includes(input) ? '' : 'none';
             }
         }
+
+        // Function to toggle hidden columns in both tables
+        function toggleColumns(button) {
+            const row = button.closest('tr');
+            const hiddenColumns = row.querySelectorAll('.hidden-column');
+            const isVisible = hiddenColumns[0].style.display !== 'none';
+
+            hiddenColumns.forEach(function (column) {
+                column.style.display = isVisible ? 'none' : 'table-cell';
+            });
+
+            // Update button text and icon
+            if (isVisible) {
+                button.innerHTML = '<i class="fas fa-plus btn-icon"></i> Show Details';
+                button.setAttribute('aria-expanded', 'false');
+            } else {
+                button.innerHTML = '<i class="fas fa-minus btn-icon"></i> Hide Details';
+                button.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Ensure hidden columns are hidden on page load
+        window.onload = function () {
+            const hiddenColumns = document.querySelectorAll('.hidden-column');
+            hiddenColumns.forEach(function (column) {
+                column.style.display = 'none';
+            });
+        };
     </script>
 </body>
 </html>
