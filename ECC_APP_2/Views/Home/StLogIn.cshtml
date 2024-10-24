@@ -1,0 +1,112 @@
+﻿@model ECC_APP_2.Models.StudentLogIn
+
+@{
+    ViewData["Title"] = "StLogIn";
+    // Layout = null;
+}
+
+<!-- Include Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+<script type="text/javascript">
+    window.tailwind.config = {
+        darkMode: ['class'],
+        theme: {
+            extend: {
+                colors: {
+                    border: 'hsl(var(--border))',
+                    input: 'hsl(var(--input))',
+                    ring: 'hsl(var(--ring))',
+                    background: 'hsl(var(--background))',
+                    foreground: 'hsl(var(--foreground))',
+                    primary: {
+                        DEFAULT: 'hsl(var(--primary))',
+                        foreground: 'hsl(var(--primary-foreground))'
+                    },
+                    secondary: {
+                        DEFAULT: 'hsl(var(--secondary))',
+                        foreground: 'hsl(var(--secondary-foreground))'
+                    },
+                    destructive: {
+                        DEFAULT: 'hsl(var(--destructive))',
+                        foreground: 'hsl(var(--destructive-foreground))'
+                    },
+                    muted: {
+                        DEFAULT: 'hsl(var(--muted))',
+                        foreground: 'hsl(var(--muted-foreground))'
+                    },
+                    accent: {
+                        DEFAULT: 'hsl(var(--accent))',
+                        foreground: 'hsl(var(--accent-foreground))'
+                    },
+                    popover: {
+                        DEFAULT: 'hsl(var(--popover))',
+                        foreground: 'hsl(var(--popover-foreground))'
+                    },
+                    card: {
+                        DEFAULT: 'hsl(var(--card))',
+                        foreground: 'hsl(var(--card-foreground))'
+                    }
+                }
+            }
+        }
+    };
+</script>
+
+<!-- Background image for the page -->
+<body class="bg-cover bg-center" style="background-image: url('https://ibb.co/qBC50CB');">
+    <!-- Login form container -->
+    <div class="flex items-center justify-center min-h-screen bg-background">
+        <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
+            <!-- Centering the logo -->
+            <div class="flex justify-center mb-4">
+                <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="w-16 h-16" />
+            </div>
+
+            <!-- Display message if any -->
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+
+            <!-- Login form -->
+            <form asp-action="StLogIn" method="post" class="mt-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-4">
+                    <input asp-for="studentNum" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="User ID" required />
+                    <span asp-validation-for="studentNum" class="text-danger"></span>
+                </div>
+                <div class="mb-4">
+                    <input asp-for="Firstname" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="First Name" required />
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Email" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Email Address" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Password" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Password" type="password" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="w-full bg-lime-500 text-black py-2 rounded-md hover:bg-lime-600">Log In</button>
+            </form>
+
+            <!-- Registration link -->
+            <p class="mt-4 text-center text-sm text-muted-foreground">
+                Don't have an account? <a href="/Home/RegisterStudent" class="text-blue-500 hover:underline">Register now</a>
+            </p>
+
+            <!-- Footer links -->
+            <div class="mt-2 text-center text-xs text-muted-foreground">
+                <a href="#" class="hover:underline">Privacy Policy</a> |
+                <a href="#" class="hover:underline">About</a>
+            </div>
+
+            <p class="mt-2 text-center text-xs text-muted-foreground">Contact: 013545821</p>
+        </div>
+    </div>
+</body>

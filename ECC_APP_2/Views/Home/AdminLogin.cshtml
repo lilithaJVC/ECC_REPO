@@ -1,0 +1,44 @@
+﻿@model ECC_APP_2.Models.AdminRegistration
+
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<!-- Include Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+<!-- Background image for the page -->
+<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
+    <div class="flex items-center justify-center min-h-screen bg-background">
+        <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
+            <div class="flex justify-center mb-4">
+                <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="w-16 h-16" />
+            </div>
+
+            <form asp-action="AdminLogin" method="post" class="mt-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-4">
+                    <input asp-for="Email" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Email Address" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Password" type="password" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Password" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

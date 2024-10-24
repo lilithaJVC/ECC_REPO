@@ -1,0 +1,97 @@
+﻿@model ECC_APP_2.Models.BussinessProposalTemplate
+
+@{
+    ViewData["Title"] = "BusinessProposal";
+    ViewBag.HideNavbar = true;
+}
+
+<h1>Business Proposal</h1>
+
+<h4>BussinessProposalTemplate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="BusinessProposal" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ExecutiveSummary" class="control-label"></label>
+                <input asp-for="ExecutiveSummary" class="form-control" />
+                <span asp-validation-for="ExecutiveSummary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Introduction" class="control-label"></label>
+                <input asp-for="Introduction" class="form-control" />
+                <span asp-validation-for="Introduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProposedSolution" class="control-label"></label>
+                <input asp-for="ProposedSolution" class="form-control" />
+                <span asp-validation-for="ProposedSolution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="problemSolution" class="control-label"></label>
+                <input asp-for="problemSolution" class="form-control" />
+                <span asp-validation-for="problemSolution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BudgetandPenalties" class="control-label"></label>
+                <input asp-for="BudgetandPenalties" class="form-control" />
+                <span asp-validation-for="BudgetandPenalties" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Benefits" class="control-label"></label>
+                <input asp-for="Benefits" class="form-control" />
+                <span asp-validation-for="Benefits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TermsandConditions" class="control-label"></label>
+                <input asp-for="TermsandConditions" class="form-control" />
+                <span asp-validation-for="TermsandConditions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Appendix" class="control-label"></label>
+                <input asp-for="Appendix" class="form-control" />
+                <span asp-validation-for="Appendix" class="text-danger"></span>
+            </div>
+
+            <!-- Organizing buttons with spacing -->
+            <div class="form-group">
+                <input type="submit" value="Submit Proposal" class="btn btn-secondary mr-2" />
+                <input type="submit" value="Download Business Proposal" class="btn btn-secondary mr-2" />
+            </div>
+        </form>
+
+        <div class="text-success">
+            @ViewBag.Message
+        </div>
+    </div>
+</div>
+
+<!-- Back button to navigate to Resources -->
+<div class="form-group">
+    <form asp-action="Resources" method="get">
+        <input type="submit" value="Back to Resources" class="btn btn-secondary" />
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .btn-secondary {
+        background-color: #006400; /* Grey color */
+        color: white;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker grey on hover */
+        }
+
+    .mr-2 {
+        margin-right: 0.5rem; /* Right margin for spacing */
+    }
+</style>

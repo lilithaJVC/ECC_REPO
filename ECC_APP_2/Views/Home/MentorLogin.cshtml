@@ -1,0 +1,62 @@
+﻿@model ECC_APP_2.Models.Mentor
+
+@{
+    ViewData["Title"] = "MentorLogin";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
+    <div class="flex items-center justify-center min-h-screen bg-background">
+        <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
+            <div class="flex justify-center mb-4">
+                <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="w-16 h-16" />
+            </div>
+
+            <!-- Dropdown for selecting view -->
+            <div class="mb-4">
+                <label for="viewSelector" class="block mb-2">Select Login Type:</label>
+                <select id="viewSelector" class="w-full p-2 border border-border rounded-md text-black" onchange="redirectToView()">
+                    <option value="">-- Select --</option>
+                    <option value="@Url.Action("StLogIn", "Home")">Student Login</option>
+                    <option value="@Url.Action("AdminLogin", "Home")">Admin Login</option>
+                    <option value="@Url.Action("MentorLogin", "Home")">Mentor Login</option> <!-- Added Mentor Login option -->
+                </select>
+            </div>
+
+            <form asp-action="MentorLogin" method="post" class="mt-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-4">
+                    <input asp-for="Email" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Email Address" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Password" type="password" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Password" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function redirectToView() {
+            var selectedValue = document.getElementById("viewSelector").value;
+            if (selectedValue) {
+                window.location.href = selectedValue; // Redirect to the selected view
+            }
+        }
+    </script>
+</body>

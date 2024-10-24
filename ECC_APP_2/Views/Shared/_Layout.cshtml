@@ -11,50 +11,48 @@
 <body style="background-color: #b5e7a0;">
     <!-- Baby green background -->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light" style="background-color: #7FB77E;">
-            <!-- Matching green navbar -->
-            <div class="container-fluid">
-                <!-- Logo and Brand -->
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" style="width: 40px; height: 40px;" />
-                    ECC_APP_2
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <!-- Darker green button -->
-                            <a class="btn" style="background-color: #4CAF50; color: white;" asp-area="" asp-controller="Home" asp-action="Student_registration">Student Registration</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Darker green button -->
-                            <a class="btn" style="background-color: #4CAF50; color: white;" asp-area="" asp-controller="Home" asp-action="Student_LogIn">Student_LogIn</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Darker green button -->
-                            <a class="btn" style="background-color: #4CAF50; color: white;" asp-area="" asp-controller="Home" asp-action="UploadCentre">UploadCentre</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Darker green button -->
-                            <a class="btn" style="background-color: #4CAF50; color: white;" asp-area="" asp-controller="Home" asp-action="Networking">Networking</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Darker green button -->
-                            <a class="btn" style="background-color: #4CAF50; color: white;" asp-area="" asp-controller="Home" asp-action="Resources">Resources</a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Darker green button -->
-                            <a class="btn" style="background-color: #4CAF50; color: white;" asp-area="" asp-controller="Home" asp-action="Bussiness_Showcase">Bussiness_Showcase</a>
-                        </li>
-                        
-                    </ul>
+        @if (ViewBag.HideNavbar != true)
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light" style="background-color: #014D4E;">
+                <!-- Matching green navbar -->
+                <div class="container-fluid">
+                    <!-- Logo and Brand -->
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" style="width: 40px; height: 40px;" />
+                        ECC_APP_2
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="btn" style="background-color: #014D4E; color: white;" asp-area="" asp-controller="Home" asp-action="RegisterStudent"><strong>Student Registration</strong></a>
+                            </li>
+                          
+                            <li class="nav-item">
+                                <a class="btn" style="background-color: #014D4E; color: white;" asp-area="" asp-controller="Home" asp-action="MentorLogin"><strong>Login</strong></a>
+                            </li>
+                          
+                           
+                            <li class="nav-item">
+                                <a class="btn" style="background-color: #014D4E; color: white;" asp-area="" asp-controller="Home" asp-action="Networking"><strong>Networking</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" style="background-color: #014D4E; color: white;" asp-area="" asp-controller="Home" asp-action="Resources"><strong>Bussiness Proposals</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" style="background-color: #014D4E; color: white;" asp-area="" asp-controller="Home" asp-action="Bussiness_Showcase"><strong>Bussiness Showcase</strong></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        }
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -66,6 +64,7 @@
             &copy; 2024 - ECC_APP_2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

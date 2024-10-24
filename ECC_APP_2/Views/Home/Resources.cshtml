@@ -1,5 +1,214 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ECC_APP_2.Models.FundingGuideTemplate
+
 @{
+    ViewData["Title"] = "Business & Funding Proposal Resources";
+    var userFirstname = ViewBag.UserFirstname as string;
+    ViewBag.HideNavbar = true;
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4; /* Light background for contrast */
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px; /* Space between header and content */
+        }
+
+        .icon {
+            width: 30px; /* Decreased size for icons */
+            height: 30px;
+            margin-left: 15px; /* Space between icons */
+        }
+
+        .top-right-container {
+            text-align: right;
+        }
+
+        .container {
+            max-width: 800px; /* Limit the width for readability */
+            margin: auto; /* Center align the container */
+            background: white; /* White background for contrast */
+            padding: 20px; /* Padding around content */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        h1.center-italic {
+            text-align: center;
+            font-style: italic;
+        }
+
+        .importance-text {
+            font-size: 1.1em; /* Slightly larger text */
+            margin-bottom: 15px; /* Space below the paragraph */
+        }
+
+        .small-welcome {
+            font-size: 1.2em;
+            margin-bottom: 20px; /* Space below the welcome text */
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: space-between; /* Space between videos */
+            margin-bottom: 20px; /* Space below video section */
+        }
+
+        iframe {
+            width: 100%; /* Full width of the container */
+            height: 200px; /* Fixed height for videos */
+            border: none; /* Remove border for a cleaner look */
+            border-radius: 8px; /* Rounded corners for videos */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around; /* Space evenly between buttons */
+            margin-top: 20px; /* Space above buttons */
+        }
+
+        .resource-button {
+            text-align: center;
+            background-color: #e9ecef; /* Light background for buttons */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: transform 0.2s; /* Animation for hover effect */
+        }
+
+            .resource-button:hover {
+                transform: scale(1.05); /* Scale up on hover */
+            }
+
+            .resource-button img {
+                width: 60px; /* Decreased size for images */
+                height: auto; /* Maintain aspect ratio */
+                margin-bottom: 10px; /* Space below images */
+            }
+
+        button {
+            background-color: #006400; /* Dark green button color */
+            color: white; /* White text color */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Padding for the button */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition for hover */
+        }
+
+            button:hover {
+                background-color: #004d00; /* Darker shade on hover */
+            }
+
+        footer {
+            text-align: center;
+            margin-top: 20px; /* Space above footer */
+            color: #777; /* Subtle color for footer text */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <a asp-controller="Home" asp-action="StudentFeedback" style="position: relative;">
+            <img src="~/images/not2.png" alt="Notifications" class="icon" />
+            @if (ViewBag.NewFeedbackCount > 0)
+            {
+                <span class="badge" style="position: absolute; top: 0; right: 0; background: red; color: white; border-radius: 50%; padding: 0 5px;">
+                    @ViewBag.NewFeedbackCount
+                </span>
+            }
+        </a>
+
+        <a asp-controller="Home" asp-action="StudentProfile">
+            <img src="~/images/prof-removebg-preview.png" alt="Profile" class="icon" />
+        </a>
+    </div>
+
+    <div class="top-right-container">
+        <form asp-controller="Home" asp-action="Index" method="get">
+            <button type="submit" class="index-button">Logout</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h1 class="center-italic">Resources</h1>
+
+        <p class="importance-text">
+            Crafting a compelling business proposal and funding guide is essential for securing support and investment. A well-structured proposal not only outlines your vision but also demonstrates your commitment and preparedness, setting you apart in a competitive landscape.
+        </p>
+
+        <div class="small-welcome">
+            Welcome, <strong>@userFirstname!</strong>
+        </div>
+
+        <div class="video-container">
+            <div>
+                <h3 class="video-heading">Learn about business proposals:</h3>
+                <iframe src="https://www.youtube.com/embed/2j3cKR28r5Q" allowfullscreen></iframe>
+            </div>
+            <div>
+                <h3 class="video-heading">Learn More About Funding Proposals:</h3>
+                <iframe src="https://www.youtube.com/embed/RMFAcdbAfqI" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <!-- Funding Guide Button -->
+            <div class="resource-button">
+                <h3>Create Funding Proposal Here</h3>
+                <form asp-controller="Home" asp-action="FundingGuide" method="get" style="display: inline;">
+                    <button type="submit">
+                        <img src="~/images/fundingguide.jpeg" alt="Funding Guide" />
+                    </button>
+                </form>
+                <div style="margin-top: 10px;">
+                    <small style="color: #555;">Already have a funding proposal? Upload it here for a review:</small>
+                </div>
+                <form asp-controller="Mentor" asp-action="SubmitFundingProposal" method="post" enctype="multipart/form-data">
+                    <!-- Include upload functionality here -->
+                </form>
+            </div>
+
+            <!-- Business Proposal Button -->
+            <div class="resource-button">
+                <h3>Create Business Proposal Here</h3>
+                <form asp-controller="Home" asp-action="BusinessProposal" method="get">
+                    <button type="submit">
+                        <img src="~/images/businessproposal.jpeg" alt="Business Proposal" />
+                    </button>
+                </form>
+                <div style="margin-top: 10px;">
+                    <small style="color: #555;">Already have a Business proposal? Upload it here for a review:</small>
+                </div>
+                <form asp-controller="Mentor" asp-action="SubmitBusinessProposal" method="post" enctype="multipart/form-data">
+                    <!-- Include upload functionality here -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ECC Development Team. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showUploadStatus(statusId) {
+            document.getElementById(statusId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>

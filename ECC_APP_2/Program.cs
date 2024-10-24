@@ -1,36 +1,91 @@
-namespace ECC_APP_2
+using ECC_APP_2.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Register logging
+        builder.Services.AddLogging(logging =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            logging.AddConsole(); // Enable console logging
+            logging.AddDebug();   // Enable debug logging
+        });
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+        // Register HttpClient services
+        builder.Services.AddHttpClient<MentorService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7187/"); // Your API base URL
+        });
 
-            var app = builder.Build();
+        builder.Services.AddHttpClient<StudentService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7187/");
+        });
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+        builder.Services.AddHttpClient<FundingGuideService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7187/");
+        });
+
+        builder.Services.AddHttpClient<BusinessProposalService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7187/");
+        });
+
+        builder.Services.AddHttpClient<AdminService>(client =>
+        {
+            client.BaseAddress = new Uri("https://localhost:7187/");
+        });
+
+        // Configure CORS
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
+        });
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+        // Configure session management
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+        });
 
-            app.UseRouting();
+        builder.Services.AddControllersWithViews();
 
-            app.UseAuthorization();
+        var app = builder.Build();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
+        // Configure the HTTP request pipeline
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
         }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseCors("AllowAll"); // Apply CORS policy
+        app.UseSession(); // Must be before UseAuthorization
+        app.UseAuthorization();
+
+        // Set up routing
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+
+        app.Run();
     }
 }

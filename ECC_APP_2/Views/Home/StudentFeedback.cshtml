@@ -1,0 +1,65 @@
+﻿@model StudentFeedbackViewModel
+
+@{
+    ViewData["Title"] = "Student Feedback";
+    ViewBag.HideNavbar = true;
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Student Feedback</h1>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <h4>All Feedback</h4>
+        </div>
+        <div class="card-body">
+            @if (Model.FeedbackList != null && Model.FeedbackList.Any())
+            {
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Feedback</th>
+                            <th>Mentor Email</th>
+                            <th>Submitted At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var feedback in Model.FeedbackList)
+                        {
+                            <tr>
+                                <td>@feedback.StudentNumber</td>
+                                <td>@feedback.FeedbackText</td>
+                                <td>@feedback.MentorEmail</td>
+                                <td>@feedback.SubmittedAt.ToString("g")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No feedback available.</p>
+            }
+        </div>
+        <div class="card-footer text-right">
+            <a asp-action="Resources" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+

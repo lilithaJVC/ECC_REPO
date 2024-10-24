@@ -1,0 +1,250 @@
+﻿@model ECC_APP_2.Models.FundingGuideTemplate
+
+@{
+    ViewData["Title"] = "Funding Guide";
+    ViewBag.HideNavbar = true;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-container {
+            margin-top: 30px;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f0f8ff; /* Light Blue */
+        }
+
+        .form-heading {
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+            color: #333;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            border-radius: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+            .btn-group .btn {
+                min-width: 150px;
+            }
+
+        /* Adjusting column layout for balance */
+        .row > .col-md-6 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
+
+        <h1 class="text-center my-4">Funding Guide</h1>
+
+        <div class="form-container">
+            <h4 class="form-heading">Funding Guide Template</h4>
+            <form asp-action="FundingGuide">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+
+                        <label asp-for="fundingPurpose" class="control-label"></label>
+                        <input asp-for="fundingPurpose" class="form-control" />
+                        <span asp-validation-for="fundingPurpose" class="text-danger"></span>
+
+
+
+                        <div class="form-group">
+                            <label asp-for="amountRequested" class="control-label"></label>
+                            <input asp-for="amountRequested" class="form-control" />
+                            <span asp-validation-for="amountRequested" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="bussinessOverview" class="control-label"></label>
+                            <input asp-for="bussinessOverview" class="form-control" />
+                            <span asp-validation-for="bussinessOverview" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="bussinessName" class="control-label"></label>
+                            <input asp-for="bussinessName" class="form-control" />
+                            <span asp-validation-for="bussinessName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="mission" class="control-label"></label>
+                            <input asp-for="mission" class="form-control" />
+                            <span asp-validation-for="mission" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="bussinessModel" class="control-label"></label>
+                            <input asp-for="bussinessModel" class="form-control" />
+                            <span asp-validation-for="bussinessModel" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="totalFunding" class="control-label"></label>
+                            <input asp-for="totalFunding" class="form-control" />
+                            <span asp-validation-for="totalFunding" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="useOfFunds" class="control-label"></label>
+                            <input asp-for="useOfFunds" class="form-control" />
+                            <span asp-validation-for="useOfFunds" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="expenses" class="control-label"></label>
+                            <input asp-for="expenses" class="form-control" />
+                            <span asp-validation-for="expenses" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="profitability" class="control-label"></label>
+                            <input asp-for="profitability" class="form-control" />
+                            <span asp-validation-for="profitability" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="industry" class="control-label"></label>
+                            <input asp-for="industry" class="form-control" />
+                            <span asp-validation-for="industry" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="competitors" class="control-label"></label>
+                            <input asp-for="competitors" class="form-control" />
+                            <span asp-validation-for="competitors" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="marketTrends" class="control-label"></label>
+                            <input asp-for="marketTrends" class="form-control" />
+                            <span asp-validation-for="marketTrends" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="KeyMembersandRoles" class="control-label"></label>
+                            <input asp-for="KeyMembersandRoles" class="form-control" />
+                            <span asp-validation-for="KeyMembersandRoles" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="keyMilestones" class="control-label"></label>
+                            <input asp-for="keyMilestones" class="form-control" />
+                            <span asp-validation-for="keyMilestones" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="timeline" class="control-label"></label>
+                            <input asp-for="timeline" class="form-control" />
+                            <span asp-validation-for="timeline" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="risks" class="control-label"></label>
+                            <input asp-for="risks" class="form-control" />
+                            <span asp-validation-for="risks" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <label asp-for="riskPlan" class="control-label"></label>
+                            <input asp-for="riskPlan" class="form-control" />
+                            <span asp-validation-for="riskPlan" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="summary" class="control-label"></label>
+                            <input asp-for="summary" class="form-control" />
+                            <span asp-validation-for="summary" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="name" class="control-label"></label>
+                            <input asp-for="name" class="form-control" />
+                            <span asp-validation-for="name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="email" class="control-label"></label>
+                            <input asp-for="email" class="form-control" />
+                            <span asp-validation-for="email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="phoneNumber" class="control-label"></label>
+                            <input asp-for="phoneNumber" class="form-control" />
+                            <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .btn-baby-green {
+                        background-color: #006400; /* Baby Green */
+                        color: white;
+                        border: none;
+                    }
+
+                        .btn-baby-green:hover {
+                            background-color: #8FBC8F; /* Slightly darker baby green on hover */
+                            color: white;
+                        }
+                </style>
+                <form asp-action="FundingGuide" method="post">
+                    <div class="btn-group">
+                        <input type="submit" value="Submit Template" class="btn btn-baby-green mx-2" />
+                    </div>
+                </form>
+
+                <form asp-action="DownloadTemplate" method="get">
+                    <div class="btn-group">
+                        <input type="submit" value="Download Template" class="btn btn-baby-green mx-2" />
+                    </div>
+                </form>
+
+                <form asp-action="Resources" method="get">
+                    <div class="btn-group">
+                        <input type="submit" value="Back" class="btn btn-baby-green mx-2" />
+                    </div>
+                </form>
+
+
+            </form>
+        </div>
+    </div>
+
+    @section Scripts {
+        @Html.Partial("_ValidationScriptsPartial")
+    }
+</body>
+</html>

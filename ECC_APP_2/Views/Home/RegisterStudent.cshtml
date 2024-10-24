@@ -1,0 +1,67 @@
+﻿@model ECC_APP_2.Models.StudentRegistration
+
+@{
+    ViewData["Title"] = "RegisterStudent";
+   // Layout = null;
+}
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}
+
+<!-- Include Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+
+<!-- Background image for the page -->
+<body class="bg-cover bg-center" style="background-image: url('~/images/bksxyr.jpg');">
+    <!-- Registration form container -->
+    <div class="flex items-center justify-center min-h-screen bg-background">
+        <div class="max-w-md w-full p-6 bg-teal-800 text-white shadow-lg rounded-lg">
+            <!-- Centering the logo -->
+            <div class="flex justify-center mb-4">
+                <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="w-16 h-16" />
+            </div>
+
+            <!-- Display message if any -->
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+
+            <!-- Registration form -->
+            <form asp-action="RegisterStudent" method="post" class="mt-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-4">
+                    <input asp-for="Firstname" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="First Name" required />
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Lastname" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Last Name" required />
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Email" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Email Address" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <input asp-for="Password" class="w-full p-2 border border-border rounded-md focus:outline-none focus:ring focus:ring-ring text-black" placeholder="Password" type="password" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="w-full bg-lime-500 text-black py-2 rounded-md hover:bg-lime-600">Register</button>
+            </form>
+
+            <!-- Footer links -->
+            <p class="mt-4 text-center text-sm text-muted-foreground">
+                Already have an account? <a href="/Home/StLogIn" class="text-blue-500 hover:underline">Login now</a>
+            </p>
+        </div>
+    </div>
+</body>
