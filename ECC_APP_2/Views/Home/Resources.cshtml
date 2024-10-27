@@ -27,10 +27,30 @@
             margin-bottom: 20px; /* Space between header and content */
         }
 
+        .icon-container {
+            text-align: center; /* Center aligns the text and icon */
+            margin-left: 20px; /* Space between icon containers */
+        }
+
         .icon {
-            width: 30px; /* Decreased size for icons */
-            height: 30px;
-            margin-left: 15px; /* Space between icons */
+            width: 40px; /* Increased size for better visibility */
+            height: 40px;
+            transition: transform 0.3s; /* Smooth scaling on hover */
+        }
+
+            .icon:hover {
+                transform: scale(1.1); /* Scale effect on hover */
+            }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 0 5px;
+            font-size: 0.8em; /* Smaller font for the badge */
         }
 
         .top-right-container {
@@ -123,19 +143,46 @@
 <body>
 
     <div class="search-container">
-        <a asp-controller="Home" asp-action="StudentFeedback" style="position: relative;">
-            <img src="~/images/not2.png" alt="Notifications" class="icon" />
-            @if (ViewBag.NewFeedbackCount > 0)
-            {
-                <span class="badge" style="position: absolute; top: 0; right: 0; background: red; color: white; border-radius: 50%; padding: 0 5px;">
-                    @ViewBag.NewFeedbackCount
-                </span>
-            }
-        </a>
+        <div class="icon-container">
+            <h3 style="font-weight: bold;">Notifications</h3>
+            <a asp-controller="Home" asp-action="StudentFeedback" style="position: relative;">
+                <img src="~/images/not2.png" alt="Notifications" class="icon" />
+                @if (ViewBag.NewFeedbackCount > 0)
+                {
+                    <span class="badge">
+                        @ViewBag.NewFeedbackCount
+                    </span>
+                }
+            </a>
+        </div>
 
-        <a asp-controller="Home" asp-action="StudentProfile">
-            <img src="~/images/prof-removebg-preview.png" alt="Profile" class="icon" />
-        </a>
+        <div class="icon-container">
+            <h3 style="font-weight: bold;">Profile</h3>
+            <a asp-controller="Home" asp-action="StudentProfile">
+                <img src="~/images/prof-removebg-preview.png" alt="Profile" class="icon" />
+            </a>
+        </div>
+
+        <div class="icon-container">
+            <h3 style="font-weight: bold;">Messages</h3>
+            <a asp-controller="Home" asp-action="studentmessagesview" style="position: relative;">
+                <img src="~/images/messageicon-removebg-preview.png" alt="Message" class="icon" />
+                @if (ViewBag.NewMessagesCount > 0)
+                {
+                    <span class="badge">
+                        @ViewBag.NewMessagesCount
+                    </span>
+                }
+            </a>
+        </div>
+
+
+        <div class="icon-container">
+            <h3 style="font-weight: bold;">Networking</h3>
+            <a asp-controller="Home" asp-action="Networking">
+                <img src="~/images/networking-removebg-preview.png" alt="Networking" class="icon" />
+            </a>
+        </div>
     </div>
 
     <div class="top-right-container">

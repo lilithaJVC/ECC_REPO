@@ -5,31 +5,12 @@
     ViewBag.HideNavbar = true;
 }
 
-<!-- Optional: Add Bootstrap CSS for better styling -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
-<style>
-    /* Custom styles */
-    .card {
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-    .profile-image {
-        width: 100%;
-        height: 200px; /* Set height to maintain aspect ratio */
-        object-fit: cover; /* Crop image to fit */
-    }
-
-    .student-info {
-        margin-top: 10px;
-    }
-</style>
+@if (TempData["InviteMessage"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["InviteMessage"]
+    </div>
+}
 
 <div class="container my-5">
     <h1 class="text-center mb-4">Welcome to the Networking Page</h1>
@@ -40,14 +21,20 @@
             {
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="https://via.placeholder.com/400x200.png?text=Profile+Image" class="card-img-top profile-image" alt="Profile Image" />
+                        <img src="~/images/prof-removebg-preview.png" class="card-img-top profile-image" alt="Profile Image" />
                         <div class="card-header text-center">
                             <h5>@student.Firstname @student.Lastname</h5>
                         </div>
                         <div class="card-body text-center student-info">
                             <h6 class="text-muted">Email:</h6>
                             <p>@student.Email</p>
-                            <a href="@Url.Action("Profile", "Students", new { id = student.StudentNum })" class="btn btn-primary">Connect <i class="fas fa-user-plus"></i></a>
+
+                            <!-- Message box for user input -->
+                            <div class="message-box my-3 border rounded p-3 bg-light">
+                                <h6>Messages for @student.Firstname:</h6>
+                                <textarea class="form-control message-content" rows="3" placeholder="Write your message here..."></textarea>
+                                <button type="button" class="btn btn-primary mt-2 send-message" data-receiver-email="@student.Email">Send Message</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -61,3 +48,39 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.send-message').click(function() {
+                const messageContent = $(this).siblings('.message-content').val();
+                const receiverEmail = $(this).data('receiver-email');
+
+                if (messageContent.trim() === '') {
+                    alert('Please enter a message.');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("SendMessage", "Home")',
+                    data: {
+                        ReceiverEmail: receiverEmail,
+                        Content: messageContent
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Message sent successfully!');
+                        } else {
+                            alert('Failed to send message.');
+                        }
+                    },
+                    error: function() {
+                        alert('Error while sending message.');
+                    }
+                });
+            });
+        });
+    </script>
+}
