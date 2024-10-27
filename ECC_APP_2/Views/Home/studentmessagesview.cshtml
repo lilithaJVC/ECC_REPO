@@ -1,0 +1,76 @@
+﻿@model List<ECC_APP_2.Models.Message>
+
+@{
+    ViewBag.Title = "Student Messages";
+}
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Student Messages</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="message-list">
+            @foreach (var message in Model)
+            {
+                <div class="message mb-3 p-4 border rounded shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <strong>@message.SenderEmail</strong>
+                        <small class="text-muted">@message.SentDate.ToString("g")</small>
+                    </div>
+                    <div class="mt-2">
+                        <strong>Message:</strong>
+                        <p class="mb-0">@message.Content</p>
+                    </div>
+
+                    <!-- Reply Section -->
+                    <div class="reply-section mt-3">
+                        <h6>Reply:</h6>
+                        <textarea class="form-control reply-content" rows="2" placeholder="Type your reply here..."></textarea>
+                        <button type="button" class="btn btn-primary mt-2 send-reply" data-receiver-email="@message.SenderEmail">Send Reply</button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">No messages found.</div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.send-reply').click(function () {
+                const replyContent = $(this).siblings('.reply-content').val();
+                const receiverEmail = $(this).data('receiver-email');
+
+                if (replyContent.trim() === '') {
+                    alert('Please enter a reply message.');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("SendMessage", "Home")', // Assuming the SendMessage method can handle replies
+                    data: {
+                        ReceiverEmail: receiverEmail,
+                        Content: replyContent
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Reply sent successfully!');
+                            location.reload(); // Optionally reload to refresh the messages
+                        } else {
+                            alert('Failed to send reply.');
+                        }
+                    },
+                    error: function () {
+                        alert('Error while sending reply.');
+                    }
+                });
+            });
+        });
+    </script>
+}

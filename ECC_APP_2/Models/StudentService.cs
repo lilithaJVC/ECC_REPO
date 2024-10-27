@@ -1,8 +1,8 @@
 ﻿using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Collections.Generic; // Ensure this is included for List<T>
-using ECC_APP_2.Models; // Add this namespace to access the Students class
+using System.Collections.Generic; 
+using ECC_APP_2.Models; 
 
 namespace ECC_APP_2.Models
 {
@@ -34,7 +34,7 @@ namespace ECC_APP_2.Models
                 System.Text.Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.PostAsync("api/Student/Login", content); // Adjust the endpoint as needed
+            var response = await _httpClient.PostAsync("api/Student/Login", content); 
 
             return response.IsSuccessStatusCode;
         }
@@ -55,6 +55,8 @@ namespace ECC_APP_2.Models
 
             return null; // or throw an exception
         }
+
+
 
     }
 }

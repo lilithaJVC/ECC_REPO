@@ -25,6 +25,17 @@
     <div class="card">
         <div class="card-header">
             <h4>All Feedback</h4>
+            <div class="icon-container">
+                <a asp-controller="Home" asp-action="StudentFeedback" style="position: relative;">
+                    <img src="~/images/not2.png" alt="Notifications" class="icon" />
+                    @if (Model.NewFeedbackCount > 0)
+                    {
+                        <span class="badge">
+                            @Model.NewFeedbackCount
+                        </span>
+                    }
+                </a>
+            </div>
         </div>
         <div class="card-body">
             @if (Model.FeedbackList != null && Model.FeedbackList.Any())
@@ -61,5 +72,3 @@
         </div>
     </div>
 </div>
-
-

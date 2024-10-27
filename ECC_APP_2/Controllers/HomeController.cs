@@ -150,20 +150,7 @@ namespace ECC_APP_2.Controllers
         }
 
 
-        //networking code 
-
-
-        public async Task<IActionResult> Networking()
-        {
-            var students = await _studentService.GetAllStudents(); // Fetch students
-            if (students == null)
-            {
-                // Handle the case where no students are found or the API call failed
-                ViewBag.ErrorMessage = "Could not retrieve students.";
-            }
-            return View(students); // Pass the list of students to the view
-        }
-
+      
 
 
 
@@ -369,18 +356,18 @@ namespace ECC_APP_2.Controllers
 
         // Mentor login POST method
         [HttpPost]
-        public async Task<IActionResult> MentorLogin(Mentor model) // Correct type to Mentor
+        public async Task<IActionResult> MentorLogin(Mentor model) 
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var isSuccess = await _mentorService.LoginMentor(model); // Pass the correct model
+            var isSuccess = await _mentorService.LoginMentor(model); 
             if (isSuccess)
             {
                 // Store the mentor's email in session
-                HttpContext.Session.SetString("MentorEmail", model.Email); // Assuming model has an Email property
+                HttpContext.Session.SetString("MentorEmail", model.Email); 
 
                 TempData["Message"] = "Login successful!";
                 return RedirectToAction("MentorDashboard");
@@ -467,8 +454,6 @@ namespace ECC_APP_2.Controllers
         }
 
         // StudentFeedback Action
-        // StudentFeedback Action
-        // StudentFeedback Action
         public IActionResult StudentFeedback()
         {
             // Retrieve the logged-in student's ID from the session
@@ -487,8 +472,14 @@ namespace ECC_APP_2.Controllers
                 .Where(f => f.StudentNumber == studentId.Value)
                 .ToList();
 
-            // Count new feedback (this could be any logic you have to determine what's "new")
-            var newFeedbackCount = feedbackForStudent.Count(f => !f.IsRead); // Assuming IsRead is a property to check if feedback has been read
+            // Count new feedback
+            var newFeedbackCount = feedbackForStudent.Count(f => !f.IsRead);
+
+            // Mark feedback as read when opening the notifications
+            foreach (var feedback in feedbackForStudent.Where(f => !f.IsRead))
+            {
+                feedback.IsRead = true; // Mark feedback as read
+            }
 
             // Create the view model with the filtered feedback and new feedback count
             var feedbackModel = new StudentFeedbackViewModel
@@ -500,8 +491,67 @@ namespace ECC_APP_2.Controllers
             return View(feedbackModel);
         }
 
-       
+
+        public async Task<IActionResult> Networking()
+        {
+            // Retrieve the logged-in student's ID from the session
+            var studentId = HttpContext.Session.GetInt32("UserID");
+
+            // Check if studentId is valid
+            if (!studentId.HasValue)
+            {
+                // Handle case where student is not logged in
+                TempData["Error"] = "You must be logged in to view the networking page.";
+                return RedirectToAction("StLogIn"); // Redirect to login page if not logged in
+            }
+
+            // Fetch students list
+            var students = await _studentService.GetAllStudents();
+            if (students == null)
+            {
+                // Handle the case where no students are found or the API call failed
+                ViewBag.ErrorMessage = "Could not retrieve students.";
+                return View(); // Return an empty view with an error message
+            }
+
+            return View(students); // Pass the list of students to the view
+        }
 
 
+        private static List<Message> messages = new List<Message>();
+
+        [HttpPost]
+        public IActionResult SendMessage(string receiverEmail, string content)
+        {
+            // Retrieve sender's email from the session
+            var senderEmail = HttpContext.Session.GetString("UserEmail");
+
+            if (string.IsNullOrEmpty(senderEmail))
+            {
+                return Json(new { success = false, message = "Sender email not found in session." });
+            }
+
+            var newMessage = new Message
+            {
+                SenderEmail = senderEmail, // Use the email from the session
+                ReceiverEmail = receiverEmail,
+                Content = content,
+                SentDate = DateTime.Now
+            };
+
+            messages.Add(newMessage); // Store message in the list
+
+            // Optionally, use TempData to notify the user
+            TempData["InviteMessage"] = "Message sent successfully!";
+
+            return Json(new { success = true });
+        }
+
+
+        public IActionResult studentmessagesview()
+        {
+            return View(messages); // Pass the list of messages to the view
+        }
     }
+
 }
