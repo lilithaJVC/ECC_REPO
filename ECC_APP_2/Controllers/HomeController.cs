@@ -196,47 +196,7 @@ namespace ECC_APP_2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        // Funding Guide code
-
-        public IActionResult FundingGuide()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> FundingGuide(FundingGuideTemplate model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var studentNum = HttpContext.Session.GetInt32("UserID");
-            if (studentNum.HasValue)
-            {
-                model.studentNum = studentNum.Value;
-            }
-            else
-            {
-                ModelState.AddModelError("", "User not logged in.");
-                return View(model);
-            }
-
-            var isSuccess = await _fundingGuideService.SaveFundingGuide(model);
-            if (isSuccess)
-            {
-                ViewBag.Message = "Funding Guide saved successfully!";
-            }
-            else
-            {
-                _logger.LogError("Failed to save Funding Guide. API returned a failure response.");
-                ViewBag.Message = "Failed to save Funding Guide. Please try again.";
-            }
-
-            return View(model);
-        }
-
-
+       
 
 
         public IActionResult LoadPartialView(string partialViewName)
@@ -453,42 +413,83 @@ namespace ECC_APP_2.Controllers
             return RedirectToAction("MentorDashboard");
         }
 
-        // StudentFeedback Action
+
         public IActionResult StudentFeedback()
         {
-            // Retrieve the logged-in student's ID from the session
             var studentId = HttpContext.Session.GetInt32("UserID");
 
-            // Check if studentId is valid
             if (!studentId.HasValue)
             {
-                // Handle case where student is not logged in
                 TempData["Error"] = "You must be logged in to view feedback.";
-                return RedirectToAction("StLogIn"); // Redirect to login page if not logged in
+                return RedirectToAction("StLogIn");
             }
 
-            // Filter feedback list to include only feedback for the logged-in student
-            var feedbackForStudent = _feedbackList
-                .Where(f => f.StudentNumber == studentId.Value)
-                .ToList();
-
-            // Count new feedback
+            var feedbackForStudent = _feedbackList.Where(f => f.StudentNumber == studentId.Value).ToList();
             var newFeedbackCount = feedbackForStudent.Count(f => !f.IsRead);
 
-            // Mark feedback as read when opening the notifications
             foreach (var feedback in feedbackForStudent.Where(f => !f.IsRead))
             {
-                feedback.IsRead = true; // Mark feedback as read
+                feedback.IsRead = true;
             }
 
-            // Create the view model with the filtered feedback and new feedback count
             var feedbackModel = new StudentFeedbackViewModel
             {
                 FeedbackList = feedbackForStudent,
-                NewFeedbackCount = newFeedbackCount // Set the new feedback count
+                NewFeedbackCount = newFeedbackCount
             };
 
+            ViewBag.NewFeedbackCount = newFeedbackCount; // Ensure this is set correctly
+
             return View(feedbackModel);
+        }
+
+
+
+
+
+        // Funding Guide code
+
+        public IActionResult FundingGuide()
+        {
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FundingGuide(FundingGuideTemplate model)
+        {
+
+            ViewBag.NewMessagesCount = await GetUnreadMessageCount();
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var studentNum = HttpContext.Session.GetInt32("UserID");
+            if (studentNum.HasValue)
+            {
+                model.studentNum = studentNum.Value;
+            }
+            else
+            {
+                ModelState.AddModelError("", "User not logged in.");
+                return View(model);
+            }
+
+            var isSuccess = await _fundingGuideService.SaveFundingGuide(model);
+            if (isSuccess)
+            {
+                ViewBag.Message = "Funding Guide saved successfully!";
+            }
+            else
+            {
+                _logger.LogError("Failed to save Funding Guide. API returned a failure response.");
+                ViewBag.Message = "Failed to save Funding Guide. Please try again.";
+            }
+
+            return View(model);
         }
 
 
@@ -518,12 +519,12 @@ namespace ECC_APP_2.Controllers
         }
 
 
-        private static List<Message> messages = new List<Message>();
+        private static messagesViewModel messagesViewModel = new messagesViewModel();
+
 
         [HttpPost]
-        public IActionResult SendMessage(string receiverEmail, string content)
+        public IActionResult SendMessage(string receiverEmail, string content, int? parentMessageId = null)
         {
-            // Retrieve sender's email from the session
             var senderEmail = HttpContext.Session.GetString("UserEmail");
 
             if (string.IsNullOrEmpty(senderEmail))
@@ -531,27 +532,85 @@ namespace ECC_APP_2.Controllers
                 return Json(new { success = false, message = "Sender email not found in session." });
             }
 
+            // Create a new message object
             var newMessage = new Message
             {
-                SenderEmail = senderEmail, // Use the email from the session
+                SenderEmail = senderEmail,
                 ReceiverEmail = receiverEmail,
                 Content = content,
-                SentDate = DateTime.Now
+                SentDate = DateTime.Now,
+                IsRead = false,
+                ParentMessageId = parentMessageId // Link to parent message if available
             };
 
-            messages.Add(newMessage); // Store message in the list
+            // Add the new message to the list
+            messagesViewModel.Messages.Add(newMessage);
 
-            // Optionally, use TempData to notify the user
+            // If the message has a parentMessageId, find the original message and link the reply
+            if (parentMessageId.HasValue)
+            {
+                var originalMessage = messagesViewModel.Messages.FirstOrDefault(m => m.MessageId == parentMessageId);
+                if (originalMessage != null)
+                {
+                    var response = new MessageResponses
+                    {
+                        ResponseContent = content,
+                        ResponseDate = DateTime.Now,
+                        SenderEmail = senderEmail
+                    };
+
+                    // Add the response to the original message
+                    originalMessage.Responses.Add(response);
+                }
+            }
+
+            // Add success message to TempData
             TempData["InviteMessage"] = "Message sent successfully!";
 
-            return Json(new { success = true });
+            // Calculate unread message count for the receiver
+            var unreadCount = messagesViewModel.Messages.Count(m => m.ReceiverEmail == receiverEmail && !m.IsRead);
+
+            return Json(new { success = true, unreadCount });
         }
 
 
-        public IActionResult studentmessagesview()
+
+        [HttpGet]
+        public async Task< IActionResult> GetUnreadMessageCount()
         {
-            return View(messages); // Pass the list of messages to the view
-        }
-    }
+            var receiverEmail = HttpContext.Session.GetString("UserEmail");
+            Console.WriteLine(receiverEmail);  // Debugging line
 
+            // Calculate the unread message count based on receiver email and unread status
+            var unreadCount = messagesViewModel.Messages
+                .Count(m => m.ReceiverEmail == receiverEmail && !m.IsRead);
+
+            return Json(new { unreadCount });
+        }
+
+        public async Task<IActionResult> StudentMessagesView()
+        {
+            // Await the result from GetUnreadMessageCount
+            ViewBag.NewMessagesCount = await GetUnreadMessageCount();
+
+            var receiverEmail = HttpContext.Session.GetString("UserEmail");
+
+            // Filter messages by the receiver email and unread status
+            var unreadMessages = messagesViewModel.Messages
+                .Where(m => m.ReceiverEmail == receiverEmail && !m.IsRead).ToList();
+
+            // Set the unread message count
+            messagesViewModel.UnreadMessageCount = unreadMessages.Count();
+
+            // Pass the message count to the view
+            ViewBag.NewMessagesCount = messagesViewModel.UnreadMessageCount;
+
+            return View(messagesViewModel);
+        }
+
+
+
+    }
 }
+
+

@@ -18,28 +18,29 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4; /* Light background for contrast */
+            background-color: #f4f4f4;
         }
 
-        .search-container {
+        .search-container, .top-right-container {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 20px; /* Space between header and content */
+            margin-bottom: 20px;
+            align-items: center;
         }
 
         .icon-container {
-            text-align: center; /* Center aligns the text and icon */
-            margin-left: 20px; /* Space between icon containers */
+            text-align: center;
+            margin-left: 20px;
         }
 
         .icon {
-            width: 40px; /* Increased size for better visibility */
+            width: 40px;
             height: 40px;
-            transition: transform 0.3s; /* Smooth scaling on hover */
+            transition: transform 0.3s;
         }
 
             .icon:hover {
-                transform: scale(1.1); /* Scale effect on hover */
+                transform: scale(1.1);
             }
 
         .badge {
@@ -50,20 +51,16 @@
             color: white;
             border-radius: 50%;
             padding: 0 5px;
-            font-size: 0.8em; /* Smaller font for the badge */
-        }
-
-        .top-right-container {
-            text-align: right;
+            font-size: 0.8em;
         }
 
         .container {
-            max-width: 800px; /* Limit the width for readability */
-            margin: auto; /* Center align the container */
-            background: white; /* White background for contrast */
-            padding: 20px; /* Padding around content */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1.center-italic {
@@ -72,71 +69,74 @@
         }
 
         .importance-text {
-            font-size: 1.1em; /* Slightly larger text */
-            margin-bottom: 15px; /* Space below the paragraph */
+            font-size: 1.1em;
+            margin-bottom: 15px;
         }
 
         .small-welcome {
             font-size: 1.2em;
-            margin-bottom: 20px; /* Space below the welcome text */
+            margin-bottom: 20px;
         }
 
         .video-container {
             display: flex;
-            justify-content: space-between; /* Space between videos */
-            margin-bottom: 20px; /* Space below video section */
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
         }
 
         iframe {
-            width: 100%; /* Full width of the container */
-            height: 200px; /* Fixed height for videos */
-            border: none; /* Remove border for a cleaner look */
-            border-radius: 8px; /* Rounded corners for videos */
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 8px;
         }
 
         .button-container {
             display: flex;
-            justify-content: space-around; /* Space evenly between buttons */
-            margin-top: 20px; /* Space above buttons */
+            justify-content: space-around;
+            margin-top: 20px;
+            gap: 10px;
         }
 
         .resource-button {
+            flex: 1;
             text-align: center;
-            background-color: #e9ecef; /* Light background for buttons */
+            background-color: #e9ecef;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            transition: transform 0.2s; /* Animation for hover effect */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
         }
 
             .resource-button:hover {
-                transform: scale(1.05); /* Scale up on hover */
+                transform: scale(1.05);
             }
 
             .resource-button img {
-                width: 60px; /* Decreased size for images */
-                height: auto; /* Maintain aspect ratio */
-                margin-bottom: 10px; /* Space below images */
+                width: 60px;
+                height: auto;
+                margin-bottom: 10px;
             }
 
         button {
-            background-color: #006400; /* Dark green button color */
-            color: white; /* White text color */
-            border: none; /* Remove default border */
-            padding: 10px 20px; /* Padding for the button */
-            border-radius: 5px; /* Rounded corners for the button */
-            cursor: pointer; /* Pointer cursor on hover */
-            transition: background-color 0.3s; /* Smooth transition for hover */
+            background-color: #006400;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
             button:hover {
-                background-color: #004d00; /* Darker shade on hover */
+                background-color: #004d00;
             }
 
         footer {
             text-align: center;
-            margin-top: 20px; /* Space above footer */
-            color: #777; /* Subtle color for footer text */
+            margin-top: 20px;
+            color: #777;
         }
     </style>
 </head>
@@ -145,13 +145,11 @@
     <div class="search-container">
         <div class="icon-container">
             <h3 style="font-weight: bold;">Notifications</h3>
-            <a asp-controller="Home" asp-action="StudentFeedback" style="position: relative;">
+            <a asp-controller="Home" asp-action="StudentFeedback" style="position: relative;" id="notification-icon">
                 <img src="~/images/not2.png" alt="Notifications" class="icon" />
                 @if (ViewBag.NewFeedbackCount > 0)
                 {
-                    <span class="badge">
-                        @ViewBag.NewFeedbackCount
-                    </span>
+                    <span class="badge">@ViewBag.NewFeedbackCount</span>
                 }
             </a>
         </div>
@@ -163,19 +161,14 @@
             </a>
         </div>
 
+        <!-- Message icon with badge -->
         <div class="icon-container">
             <h3 style="font-weight: bold;">Messages</h3>
-            <a asp-controller="Home" asp-action="studentmessagesview" style="position: relative;">
+            <a asp-controller="Home" asp-action="StudentMessagesView" style="position: relative;">
                 <img src="~/images/messageicon-removebg-preview.png" alt="Message" class="icon" />
-                @if (ViewBag.NewMessagesCount > 0)
-                {
-                    <span class="badge">
-                        @ViewBag.NewMessagesCount
-                    </span>
-                }
+                <span class="badge">@ViewBag.NewMessagesCount</span>
             </a>
         </div>
-
 
         <div class="icon-container">
             <h3 style="font-weight: bold;">Networking</h3>
@@ -249,13 +242,41 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 ECC Development Team. All rights reserved.</p>
+        <p>&copy; 2024 ECC App. All rights reserved.</p>
     </footer>
 
-    <script>
-        function showUploadStatus(statusId) {
-            document.getElementById(statusId).style.display = 'block';
-        }
-    </script>
+
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                function updateUnreadCount() {
+                    $.ajax({
+                        url: '@Url.Action("GetUnreadMessageCount", "Home")', // Adjust if necessary
+                        method: 'GET',
+                        success: function (data) {
+                            if (data.unreadCount > 0) {
+                                $('.badge').text(data.unreadCount).show();
+                            } else {
+                                $('.badge').hide();
+                            }
+                        }
+                    });
+                }
+
+                // Update count on page load and every 60 seconds
+                updateUnreadCount();
+                setInterval(updateUnreadCount, 60000);
+
+                // Hide the notification icon after 5 minutes (300000 ms)
+                setTimeout(function () {
+                    var notificationIcon = document.getElementById('notification-icon');
+                    if (notificationIcon) {
+                        notificationIcon.style.display = 'none'; // Hide the entire notification icon
+                    }
+                }, 300000); // 5 minutes in milliseconds
+            });
+        </script>
+    }
 </body>
 </html>
