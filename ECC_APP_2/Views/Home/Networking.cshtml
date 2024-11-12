@@ -26,9 +26,11 @@
                             <h5>@student.Firstname @student.Lastname</h5>
                         </div>
                         <div class="card-body text-center student-info">
+                            <!-- Hide email information -->
+                            <!--
                             <h6 class="text-muted">Email:</h6>
                             <p>@student.Email</p>
-
+                            -->
                             <!-- Message box for user input -->
                             <div class="message-box my-3 border rounded p-3 bg-light">
                                 <h6>Messages for @student.Firstname:</h6>
@@ -52,8 +54,8 @@
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.send-message').click(function() {
+        $(document).ready(function () {
+            $('.send-message').click(function () {
                 const messageContent = $(this).siblings('.message-content').val();
                 const receiverEmail = $(this).data('receiver-email');
 
@@ -69,14 +71,14 @@
                         ReceiverEmail: receiverEmail,
                         Content: messageContent
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             alert('Message sent successfully!');
                         } else {
                             alert('Failed to send message.');
                         }
                     },
-                    error: function() {
+                    error: function () {
                         alert('Error while sending message.');
                     }
                 });
