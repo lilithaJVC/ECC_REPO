@@ -515,8 +515,16 @@ namespace ECC_APP_2.Controllers
                 return View(); // Return an empty view with an error message
             }
 
-            return View(students); // Pass the list of students to the view
+            // Process the students list using a loop
+            foreach (var student in students)
+            {
+                // Add a custom property or perform some processing
+                student.CustomMessage = $"Welcome, {student.FirstName}! Connect with others.";
+            }
+
+            return View(students); // Pass the modified list of students to the view
         }
+
 
 
         private static messagesViewModel messagesViewModel = new messagesViewModel();

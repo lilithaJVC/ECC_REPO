@@ -54,6 +54,13 @@
             font-size: 0.8em;
         }
 
+        .badge-blue {
+            top: -5px; /* Adjust position relative to the first badge */
+            right: -30px; /* Offset to avoid overlapping */
+            background: blue;
+            color: white;
+        }
+
         .container {
             max-width: 800px;
             margin: auto;
@@ -161,14 +168,16 @@
             </a>
         </div>
 
-        <!-- Message icon with badge -->
+        <!-- Message icon with two badges -->
         <div class="icon-container">
             <h3 style="font-weight: bold;">Messages</h3>
             <a asp-controller="Home" asp-action="StudentMessagesView" style="position: relative;">
                 <img src="~/images/messageicon-removebg-preview.png" alt="Message" class="icon" />
                 <span class="badge">@ViewBag.NewMessagesCount</span>
+                <span class="badge badge-blue">@ViewBag.SpecialMessagesCount</span>
             </a>
         </div>
+
 
         <div class="icon-container">
             <h3 style="font-weight: bold;">Networking</h3>
@@ -236,6 +245,7 @@
                 </div>
                 <form asp-controller="Mentor" asp-action="SubmitBusinessProposal" method="post" enctype="multipart/form-data">
                     <!-- Include upload functionality here -->
+
                 </form>
             </div>
         </div>
@@ -247,36 +257,40 @@
 
 
     @section Scripts {
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       
+        </script>
+
+    }
+
+    @section Scripts2 {
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
-                function updateUnreadCount() {
-                    $.ajax({
-                        url: '@Url.Action("GetUnreadMessageCount", "Home")', // Adjust if necessary
-                        method: 'GET',
-                        success: function (data) {
-                            if (data.unreadCount > 0) {
-                                $('.badge').text(data.unreadCount).show();
-                            } else {
-                                $('.badge').hide();
-                            }
-                        }
-                    });
+    function updateUnreadCount() {
+        $.ajax({
+            url: '@Url.Action("GetUnreadMessageCount", "Home")', // Adjust if necessary
+            method: 'GET',
+            success: function (data) {
+                if (data.unreadCount > 0) {
+                                $('.badge-blue').text(data.unreadCount).show();
+                } else {
+                    $('.badge-blue').hide();
                 }
 
-                // Update count on page load and every 60 seconds
-                updateUnreadCount();
-                setInterval(updateUnreadCount, 60000);
 
-                // Hide the notification icon after 5 minutes (300000 ms)
-                setTimeout(function () {
-                    var notificationIcon = document.getElementById('notification-icon');
-                    if (notificationIcon) {
-                        notificationIcon.style.display = 'none'; // Hide the entire notification icon
-                    }
-                }, 300000); // 5 minutes in milliseconds
+            }
+        });
+    }
+
+    // Update count on page load and every 60 seconds
+    updateUnreadCount();
+    setInterval(updateUnreadCount, 60000);
+
+               
             });
         </script>
     }
+
+
 </body>
 </html>
