@@ -34,7 +34,15 @@ namespace ECC_APP_2.Controllers
         }
 
 
-        // Admin registration view  
+
+
+
+        // Admin registration view
+
+        //Code attribution 
+        //stack overflow: https://stackoverflow.com/questions/44376801/mvc-application-use-your-local-db-in-order-to-login-register
+
+
 
         public IActionResult AdminRegistration()
         {
@@ -81,6 +89,9 @@ namespace ECC_APP_2.Controllers
 
 
         //student registraion code 
+        //Code attribution 
+        //stack overflow: https://stackoverflow.com/questions/44376801/mvc-application-use-your-local-db-in-order-to-login-register
+
 
         public IActionResult AdminDash()
         {
@@ -114,6 +125,9 @@ namespace ECC_APP_2.Controllers
         }
 
         // Student login code
+        //Code attribution 
+        //stack overflow: https://stackoverflow.com/questions/44376801/mvc-application-use-your-local-db-in-order-to-login-register
+
 
         public IActionResult StLogIn()
         {
@@ -260,13 +274,16 @@ namespace ECC_APP_2.Controllers
             return View(model);  // Pass the model back to the view in case of errors
         }
 
-      
+
 
 
 
 
 
         //Mentor code 
+        //Code attribution 
+        //stack overflow: https://stackoverflow.com/questions/44376801/mvc-application-use-your-local-db-in-order-to-login-register
+
 
         public IActionResult MentorLogin()
         {
@@ -274,6 +291,9 @@ namespace ECC_APP_2.Controllers
         }
 
         // Mentor login POST method
+        //Code attribution 
+        //stack overflow: https://stackoverflow.com/questions/44376801/mvc-application-use-your-local-db-in-order-to-login-register
+
         [HttpPost]
         public async Task<IActionResult> MentorLogin(Mentor model) 
         {
@@ -469,6 +489,8 @@ namespace ECC_APP_2.Controllers
 
 
         //networking code 
+        //code attribution: 
+        //Soclar winds: https://www.solarwinds.com/database?s_kwcid=AL!11508!3!708553666292!p!!g!!sql%20ssmscq_src=google_ads&cq_cmp=21563311874&cq_con=165671124453&cq_term=sql%20ssms&cq_med=&cq_plac=&cq_net=g&cq_plt=gp&&cq_plac=&cq_net=g&cq_pos=&cq_med=&cq_plt=gp&gad_source=1&gclid=CjwKCAiAl4a6BhBqEiwAqvrqupIQlgmhGZXSQGF5sk8EWDENGbERANcsXk3fFjCqVX8fOq6kek2w2hoCf0MQAvD_BwE&gclsrc=aw.ds
         public async Task<IActionResult> Networking()
         {
             // Retrieve the logged-in student's ID from the session
@@ -494,8 +516,7 @@ namespace ECC_APP_2.Controllers
             // Process the students list using a loop
             foreach (var student in students)
             {
-                // Add a custom property or perform some processing
-             //   student.CustomMessage = $"Welcome, {student.FirstName}! Connect with others.";
+
             }
 
             return View(students); // Pass the modified list of students to the view
