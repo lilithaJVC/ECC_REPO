@@ -1,0 +1,31 @@
+name: Build and Test Application
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger the workflow for pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Runs the pipeline on the latest Ubuntu environment
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2  # Checkout the repository code
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1  # Set up .NET SDK
+        with:
+          dotnet-version: '6.0'  
+
+      - name: Restore Dependencies
+        run: dotnet restore  # Restore NuGet packages for the application
+
+      - name: Build Application
+        run: dotnet build --configuration Release  # Build the MVC app
+
+      - name: Run Unit Tests
+        run: dotnet test --configuration Release  # Run unit tests
