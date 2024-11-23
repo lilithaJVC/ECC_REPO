@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECC_APP_2", "ECC_APP_2\ECC_APP_2.csproj", "{3860948D-71C2-4369-9AB3-90048E168EAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECC_APP_2", "ECC_APP_2\ECC_APP_2.csproj", "{3860948D-71C2-4369-9AB3-90048E168EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECC_APP_2.Tests", "Ecc.Tests\ECC_APP_2.Tests.csproj", "{65C18275-0576-4D3E-81C2-1C6B686FD9CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3860948D-71C2-4369-9AB3-90048E168EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3860948D-71C2-4369-9AB3-90048E168EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3860948D-71C2-4369-9AB3-90048E168EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C18275-0576-4D3E-81C2-1C6B686FD9CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65C18275-0576-4D3E-81C2-1C6B686FD9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65C18275-0576-4D3E-81C2-1C6B686FD9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65C18275-0576-4D3E-81C2-1C6B686FD9CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
