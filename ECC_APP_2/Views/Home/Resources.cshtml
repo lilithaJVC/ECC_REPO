@@ -168,15 +168,15 @@
             </a>
         </div>
 
-        <!-- Message icon with two badges -->
         <div class="icon-container">
             <h3 style="font-weight: bold;">Messages</h3>
-            <a asp-controller="Home" asp-action="StudentMessagesView" style="position: relative;">
+            <a asp-controller="Home" asp-action="StudentMessagesView" style="position: relative;" id="message-icon">
                 <img src="~/images/messageicon-removebg-preview.png" alt="Message" class="icon" />
                 <span class="badge">@ViewBag.NewMessagesCount</span>
                 <span class="badge badge-blue">@ViewBag.SpecialMessagesCount</span>
             </a>
         </div>
+
 
 
         <div class="icon-container">
@@ -228,6 +228,7 @@
                     <small style="color: #555;">Already have a funding proposal? Upload it here for a review:</small>
                 </div>
                 <form asp-controller="Mentor" asp-action="SubmitFundingProposal" method="post" enctype="multipart/form-data">
+                 
                     <!-- Include upload functionality here -->
                 </form>
             </div>
@@ -263,33 +264,48 @@
     }
 
     @section Scripts2 {
-       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
-    function updateUnreadCount() {
-        $.ajax({
-            url: '@Url.Action("GetUnreadMessageCount", "Home")', // Adjust if necessary
-            method: 'GET',
-            success: function (data) {
-                if (data.unreadCount > 0) {
+                // Update unread count periodically
+                function updateUnreadCount() {
+                    $.ajax({
+                        url: '@Url.Action("GetUnreadMessageCount", "Home")',
+                        method: 'GET',
+                        success: function (data) {
+                            if (data.unreadCount > 0) {
                                 $('.badge-blue').text(data.unreadCount).show();
-                } else {
-                    $('.badge-blue').hide();
+                            } else {
+                                $('.badge-blue').hide();
+                            }
+                        }
+                    });
                 }
 
+                // Mark messages as read when the icon is clicked
+                $('#message-icon').click(function (e) {
+                    e.preventDefault(); // Prevent default navigation
+                    $.ajax({
+                        url: '@Url.Action("MarkMessagesAsRead", "Home")',
+                        method: 'POST',
+                        success: function (data) {
+                            if (data.success) {
+                                $('.badge-blue').hide(); // Hide the badge on success
+                            }
+                        }
+                    });
 
-            }
-        });
-    }
+                    // Redirect to the messages page after marking as read
+                    window.location.href = $(this).attr('href');
+                });
 
-    // Update count on page load and every 60 seconds
-    updateUnreadCount();
-    setInterval(updateUnreadCount, 60000);
-
-               
+                // Update count on page load and every 60 seconds
+                updateUnreadCount();
+                setInterval(updateUnreadCount, 60000);
             });
         </script>
     }
+
 
 
 </body>

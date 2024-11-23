@@ -617,6 +617,27 @@ namespace ECC_APP_2.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult MarkMessagesAsRead()
+        {
+            var receiverEmail = HttpContext.Session.GetString("UserEmail");
+
+            if (string.IsNullOrEmpty(receiverEmail))
+            {
+                return Json(new { success = false, message = "Receiver email not found in session." });
+            }
+
+            // Mark all unread messages for this receiver as read
+            var unreadMessages = messagesViewModel.Messages
+                .Where(m => m.ReceiverEmail == receiverEmail && !m.IsRead);
+
+            foreach (var message in unreadMessages)
+            {
+                message.IsRead = true;
+            }
+
+            return Json(new { success = true });
+        }
 
     }
 }
