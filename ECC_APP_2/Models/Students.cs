@@ -19,8 +19,8 @@ namespace ECC_APP_2.Models
 
         public string Password { get; set; }
 
-        public String CustomMessage { get; set; }
+       // public String CustomMessage { get; set; }
 
-        public String FirstName { get; set; }
+      //  public String FirstName { get; set; }
     }
 }

@@ -66,14 +66,6 @@
             width: 100%;
         }
 
-       //    font-size: 2.5rem;
-            }
-
-            .sub-heading {
-                font-size: 1rem;
-            } */
-        }
-
         /* Button Icons */
         .btn-icon {
             margin-right: 5px;
@@ -132,11 +124,11 @@
             </div>
         }
 
-        <!-- Search Bar -->
+        <!-- Search Bar for Business Proposals -->
         <div class="row mb-4">
             <div class="col-md-6 offset-md-3">
                 <div class="input-group">
-                    <input type="text" placeholder="Search by Student Number..." class="form-control search-input" aria-label="Search" id="searchInput">
+                    <input type="text" placeholder="Search Business Proposals by User ID..." class="form-control search-input" aria-label="Search" id="searchProposalsInput">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-primary search-button" onclick="searchProposals()">
                             <i class="fas fa-search btn-icon"></i> Search
@@ -200,6 +192,20 @@
                     }
                 </tbody>
             </table>
+        </div>
+
+        <!-- Search Bar for Funding Guides -->
+        <div class="row mb-4">
+            <div class="col-md-6 offset-md-3">
+                <div class="input-group">
+                    <input type="text" placeholder="Search Funding Guide by User ID..." class="form-control search-input" aria-label="Search" id="searchFundingInput">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary search-button" onclick="searchFundingGuides()">
+                            <i class="fas fa-search btn-icon"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Funding Guides Table -->
@@ -285,52 +291,67 @@
         </div>
     </div>
 
-    <!-- Font Awesome for Icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <!-- jQuery and Bootstrap JS -->
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
     <script>
-        // Function to search Business Proposals by Student Number
-        function searchProposals() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const table = document.getElementById('proposalsTable');
-            const rows = table.getElementsByTagName('tr');
-
-            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header row
-                const cells = rows[i].getElementsByTagName('td');
-                const studentNum = cells[1].textContent.toLowerCase(); // Student Number is in the second column (index 1)
-                rows[i].style.display = studentNum.includes(input) ? '' : 'none';
-            }
-        }
-
-        // Function to toggle hidden columns in both tables
+        // Toggle columns for the Proposal and Funding Guide Details
         function toggleColumns(button) {
             const row = button.closest('tr');
             const hiddenColumns = row.querySelectorAll('.hidden-column');
-            const isVisible = hiddenColumns[0].style.display !== 'none';
-
-            hiddenColumns.forEach(function (column) {
-                column.style.display = isVisible ? 'none' : 'table-cell';
+            const isVisible = hiddenColumns[0].style.display === 'table-cell';
+            hiddenColumns.forEach(col => {
+                col.style.display = isVisible ? 'none' : 'table-cell';
             });
+            button.innerHTML = isVisible ? '<i class="fas fa-plus btn-icon"></i> Show Details' : '<i class="fas fa-minus btn-icon"></i> Hide Details';
+        }
 
-            // Update button text and icon
-            if (isVisible) {
-                button.innerHTML = '<i class="fas fa-plus btn-icon"></i> Show Details';
-                button.setAttribute('aria-expanded', 'false');
-            } else {
-                button.innerHTML = '<i class="fas fa-minus btn-icon"></i> Hide Details';
-                button.setAttribute('aria-expanded', 'true');
+        // Search Business Proposals by Student ID
+        function searchProposals() {
+            const input = document.getElementById('searchProposalsInput');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById('proposalsTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const studentNumCell = cells[1]; // Assuming student number is in the second column
+                if (studentNumCell) {
+                    const studentNum = studentNumCell.textContent || studentNumCell.innerText;
+                    if (studentNum.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = '';
+                    } else {
+                        rows[i].style.display = 'none';
+                    }
+                }
             }
         }
 
-        // Ensure hidden columns are hidden on page load
-        window.onload = function () {
-            const hiddenColumns = document.querySelectorAll('.hidden-column');
-            hiddenColumns.forEach(function (column) {
-                column.style.display = 'none';
-            });
-        };
+        // Search Funding Guides by Student ID
+        function searchFundingGuides() {
+            const input = document.getElementById('searchFundingInput');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById('fundingGuidesTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const studentNumCell = cells[1]; // Assuming student number is in the second column
+                if (studentNumCell) {
+                    const studentNum = studentNumCell.textContent || studentNumCell.innerText;
+                    if (studentNum.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = '';
+                    } else {
+                        rows[i].style.display = 'none';
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
