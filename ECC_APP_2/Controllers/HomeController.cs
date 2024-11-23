@@ -34,11 +34,14 @@ namespace ECC_APP_2.Controllers
         }
 
 
-        // Admin registration page
+        // Admin registration view  
+
         public IActionResult AdminRegistration()
         {
             return View();
         }
+
+
 
         // Admin login page
         public IActionResult AdminLogin()
@@ -61,7 +64,7 @@ namespace ECC_APP_2.Controllers
             {
                 TempData["Message"] = "Login successful!";
                 // Redirect to a dashboard or admin panel after successful login
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminDash");
             }
             else
             {
@@ -71,7 +74,18 @@ namespace ECC_APP_2.Controllers
             return View(model);
         }
 
-        //student registration 
+
+
+
+
+
+
+        //student registraion code 
+
+        public IActionResult AdminDash()
+        {
+            return View();
+        }
 
         public IActionResult RegisterStudent()
         {
@@ -197,79 +211,17 @@ namespace ECC_APP_2.Controllers
         }
 
        
-
-
         public IActionResult LoadPartialView(string partialViewName)
         {
             return PartialView(partialViewName);
-
-
-        }
-
-        public IActionResult DownloadTemplate()
-        {
-            // Define the ID for the funding guide you want to fetch
-            int fundingGuideId = 1; // Replace with the actual ID or logic to get the ID
-            var fileName = "BusinessProposalTemplate.docx";
-
-            // Fetch the content asynchronously
-            var fileContentTask = GenerateTemplateContent(fundingGuideId);
-            fileContentTask.Wait(); // Wait for the task to complete synchronously
-            var fileContent = fileContentTask.Result;
-
-            // Create a file stream for the content
-            var fileStream = new MemoryStream(Encoding.UTF8.GetBytes(fileContent));
-
-            // Return the file as a download
-            return File(fileStream, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
-        }
-
-        // Helper method to generate or fetch the template content
-        private async Task<string> GenerateTemplateContent(int id)
-        {
-            var fundingGuide = await _fundingGuideService.GetFundingGuideById(id);
-
-            if (fundingGuide == null)
-            {
-                return "Funding guide not found.";
-            }
-            else
-            {
-                return $"Funding Guide Template \n   \nFunding Guide ID: {fundingGuide.FundingGuideId}\n" +
-                  $"Funding Purpose: {fundingGuide.fundingPurpose}\n" +
-                      $"Bussiness Overview: {fundingGuide.bussinessOverview}\n" +
-                        $"Business name: {fundingGuide.bussinessName}\n" +
-                          $"Mission: {fundingGuide.mission}\n" +
-                            $"BussinessModel {fundingGuide.bussinessModel}\n" +
-                              $"TotalFunding: {fundingGuide.totalFunding}\n" +
-                                $"UseOfFunds: {fundingGuide.useOfFunds}\n" +
-                                  $"Expenses: {fundingGuide.expenses}\n" +
-
-                                    $"Profitability: {fundingGuide.profitability}\n" +
-                                      $"Industry: {fundingGuide.industry}\n" +
-                                        $"Competitors: {fundingGuide.competitors}\n" +
-                                          $"MarketTrends: {fundingGuide.marketTrends}\n" +
-                                            $"KeyMembersAndRoles: {fundingGuide.KeyMembersandRoles}\n" +
-                                              $"KeyMilestones: {fundingGuide.keyMilestones}\n" +
-                                                $"Timeline: {fundingGuide.timeline}\n" +
-                                                  $"Risks: {fundingGuide.risks}\n" +
-                                                    $"RiskPlan: {fundingGuide.riskPlan}\n" +
-
-                                                     $"Summary: {fundingGuide.summary}\n" +
-                                                      $"Name: {fundingGuide.name}\n" +
-                                                       $"Email: {fundingGuide.email}\n" +
-                                                        $"PhoneNumber: {fundingGuide.phoneNumber}\n" +
-
-                  $"Amount Requested: {fundingGuide.amountRequested}";
-
-            }
-
         }
 
 
 
-        // Business Proposal code
 
+
+
+        // Business Proposal code 
         public IActionResult BusinessProposal()
         {
             // Render the BusinessProposal form view
@@ -308,7 +260,14 @@ namespace ECC_APP_2.Controllers
             return View(model);  // Pass the model back to the view in case of errors
         }
 
-        // Mentor login GET method
+      
+
+
+
+
+
+        //Mentor code 
+
         public IActionResult MentorLogin()
         {
             return View();
@@ -341,12 +300,23 @@ namespace ECC_APP_2.Controllers
         }
 
 
+
+
+
+
+
+        //Bussiness Showcase code 
         public async Task<IActionResult> Bussiness_Showcase()
         {
             return View();
         }
 
 
+
+
+
+
+        //Mentor Code
         public async Task<IActionResult> MentorDashboard()
         {
             // Fetch all business proposals and funding guides
@@ -365,6 +335,9 @@ namespace ECC_APP_2.Controllers
         }
 
 
+
+
+        //Student Profile code 
         public IActionResult StudentProfile()
        {
          // Retrieve user details from the session
@@ -387,7 +360,7 @@ namespace ECC_APP_2.Controllers
 
 
 
-        // SubmitFeedback Action
+       //Prposal Feedback code 
         [HttpPost]
         public IActionResult SubmitFeedback(string mentorComment, int studentNum, string mentorEmail)
         {
@@ -413,7 +386,6 @@ namespace ECC_APP_2.Controllers
             return RedirectToAction("MentorDashboard");
         }
 
-
         public IActionResult StudentFeedback()
         {
             var studentId = HttpContext.Session.GetInt32("UserID");
@@ -438,7 +410,7 @@ namespace ECC_APP_2.Controllers
                 NewFeedbackCount = newFeedbackCount
             };
 
-            ViewBag.NewFeedbackCount = newFeedbackCount; // Ensure this is set correctly
+            ViewBag.NewFeedbackCount = newFeedbackCount;
 
             return View(feedbackModel);
         }
@@ -493,6 +465,10 @@ namespace ECC_APP_2.Controllers
         }
 
 
+
+
+
+        //networking code 
         public async Task<IActionResult> Networking()
         {
             // Retrieve the logged-in student's ID from the session
@@ -526,9 +502,8 @@ namespace ECC_APP_2.Controllers
         }
 
 
-
+        //messages method 
         private static messagesViewModel messagesViewModel = new messagesViewModel();
-
 
         [HttpPost]
         public IActionResult SendMessage(string receiverEmail, string content, int? parentMessageId = null)
@@ -580,8 +555,6 @@ namespace ECC_APP_2.Controllers
 
             return Json(new { success = true, unreadCount });
         }
-
-
 
         [HttpGet]
         public async Task< IActionResult> GetUnreadMessageCount()
