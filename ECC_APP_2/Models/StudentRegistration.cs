@@ -4,6 +4,7 @@ namespace ECC_APP_2.Models
 {
     public class StudentRegistration
     {
+
         public StudentRegistration() { }
 
         public StudentRegistration(string firstname, string lastname, string email, string password)
