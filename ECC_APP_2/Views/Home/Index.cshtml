@@ -2,130 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="hero-content">
-        <h1 class="hero-title">Entrepreneurship Support Platform</h1>
-        <div class="marquee-container">
-            <marquee behavior="scroll" direction="left">
-                <span>Welcome to the Entrepreneurship Support Platform!</span>
-            </marquee>
-        </div>
-        <p class="hero-subtitle">Make a change in your life, we are here to assist you.</p>
-    </div>
-</section>
-
-<!-- Entrepreneur Video and Write-up Section -->
-<section class="entrepreneur-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Video -->
-            <div class="col-md-6">
-                <div class="ratio ratio-16x9">
-                    <iframe class="ratio-item" src="https://www.youtube.com/embed/lJjILQu2xM8" allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <!-- Write-up -->
-            <div class="col-md-6">
-                <div class="entrepreneur-writeup">
-                    <h2>What It Means to Be an Entrepreneur</h2>
-                    <p>Being an entrepreneur means more than starting a business. It's about taking risks, embracing challenges, and having the vision and resilience to bring ideas to life. Entrepreneurs are problem solvers, innovators, and leaders who strive to make a difference in their communities and the world. They learn from failures, adapt to change, and continuously seek growth.</p>
-                    <p>Entrepreneurship is a journey of constant learning, creativity, and determination. Whether you are building a startup or pursuing a side hustle, you are contributing to the economy, creating opportunities, and shaping the future.</p>
-                </div>
-            </div>
-        </div>
-
-
-<!-- Why We Are a Trusted Platform Section -->
-<section class="trusted-platform">
-    <div class="container">
-        <h2 class="section-title text-center">Why We Are a Trusted Platform</h2>
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <img src="https://www.allbusiness.com/media-library/multitasking-businessman.jpg?id=32091079&width=1200&height=1200" alt="Trusted Platform" class="trusted-image img-fluid rounded">
-            </div>
-            <div class="col-md-6">
-                <div class="trusted-writeup">
-                    <h3>Our Commitment to Excellence</h3>
-                    <p>We are dedicated to supporting entrepreneurs by offering reliable and personalized guidance. Our platform is trusted by thousands of users for the following reasons:</p>
-                    <ul>
-                        <li><strong>Expert Team:</strong> Our team consists of experienced professionals with deep knowledge in entrepreneurship and business management.</li>
-                        <li><strong>Proven Results:</strong> We have helped hundreds of startups achieve their business goals and grow into successful companies.</li>
-                        <li><strong>Secure and Reliable:</strong> Our platform ensures your data is safe with industry-standard security measures.</li>
-                        <li><strong>24/7 Support:</strong> We offer round-the-clock support to ensure that you have help whenever you need it.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- News and Articles Section -->
-<section class="news-articles">
-    <div class="container">
-        <h2 class="section-title text-center">Post</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="article-card">
-                    <img src="~/images/article1.1.jpg" alt="Article 1" class="article-image img-fluid" />
-                    <h3><a href="https://www.forbes.com/entrepreneurs/" target="_blank">Forbes Entrepreneurship Articles</a></h3>
-                    <p>Explore insightful articles on entrepreneurship and get inspired to take your business to the next level.</p>
-                    <a href="https://www.forbes.com/entrepreneurs/" target="_blank" class="read-more">Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="article-card">
-                    <img src="~/images/article2.1.jpg" alt="Article 2" class="article-image img-fluid" />
-                    <h3><a href="https://www.cnbc.com/entrepreneurs/" target="_blank">CNBC Entrepreneurship Articles</a></h3>
-                    <p>Stay updated with the latest trends and tips in entrepreneurship from CNBC.</p>
-                    <a href="https://www.cnbc.com/entrepreneurs/" target="_blank" class="read-more">Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="article-card">
-                    <img src="~/images/article3.1.jpg" alt="Article 3" class="article-image img-fluid" />
-                    <h3><a href="https://hbr.org/1985/03/the-heart-of-entrepreneurship" target="_blank">Harvard Business Review: The Heart of Entrepreneurship</a></h3>
-                    <p>Delve into the essence of entrepreneurship with insights from Harvard Business Review.</p>
-                    <a href="https://hbr.org/1985/03/the-heart-of-entrepreneurship" target="_blank" class="read-more">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<!-- CSS Styling -->
 <style>
-    /* Global Spacing */
-    section {
-        padding: 60px 0;
-    }
-
-    /* Root Colors for Brand Consistency */
+    /* Root Variables */
     :root {
-        --primary-color: #4CAF50;
+        --primary-color: #014D4E;
         --secondary-color: #333;
+        --background-color: #b5e7a0;
         --light-color: #f9f9f9;
         --dark-color: #222;
+        --spacing-section: 6rem;
     }
 
-    /* Global Styling */
-    body {
-        font-family: 'Roboto', sans-serif;
-    }
-
-    a {
-        color: var(--primary-color);
-        text-decoration: none;
-    }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-    /* Hero Section Styling */
+    /* Hero Section */
     .hero-section {
         width: 100%;
         height: 100vh;
@@ -137,31 +25,247 @@
         align-items: center;
         text-align: center;
         color: white;
+        position: relative;
+        margin-top: -56px;
     }
 
     .hero-content {
         background: rgba(0, 0, 0, 0.5);
-        padding: 20px;
-        border-radius: 10px;
+        padding: 3rem;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
     .hero-title {
         font-size: 4rem;
-        margin-bottom: 10px;
+        margin: 0;
+        line-height: 1.2;
     }
 
     .hero-subtitle {
         font-size: 1.5rem;
+        margin: 0;
+        opacity: 0.9;
     }
 
-    /* Responsive Font Sizes */
-    @@media (max-width: 1200px) {
-        .hero-title {
-            font-size: 3rem;
+    .hero-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background-color: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        margin-top: 1rem;
+    }
+
+        .hero-button:hover {
+            background-color: white;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            text-decoration: none;
         }
+
+    /* Entrepreneur Section */
+    .entrepreneur-section {
+        background-color: white;
+        padding: var(--spacing-section) 0;
     }
 
+    .entrepreneur-writeup {
+        padding: 2.5rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        height: 100%;
+    }
+
+        .entrepreneur-writeup h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .entrepreneur-writeup p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+    /* Video Container */
+    .ratio {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Trusted Platform Section */
+    .trusted-platform {
+        background-color: var(--background-color);
+        padding: var(--spacing-section) 0;
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .trusted-image {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .trusted-writeup {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        height: 100%;
+    }
+
+        .trusted-writeup h3 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .trusted-writeup ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .trusted-writeup li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+            .trusted-writeup li:last-child {
+                margin-bottom: 0;
+            }
+
+            .trusted-writeup li:before {
+                content: "•";
+                color: var(--primary-color);
+                position: absolute;
+                left: 0;
+                font-size: 1.2rem;
+            }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 4rem;
+        padding: 2rem;
+        background-color: var(--primary-color);
+        border-radius: 15px;
+    }
+
+    .nav-btn {
+        padding: 1rem 2rem;
+        background-color: transparent;
+        color: white !important;
+        border: 2px solid white;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+        .nav-btn:hover {
+            background-color: white;
+            color: var(--primary-color) !important;
+            text-decoration: none;
+        }
+
+    /* News and Articles Section */
+    .news-articles {
+        background-color: white;
+        padding: var(--spacing-section) 0;
+    }
+
+    .article-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease;
+    }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .article-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+    }
+
+    .article-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+
+    .article-card p {
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+        line-height: 1.6;
+    }
+
+    .read-more {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-color);
+        color: white !important;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        margin-top: auto;
+        text-align: center;
+    }
+
+        .read-more:hover {
+            background-color: #023739;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+    /* Container */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Responsive Design */
     @@media (max-width: 768px) {
+        :root {
+            --spacing-section: 4rem;
+        }
+
         .hero-title {
             font-size: 2.5rem;
         }
@@ -169,196 +273,119 @@
         .hero-subtitle {
             font-size: 1.2rem;
         }
-    }
 
-    /* Entrepreneur Section */
-    .entrepreneur-section {
-        background-color: var(--light-color);
-    }
-
-    .entrepreneur-writeup h2 {
-        font-size: 2.5rem;
-        color: var(--primary-color);
-    }
-
-    .entrepreneur-writeup p {
-        font-size: 1.2rem;
-        line-height: 1.8;
-        color: var(--secondary-color);
-    }
-
-    /* Team Section */
-    .meet-our-team {
-        background-color: #fff;
-    }
-
-    .team-member {
-        text-align: center;
-        margin-bottom: 40px;
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-
-        .team-member:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .hero-content {
+            padding: 2rem;
+            width: 95%;
         }
 
-    .team-image {
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        margin-bottom: 20px;
-        transition: filter 0.3s;
-    }
-
-    .team-member:hover img {
-        filter: grayscale(50%);
-    }
-
-    .team-member h3 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-    }
-
-    .team-member p {
-        color: var(--secondary-color);
-    }
-
-    /* Trusted Platform Section */
-    .trusted-platform {
-        background-color: var(--light-color);
-        padding: 100px 0;
-    }
-
-    .trusted-writeup h3 {
-        font-size: 2.2rem;
-        margin-bottom: 20px;
-        color: var(--primary-color);
-    }
-
-    .trusted-writeup ul {
-        list-style-type: disc;
-        padding-left: 20px;
-    }
-
-        .trusted-writeup ul li {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
+        .entrepreneur-writeup,
+        .trusted-writeup {
+            padding: 1.5rem;
+            margin-top: 2rem;
         }
 
-    /* News and Articles Section */
-    .news-articles {
-        background-color: #fff;
-    }
-
-    .article-card {
-        background: white;
-        border-radius: 15px;
-        padding: 40px;
-        margin-bottom: 30px;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s;
-        text-align: center;
-    }
-
-        .article-card:hover {
-            transform: scale(1.05);
-        }
-
-    .article-image {
-        width: 100%;
-        border-radius: 10px;
-    }
-
-    .article-card h3 {
-        font-size: 1.8rem;
-        margin-top: 20px;
-        color: var(--secondary-color);
-    }
-
-    .read-more {
-        text-decoration: none;
-        color: var(--primary-color);
-        font-weight: bold;
-        font-size: 1.2rem;
-    }
-
-        .read-more:hover {
-            text-decoration: underline;
-        }
-
-    .footer {
-        background-color: #333;
-        color: #fff;
-        padding: 40px 0;
-    }
-
-    .footer-column {
-        margin-bottom: 20px;
-    }
-
-    .footer-logo-img {
-        max-width: 120px;
-        margin-bottom: 10px;
-    }
-
-    /* Footer Links */
-    .footer-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: center;
-    }
-
-        .footer-list li {
-            margin-bottom: 10px;
-        }
-
-        .footer-list a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-            .footer-list a:hover {
-                text-decoration: underline;
-            }
-
-    /* Social Media Icons */
-    .social-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-    }
-
-        .social-list li {
-            margin-left: 15px;
-        }
-
-    .social-icon {
-        width: 24px;
-        height: 24px;
-        filter: invert(100%); /* Makes icons white */
-    }
-
-    /* Copyright Text */
-    .footer p {
-        margin: 0;
-        font-size: 0.9rem;
-    }
-
-    @@media (max-width: 768px) {
-        .footer-column {
-            text-align: center;
-        }
-
-        .social-list {
-            justify-content: center;
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
         }
     }
-
 </style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Entrepreneurship Support Platform</h1>
+        <div class="marquee-container">
+            <marquee behavior="scroll" direction="left">
+                <span>Welcome to the Entrepreneurship Support Platform!</span>
+            </marquee>
+        </div>
+        <p class="hero-subtitle">Make a change in your life, we are here to assist you.</p>
+        <a href="@Url.Action("ResourcesPage", "Home")" class="hero-button">Go to Resources</a>
+    </div>
+</section>
+
+<!-- Entrepreneur Section -->
+<section class="entrepreneur-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/lJjILQu2xM8" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="entrepreneur-writeup">
+                    <h2>What It Means to Be an Entrepreneur</h2>
+                    <p>Being an entrepreneur means more than starting a business. It's about taking risks, embracing challenges, and having the vision and resilience to bring ideas to life. Entrepreneurs are problem solvers, innovators, and leaders who strive to make a difference in their communities and the world.</p>
+                    <p>Entrepreneurship is a journey of constant learning, creativity, and determination. Whether you are building a startup or pursuing a side hustle, you are contributing to the economy, creating opportunities, and shaping the future.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trusted Platform Section -->
+<section class="trusted-platform">
+    <div class="container">
+        <h2 class="section-title">Why We Are a Trusted Platform</h2>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="~/images/Pic2.png" alt="Our Commitment" class="trusted-image">
+            </div>
+            <div class="col-md-6">
+                <div class="trusted-writeup">
+                    <h3>Our Commitment to Excellence</h3>
+                    <p>We are dedicated to supporting entrepreneurs by offering reliable and personalized guidance. Our platform is trusted by thousands of users for the following reasons:</p>
+                    <ul>
+                        <li>Expert Team: Our team consists of experienced professionals with deep knowledge in entrepreneurship and business management.</li>
+                        <li>Proven Results: We have helped hundreds of startups achieve their business goals and grow into successful companies.</li>
+                        <li>Secure and Reliable: Our platform ensures your data is safe with industry-standard security measures.</li>
+                        <li>24/7 Support: We offer round-the-clock support to ensure that you have help whenever you need it.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News and Articles Section -->
+<section class="news-articles">
+    <div class="container">
+        <h2 class="section-title">Post</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="article-card">
+                    <img src="~/images/article1.1.jpg" alt="Article 1" class="article-image">
+                    <h3>Forbes Entrepreneurship Articles</h3>
+                    <p>Explore insightful articles on entrepreneurship and get inspired to take your business to the next level.</p>
+                    <a href="https://www.forbes.com/entrepreneurs/" target="_blank" class="read-more">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="article-card">
+                    <img src="~/images/article2.1.jpg" alt="Article 2" class="article-image">
+                    <h3>CNBC Entrepreneurship Articles</h3>
+                    <p>Stay updated with the latest trends and tips in entrepreneurship from CNBC.</p>
+                    <a href="https://www.cnbc.com/entrepreneurs/" target="_blank" class="read-more">Read More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="article-card">
+                    <img src="~/images/article3.1.jpg" alt="Article 3" class="article-image">
+                    <h3>Harvard Business Review: The Heart of Entrepreneurship</h3>
+                    <p>Delve into the essence of entrepreneurship with insights from Harvard Business Review.</p>
+                    <a href="https://hbr.org/1985/03/the-heart-of-entrepreneurship" target="_blank" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a asp-controller="Home" asp-action="aboutus" class="nav-btn">About Us</a>
+            <a asp-controller="Home" asp-action="Contact" class="nav-btn">Contact Us</a>
+            <a asp-controller="Home" asp-action="FAQ" class="nav-btn">FAQs</a>
+        </div>
+    </div>
+</section>
