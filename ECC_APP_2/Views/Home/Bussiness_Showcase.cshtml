@@ -1,258 +1,339 @@
 ﻿@model ECC_APP_2.Models.BusinessShowcase
 
-<h1 class="text-center mb-4">Business Showcase</h1>
-<p class="text-center mb-4"><b>A platform where student entrepreneurs promote their businesses to sponsors using multimedia content.</b></p>
-
-
-<form asp-action="Create" enctype="multipart/form-data" method="post">
-    <div class="container">
-        <!-- Business Showcase Section at the Top -->
-        <div class="row my-5">
-            <div class="col-12">
-                <h2 class="text-center text-dark mb-4">Business Showcase</h2>
-
-                <!-- Filter Dropdown for Categories -->
-                <div class="text-center mb-4">
-                    <select id="filterCategory" class="form-select w-auto d-inline-block">
-                        <option value="all">All</option>
-                        <option value="tech">Tech</option>
-                        <option value="eco">Environmental</option>
-                        <option value="food">Culinary</option>
-                    </select>
-                </div>
-
-                <!-- Dynamic Business Showcase Section with Sample Proposals and Logos -->
-                <div class="row" id="businessShowcase">
-                    <!-- Tech Business Proposal -->
-                    <div class="col-md-4 col-sm-6 mb-4" data-category="tech">
-                        <div class="card shadow-sm">
-                            <img src="~/images/istockphoto-1332607841-612x612 - Copy.jpg" class="card-img-top" alt="Tech Innovations Logo">
-                            <div class="card-body">
-                                <h5 class="card-title">Tech Innovations</h5>
-                                <p class="card-text">
-                                    Revolutionizing digital security with state-of-the-art encryption technology for consumer devices.
-                                </p>
-                                <p class="card-text">
-                                    <strong>Contact:</strong> info@techinnovations.com<br>
-                                    <strong>Phone:</strong> (555) 123-4567
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Environmental Business Proposal -->
-                    <div class="col-md-4 col-sm-6 mb-4" data-category="eco">
-                        <div class="card shadow-sm">
-                            <img src="~/images/eco-building-logo-vector-21435282.jpg" class="card-img-top" alt="GreenEarth Solutions Logo">
-                            <div class="card-body">
-                                <h5 class="card-title">GreenEarth Solutions</h5>
-                                <p class="card-text">
-                                    Committed to reducing waste through innovative recycling solutions tailored for urban environments.
-                                </p>
-                                <p class="card-text">
-                                    <strong>Contact:</strong> hello@greenearth.com<br>
-                                    <strong>Phone:</strong> (555) 234-5678
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Culinary Business Proposal -->
-                    <div class="col-md-4 col-sm-6 mb-4" data-category="food">
-                        <div class="card shadow-sm">
-                            <img src="~/images/chef-hat-logo-icon-vector-600nw-2297100465.webp" class="card-img-top" alt="TasteCraft Logo">
-                            <div class="card-body">
-                                <h5 class="card-title">TasteCraft</h5>
-                                <p class="card-text">
-                                    A culinary hub specializing in farm-to-table experiences, bringing fresh local produce to gourmet cuisine.
-                                </p>
-                                <p class="card-text">
-                                    <strong>Contact:</strong> contact@tastecraft.com<br>
-                                    <strong>Phone:</strong> (555) 345-6789
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Additional Business: Tech -->
-        <div class="col-md-4 col-sm-6 mb-4" data-category="tech">
-            <div class="card shadow-sm">
-                <img src="~/images/tech-solutions-logo.jpg" class="card-img-top" alt="FutureTech Logo">
-                <div class="card-body">
-                    <h5 class="card-title">FutureTech Solutions</h5>
-                    <p class="card-text">
-                        Delivering next-gen cloud computing and AI solutions for small businesses and startups.
-                    </p>
-                    <p class="card-text">
-                        <strong>Contact:</strong> futuretech@solutions.com<br>
-                        <strong>Phone:</strong> (555) 456-7890
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Additional Business: Environmental -->
-        <div class="col-md-4 col-sm-6 mb-4" data-category="eco">
-            <div class="card shadow-sm">
-                <img src="~/images/solar-logo.jpg" class="card-img-top" alt="SolarHub Logo">
-                <div class="card-body">
-                    <h5 class="card-title">SolarHub Innovations</h5>
-                    <p class="card-text">
-                        Empowering communities with affordable and sustainable solar energy solutions.
-                    </p>
-                    <p class="card-text">
-                        <strong>Contact:</strong> support@solarhub.com<br>
-                        <strong>Phone:</strong> (555) 567-8901
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Additional Business: Culinary -->
-        <div class="col-md-4 col-sm-6 mb-4" data-category="food">
-            <div class="card shadow-sm">
-                <img src="~/images/catering-logo.jpg" class="card-img-top" alt="GourmetBites Logo">
-                <div class="card-body">
-                    <h5 class="card-title">GourmetBites Catering</h5>
-                    <p class="card-text">
-                        Specializing in exclusive event catering with a focus on unique and personalized menus.
-                    </p>
-                    <p class="card-text">
-                        <strong>Contact:</strong> gourmetbites@catering.com<br>
-                        <strong>Phone:</strong> (555) 678-9012
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Form to Add New Business -->
-    <div class="row my-5">
-        <div class="col-12">
-            <h3 class="text-center text-dark mb-3">Showcase Your Business Here</h3>
-
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <!-- Business Name -->
-                    <div class="form-group mb-3">
-                        <label for="BusinessName" class="form-label">Business Name</label>
-                        <input type="text" class="form-control" id="BusinessName" name="BusinessName" placeholder="Enter your business name" required>
-                        <span asp-validation-for="BusinessName" class="text-danger"></span>
-                    </div>
-
-                    <!-- Business Description -->
-                    <div class="form-group mb-3">
-                        <label for="BusinessDescription" class="form-label">Business Description</label>
-                        <textarea class="form-control" id="BusinessDescription" name="BusinessDescription" rows="3" placeholder="Describe your business" required></textarea>
-                        <span asp-validation-for="BusinessDescription" class="text-danger"></span>
-                    </div>
-
-                    <!-- Contact Details -->
-                    <div class="form-group mb-3">
-                        <label for="ContactDetails" class="form-label">Contact Details</label>
-                        <textarea class="form-control" id="ContactDetails" name="ContactDetails" rows="3" placeholder="Provide your contact details" required></textarea>
-                        <span asp-validation-for="ContactDetails" class="text-danger"></span>
-                    </div>
-
-                    <!-- Upload Business Logo -->
-                    <div class="form-group mb-4">
-                        <label for="BusinessLogo" class="form-label">Upload Business Logo</label>
-                        <input type="file" class="form-control-file" id="BusinessLogo" name="BusinessLogo" accept="image/*" required>
-                        <span asp-validation-for="BusinessLogo" class="text-danger"></span>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary px-5">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- CSS for Hover Effect on Logo -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Showcase</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        .card:hover .card-img-top {
-            opacity: 1;
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control {
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+        }
+        
+        .category-pill {
+            background-color: #EDF2F7;
+            border-radius: 9999px;
+            padding: 0.25rem 1rem;
+            font-size: 0.875rem;
+            color: #4A5568;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .add-business-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .add-business-btn:hover {
+            transform: scale(1.05);
         }
 
-        .card-img-top {
-            opacity: 0.5;
-            transition: opacity 0.3s;
+        .card-img-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 66.67%; /* 3:2 Aspect Ratio */
+        }
+
+        .card-img-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover .card-img-container img {
+            transform: scale(1.1);
+        }
+
+        .filter-select {
+            background-color: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234A5568'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em 1.5em;
+        }
+
+        /* Form input styling */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem;
+            background: #48BB78;
+            color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #667eea;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @@keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white py-16 px-4 mb-12">
+        <div class="container mx-auto max-w-6xl">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-4 animate__animated animate__fadeInDown">
+                Business Showcase
+            </h1>
+            <p class="text-xl md:text-2xl text-center max-w-3xl mx-auto opacity-90 animate__animated animate__fadeInUp">
+                A platform where student entrepreneurs promote their businesses to sponsors using multimedia content.
+            </p>
+        </div>
+    </div>
 
-    <!-- JavaScript for Filter Functionality -->
+    <div class="container mx-auto max-w-6xl px-4">
+        <!-- Filter and Add Business Section -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <select id="filterCategory" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="tech">Tech</option>
+                <option value="eco">Environmental</option>
+                <option value="food">Culinary</option>
+            </select>
+            <button class="add-business-btn text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2" onclick="toggleForm()">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Add Business
+            </button>
+        </div>
+
+        <!-- Business Showcase Grid -->
+        <div id="businessShowcase" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- Sample Card -->
+            <div class="card bg-white rounded-xl shadow-md overflow-hidden" data-category="tech">
+                <div class="card-img-container">
+                    <img src="~/images/techino.jpg" alt="Tech Innovations Logo" class="w-full">
+                </div>
+                <div class="p-6">
+                    <span class="category-pill">Tech</span>
+                    <h3 class="text-xl font-semibold mb-2">Tech Innovations</h3>
+                    <p class="text-gray-600 mb-4">
+                        Revolutionizing digital security with state-of-the-art encryption technology for consumer devices.
+                    </p>
+                    <div class="text-sm text-gray-500">
+                        <p><strong>Contact:</strong> info@techinnovations.com</p>
+                        <p><strong>Phone:</strong> (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Business Form -->
+        <div id="businessFormContainer" class="hidden bg-white rounded-xl shadow-lg p-8 mb-12 animate__animated animate__fadeIn">
+            <h3 class="text-2xl font-semibold text-center mb-6">Showcase Your Business</h3>
+            <form id="businessForm" class="max-w-2xl mx-auto" enctype="multipart/form-data">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Business Name</label>
+                        <input type="text" id="BusinessName" name="BusinessName" required
+                               class="form-input">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Business Description</label>
+                        <textarea id="BusinessDescription" name="BusinessDescription" rows="3" required
+                                  class="form-input"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Contact Details</label>
+                        <textarea id="ContactDetails" name="ContactDetails" rows="3" required
+                                  class="form-input"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Business Logo</label>
+                        <input type="file" id="BusinessLogo" name="BusinessLogo" accept="image/*" required
+                               class="form-input">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                        <select id="BusinessCategory" name="BusinessCategory" required
+                                class="form-input">
+                            <option value="tech">Tech</option>
+                            <option value="eco">Environmental</option>
+                            <option value="food">Culinary</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-end gap-4">
+                        <button type="button" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50" onclick="toggleForm()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="add-business-btn px-6 py-2 rounded-lg text-white">
+                            <span class="loading-spinner mr-2"></span>
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        Business added successfully!
+    </div>
+
     <script>
-        // Filter Functionality
-        document.getElementById("filterCategory").addEventListener("change", function () {
-            var selectedCategory = this.value;
-            var businessCards = document.querySelectorAll("#businessShowcase .col-md-4");
+        const form = document.getElementById("businessForm");
+        const formContainer = document.getElementById("businessFormContainer");
+        const showcase = document.getElementById("businessShowcase");
+        const toast = document.getElementById("toast");
+        const loadingSpinner = document.querySelector(".loading-spinner");
 
-            businessCards.forEach(function (card) {
+        function toggleForm() {
+            formContainer.classList.toggle('hidden');
+            if (!formContainer.classList.contains('hidden')) {
+                formContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showToast() {
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            // Show loading spinner
+            loadingSpinner.style.display = 'inline-block';
+
+            const name = document.getElementById("BusinessName").value;
+            const description = document.getElementById("BusinessDescription").value;
+            const contact = document.getElementById("ContactDetails").value;
+            const logoFile = document.getElementById("BusinessLogo").files[0];
+            const category = document.getElementById("BusinessCategory").value;
+
+            if (!logoFile) {
+                alert("Please upload a logo!");
+                loadingSpinner.style.display = 'none';
+                return;
+            }
+
+            try {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                const card = document.createElement("div");
+                card.className = "card bg-white rounded-xl shadow-md overflow-hidden animate__animated animate__fadeIn";
+                card.setAttribute("data-category", category);
+
+                card.innerHTML = `
+                    <div class="card-img-container">
+                        <img src="${URL.createObjectURL(logoFile)}" alt="${name} Logo" class="w-full">
+                    </div>
+                    <div class="p-6">
+                        <span class="category-pill">${category}</span>
+                        <h3 class="text-xl font-semibold mb-2">${name}</h3>
+                        <p class="text-gray-600 mb-4">${description}</p>
+                        <div class="text-sm text-gray-500">${contact}</div>
+                    </div>
+                `;
+
+                showcase.insertBefore(card, showcase.firstChild);
+                form.reset();
+                toggleForm();
+                showToast();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error adding your business. Please try again.');
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        document.getElementById("filterCategory").addEventListener("change", function () {
+            const selectedCategory = this.value;
+            const businessCards = document.querySelectorAll("#businessShowcase .card");
+
+            businessCards.forEach(card => {
+                const cardElement = card;
                 if (selectedCategory === "all" || card.getAttribute("data-category") === selectedCategory) {
-                    card.style.display = "block";
+                    cardElement.style.display = "block";
+                    cardElement.classList.add('animate__animated', 'animate__fadeIn');
                 } else {
-                    card.style.display = "none";
+                    cardElement.style.display = "none";
                 }
             });
         });
 
-        // Logic to add dynamically submitted business cards (example simulation)
-        function addBusinessCard(name, description, contact, logoSrc, category) {
-            var showcase = document.getElementById("businessShowcase");
-
-            // Create the card container
-            var cardCol = document.createElement("div");
-            cardCol.className = "col-md-4 col-sm-6 mb-4";
-            cardCol.setAttribute("data-category", category);
-
-            // Create the card element
-            var card = document.createElement("div");
-            card.className = "card shadow-sm";
-
-            // Create the image with hover effect
-            var img = document.createElement("img");
-            img.src = logoSrc;
-            img.className = "card-img-top";
-            img.alt = name + " Logo";
-
-            // Add the card body with business details
-            var cardBody = document.createElement("div");
-            cardBody.className = "card-body";
-            var title = document.createElement("h5");
-            title.className = "card-title";
-            title.innerText = name;
-
-            var desc = document.createElement("p");
-            desc.className = "card-text";
-            desc.innerText = description;
-
-            var contactInfo = document.createElement("p");
-            contactInfo.className = "card-text";
-            contactInfo.innerHTML = "<strong>Contact:</strong> " + contact;
-
-            // Append elements together
-            cardBody.appendChild(title);
-            cardBody.appendChild(desc);
-            cardBody.appendChild(contactInfo);
-            card.appendChild(img);
-            card.appendChild(cardBody);
-            cardCol.appendChild(card);
-
-            // Append the card to the showcase
-            showcase.appendChild(cardCol);
-        }
-
-        // Example call to add a business card (replace with actual form submission data)
-        // addBusinessCard("Example Corp", "Innovative solutions for the future.", "contact@example.com", "/path/to/logo.jpg", "tech");
+        // Preview image before upload
+        document.getElementById("BusinessLogo").addEventListener("change", function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // You could add preview functionality here if needed
+                    console.log("Image loaded successfully");
+                }
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
-</form>
-
-
-
-
-
+</body>
+</html>
