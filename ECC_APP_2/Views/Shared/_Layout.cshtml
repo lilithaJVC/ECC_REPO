@@ -175,9 +175,9 @@
         {
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                        <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" />
-                        <span>ECC_APP_2</span>
+                    <a class="navbar-brand d-block" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/New_Logo_ECC-removebg-preview.png" alt="ECC Logo" class="logo-img" />
+                        <span class="app-name">Entrepreneurship Support Platform</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav"
@@ -186,21 +186,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
+                          
                             <li class="nav-item">
-                                <a class="btn-nav" asp-controller="Home" asp-action="RegisterStudent">Student Registration</a>
+                                <a class="btn-nav" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn-nav" asp-controller="Home" asp-action="MentorLogin">Login</a>
+                                <a class="btn-nav" asp-controller="Home" asp-action="aboutus">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn-nav" asp-controller="Home" asp-action="Networking">Networking</a>
+                                <a class="btn-nav" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="btn-nav" asp-controller="Home" asp-action="Resources">Business Proposals</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn-nav" asp-controller="Home" asp-action="Bussiness_Showcase">Business Showcase</a>
-                            </li>
+                            
+                           
+                           
+                           
                         </ul>
                     </div>
                 </div>
