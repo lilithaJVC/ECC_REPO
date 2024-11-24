@@ -1,0 +1,191 @@
+﻿@{
+    ViewData["Title"] = "About Us - Entrepreneurship Support Platform";
+}
+
+<style>
+    :root {
+        --primary-color: #014D4E;
+        --background-color: #b5e7a0;
+        --text-color: #333;
+    }
+
+    .about-page {
+        padding: 4rem 0;
+        background-color: var(--background-color);
+        min-height: calc(100vh - 76px);
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        font-weight: 600;
+    }
+
+    .about-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2.5rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-content h2 {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+    }
+
+    .about-content p {
+        color: var(--text-color);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+
+    .team-section {
+        margin-top: 4rem;
+    }
+
+    .team-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .team-member-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+        object-fit: cover;
+        border: 3px solid var(--primary-color);
+    }
+
+    .team-member-name {
+        color: var(--primary-color);
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .team-member-role {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .mission-vision {
+        margin-top: 3rem;
+    }
+
+    .stats-section {
+        background-color: var(--primary-color);
+        padding: 3rem 0;
+        margin: 4rem 0;
+        border-radius: 15px;
+        color: white;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    @@media (max-width: 768px) {
+        .section-title {
+            font-size: 2.2rem;
+        }
+
+        .about-card {
+            padding: 1.5rem;
+        }
+
+        .stat-item {
+            margin-bottom: 2rem;
+        }
+    }
+</style>
+
+<div class="about-page">
+    <div class="container">
+        <h1 class="section-title">About Us</h1>
+
+        <!-- Main About Section -->
+        <div class="about-card">
+            <div class="about-content">
+                <h2>Our Story</h2>
+                <p>Welcome to the Entrepreneurship Support Platform, where innovation meets opportunity. Founded with the vision of empowering aspiring entrepreneurs, our platform serves as a bridge between ambitious ideas and successful businesses.</p>
+
+                <p>We understand that starting a business can be challenging, which is why we've created a comprehensive ecosystem of resources, mentorship, and support to guide you through every step of your entrepreneurial journey.</p>
+            </div>
+        </div>
+
+        <!-- Mission and Vision -->
+        <div class="mission-vision">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="about-card">
+                        <div class="about-content">
+                            <h2>Our Mission</h2>
+                            <p>To empower and equip aspiring entrepreneurs with the knowledge, tools, and resources they need to transform their innovative ideas into successful, sustainable businesses.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="about-card">
+                        <div class="about-content">
+                            <h2>Our Vision</h2>
+                            <p>To become the leading platform for entrepreneurial development, fostering a vibrant community of innovative thinkers and successful business leaders who drive positive change in their communities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Entrepreneurs Supported</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Expert Mentors</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Success Stories</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>

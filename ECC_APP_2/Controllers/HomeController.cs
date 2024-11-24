@@ -486,6 +486,34 @@ namespace ECC_APP_2.Controllers
 
 
 
+        //Resources page code
+        public IActionResult ResourcesPage()
+        {
+            return View();
+        }
+
+
+        //about us 
+
+        public IActionResult aboutus()
+        {
+            return View();
+        }
+
+
+        //Contact us 
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        //FAQ
+
+        public IActionResult FAQ()
+        {
+            return View();
+        }
+
 
 
         //networking code 

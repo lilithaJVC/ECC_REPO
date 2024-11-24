@@ -7,12 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Home\AdminDashboard.cshtml" />
     <Content Remove="Views\Shared\AdminDashboard.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Home\AdminDashboard.cshtml" />
     <None Include="Views\Shared\AdminDashboard.cshtml" />
     <None Include="wwwroot\images\ECC_Home_Page.png" />
   </ItemGroup>
@@ -24,14 +22,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Home\AdminDashboard.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Home\AdminDashboard.cshtml" />
   </ItemGroup>
 
 </Project>

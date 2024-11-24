@@ -1,0 +1,388 @@
+﻿@{
+    ViewData["Title"] = "Resources - Entrepreneurship Support Platform";
+}
+
+<style>
+    :root {
+        --primary-color: #014D4E;
+        --background-color: #b5e7a0;
+        --text-color: #333;
+    }
+
+    .resources-page {
+        padding: 4rem 0;
+        background-color: var(--background-color);
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        font-weight: 600;
+    }
+
+    .sub-section {
+        margin-bottom: 5rem;
+        padding: 0 1rem;
+    }
+
+    .sub-heading {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    /* Video Cards */
+    .video-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .video-container {
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    .video-content h4 {
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    .video-content p {
+        color: var(--text-color);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Template Cards */
+    .template-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .template-preview {
+        border: 1px solid #eee;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+    }
+
+        .template-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+    .template-content h4 {
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    .template-content p {
+        color: var(--text-color);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .download-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-color);
+        color: white !important;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+        .download-btn:hover {
+            background-color: #023739;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 4rem;
+        padding: 2rem;
+        background-color: var(--primary-color);
+        border-radius: 15px;
+    }
+
+    .nav-btn {
+        padding: 1rem 2rem;
+        background-color: transparent;
+        color: white !important;
+        border: 2px solid white;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+        .nav-btn:hover {
+            background-color: white;
+            color: var(--primary-color) !important;
+            text-decoration: none;
+        }
+
+    /* Responsive Design */
+    @@media (max-width: 768px) {
+        .section-title {
+            font-size: 2.2rem;
+        }
+
+        .sub-heading {
+            font-size: 1.8rem;
+        }
+
+        .nav-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+
+        .nav-btn {
+            width: 200px;
+            text-align: center;
+        }
+    }
+</style>
+
+<div class="resources-page">
+    <div class="container">
+        <!-- Business Proposals Section -->
+        <h1 class="section-title">Business Proposals</h1>
+
+        <!-- Business Proposals Videos -->
+        <div class="sub-section">
+            <h2 class="sub-heading">Video Guides</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="video-card">
+                        <div class="video-container ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/jsGBuu88WE0" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <h4>Business Plan Fundamentals</h4>
+                            <p>Comprehensive guide on creating a strong business plan that attracts investors and guides your business journey.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="video-card">
+                        <div class="video-container ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/Oqw1Rj0MVJo" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <h4>Startup Pitch Essentials</h4>
+                            <p>Learn key strategies for crafting a compelling business pitch that captures attention and secures funding.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="video-card">
+                        <div class="video-container ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/FO1jc6hEWo8" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <h4>Business Model Framework</h4>
+                            <p>Detailed walkthrough of creating a solid business model that ensures long-term sustainability and growth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Proposals Templates -->
+        <div class="sub-section">
+            <h2 class="sub-heading">Templates</h2>
+            <div class="row">
+                <!-- Template 1 -->
+                <div class="col-md-4">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <!-- Replace with actual preview image -->
+                            <img src="~/images/basic.jpg" alt="Basic Business Plan Template">
+                        </div>
+                        <div class="template-content">
+                            <h4>Basic Business Plan Template</h4>
+                            <p>A comprehensive template for creating your first business plan. Includes all essential sections and guidance notes.</p>
+                            <a href="~/Templates/Professional_Business_Proposal_Template.pdf" download class="download-btn">
+                                Download Template
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Template 2 -->
+                <div class="col-md-4">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="~/images/advanced.jpg" alt="Financial Projections Template">
+                        </div>
+                        <div class="template-content">
+                            <h4>Financial Projections Template</h4>
+                            <p>Excel-based template for creating professional financial projections and forecasts.</p>
+                            <a href="~/Templates/Advanced_Business_Proposal_Template.pdf" download class="download-btn">
+                                Download Template
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Template 3 -->
+                <div class="col-md-4">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="~/images/fbs.jpg" alt="Market Analysis Template">
+                        </div>
+                        <div class="template-content">
+                            <h4>Market Analysis Template</h4>
+                            <p>Template for conducting thorough market research and competitive analysis.</p>
+                            <a href="~/Templates/Financial_Business_Proposal_Template_Fillable.pdf" download class="download-btn">
+                                Download Template
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funding Guide Section -->
+        <h1 class="section-title">Funding Guide</h1>
+
+        <!-- Funding Guide Videos -->
+        <div class="sub-section">
+            <h2 class="sub-heading">Video Guides</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="video-card">
+                        <div class="video-container ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/677ZtSMr4-4" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <h4>Investment Strategies</h4>
+                            <p>Explore different investment strategies and learn how to attract potential investors to your business.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="video-card">
+                        <div class="video-container ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/jYWF64Um7pw" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <h4>Funding Options</h4>
+                            <p>Comprehensive overview of various funding options available for startups and small businesses.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="video-card">
+                        <div class="video-container ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/EAl39XAm5sw" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-content">
+                            <h4>Financial Planning</h4>
+                            <p>Learn essential financial planning strategies for sustainable business growth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funding Guide Templates -->
+        <div class="sub-section">
+            <h2 class="sub-heading">Templates</h2>
+            <div class="row">
+                <!-- Template 1 -->
+                <div class="col-md-4">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="~/images/pitch.jpg" alt="Funding Proposal Template">
+                        </div>
+                        <div class="template-content">
+                            <h4>Funding Proposal Template</h4>
+                            <p>Professional template for creating compelling funding proposals.</p>
+                            <a href="~/Templates/Professional_Business_Proposal_Template.pdf" download class="download-btn">
+                                Download Template
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Template 2 -->
+                <div class="col-md-4">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="~/images/fundingte.jpg" alt="Investment Pitch Deck">
+                        </div>
+                        <div class="template-content">
+                            <h4>Investment Pitch Deck</h4>
+                            <p>PowerPoint template for creating impressive investor presentations.</p>
+                            <a href="~/Templates/Pitch_Deck_Template_Funding_Guide.pdf" download class="download-btn">
+                                Download Template
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Template 3 -->
+                <div class="col-md-4">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="~/images/forecast.jpg" alt="Financial Model Template">
+                        </div>
+                        <div class="template-content">
+                            <h4>Financial Model Template</h4>
+                            <p>Detailed financial modeling template for business projections.</p>
+                            <a href="~/Templates/Financial_Forecast_Template.pdf" download class="download-btn">
+                                Download Template
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a asp-controller="Home" asp-action="aboutus" class="nav-btn">About Us</a>
+            <a asp-controller="Home" asp-action="ContactUs" class="nav-btn">Contact Us</a>
+            <a asp-controller="Home" asp-action="FAQ" class="nav-btn">FAQs</a>
+        </div>
+    </div>
+</div>

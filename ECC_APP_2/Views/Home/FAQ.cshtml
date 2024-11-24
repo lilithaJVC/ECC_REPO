@@ -1,0 +1,261 @@
+﻿@{
+    ViewData["Title"] = "FAQ - Entrepreneurship Support Platform";
+}
+
+<style>
+    :root {
+        --primary-color: #014D4E;
+        --background-color: #b5e7a0;
+        --text-color: #333;
+    }
+
+    .faq-page {
+        padding: 4rem 0;
+        background-color: var(--background-color);
+        min-height: calc(100vh - 76px);
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        font-weight: 600;
+    }
+
+    .faq-category {
+        margin-bottom: 3rem;
+    }
+
+    .category-title {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .faq-item {
+        background: white;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .faq-question {
+        padding: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--primary-color);
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+        background-color: rgba(1, 77, 78, 0.05);
+    }
+
+    .faq-answer {
+        padding: 0 1.5rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background-color: rgba(1, 77, 78, 0.02);
+    }
+
+    .faq-answer-content {
+        padding: 1.5rem 0;
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 500px;
+    }
+
+    .faq-item.active .faq-question {
+        background-color: rgba(1, 77, 78, 0.05);
+    }
+
+    .toggle-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .toggle-icon {
+        transform: rotate(180deg);
+    }
+
+    @@media (max-width: 768px) {
+        .section-title {
+            font-size: 2.2rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+        }
+
+        .faq-question {
+            font-size: 1rem;
+            padding: 1.2rem;
+        }
+    }
+</style>
+
+<div class="faq-page">
+    <div class="container">
+        <h1 class="section-title">Frequently Asked Questions</h1>
+
+        <!-- Platform Benefits -->
+        <div class="faq-category">
+            <h2 class="category-title">Platform Benefits</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Why should I use this platform?
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Our platform offers:
+                        <ul>
+                            <li>Easy access to entrepreneurial resources on-the-go</li>
+                            <li>Comprehensive guidance and support</li>
+                            <li>Networking opportunities with like-minded entrepreneurs</li>
+                            <li>Professional mentorship from experienced business leaders</li>
+                            <li>Tools and resources for business development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What makes this platform unique?
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Our platform stands out by providing:
+                        <ul>
+                            <li>Personalized mentorship opportunities</li>
+                            <li>Real-world business insights and guidance</li>
+                            <li>Strategic partnership opportunities</li>
+                            <li>Access to successful entrepreneurs and investors</li>
+                            <li>Comprehensive resource library</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources and Features -->
+        <div class="faq-category">
+            <h2 class="category-title">Resources and Features</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What resources are available on the platform?
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        We offer various resources including:
+                        <ul>
+                            <li>Startup guides and business templates</li>
+                            <li>Funding resources and financial planning tools</li>
+                            <li>Networking opportunities and events</li>
+                            <li>Video tutorials and webinars</li>
+                            <li>One-on-one mentorship sessions</li>
+                            <li>Business management tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    How can I access the learning materials?
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Our content is available in multiple formats:
+                        <ul>
+                            <li>Video tutorials and guides</li>
+                            <li>Interactive webinars</li>
+                            <li>Downloadable resources and templates</li>
+                            <li>One-on-one mentorship sessions</li>
+                            <li>Mobile-friendly platform for on-the-go access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Networking and Mentorship -->
+        <div class="faq-category">
+            <h2 class="category-title">Networking and Mentorship</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How can I connect with mentors and other entrepreneurs?
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        We facilitate connections through:
+                        <ul>
+                            <li>Business networking events and galas</li>
+                            <li>Mentorship matching programs</li>
+                            <li>Strategic partnership opportunities</li>
+                            <li>Professional development workshops</li>
+                            <li>Industry-specific meetups</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What types of networking opportunities are available?
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        We offer various networking opportunities:
+                        <ul>
+                            <li>Business galas and formal events</li>
+                            <li>Informal meetups and discussions</li>
+                            <li>Industry-specific networking sessions</li>
+                            <li>Mentor-mentee matching programs</li>
+                            <li>Investment pitch events</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentNode;
+            const isActive = item.classList.contains('active');
+            
+            // Close all items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
