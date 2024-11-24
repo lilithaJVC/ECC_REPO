@@ -1,1 +1,258 @@
-﻿
+﻿@model ECC_APP_2.Models.BusinessShowcase
+
+<h1 class="text-center mb-4">Business Showcase</h1>
+<p class="text-center mb-4"><b>A platform where student entrepreneurs promote their businesses to sponsors using multimedia content.</b></p>
+
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+    <div class="container">
+        <!-- Business Showcase Section at the Top -->
+        <div class="row my-5">
+            <div class="col-12">
+                <h2 class="text-center text-dark mb-4">Business Showcase</h2>
+
+                <!-- Filter Dropdown for Categories -->
+                <div class="text-center mb-4">
+                    <select id="filterCategory" class="form-select w-auto d-inline-block">
+                        <option value="all">All</option>
+                        <option value="tech">Tech</option>
+                        <option value="eco">Environmental</option>
+                        <option value="food">Culinary</option>
+                    </select>
+                </div>
+
+                <!-- Dynamic Business Showcase Section with Sample Proposals and Logos -->
+                <div class="row" id="businessShowcase">
+                    <!-- Tech Business Proposal -->
+                    <div class="col-md-4 col-sm-6 mb-4" data-category="tech">
+                        <div class="card shadow-sm">
+                            <img src="~/images/istockphoto-1332607841-612x612 - Copy.jpg" class="card-img-top" alt="Tech Innovations Logo">
+                            <div class="card-body">
+                                <h5 class="card-title">Tech Innovations</h5>
+                                <p class="card-text">
+                                    Revolutionizing digital security with state-of-the-art encryption technology for consumer devices.
+                                </p>
+                                <p class="card-text">
+                                    <strong>Contact:</strong> info@techinnovations.com<br>
+                                    <strong>Phone:</strong> (555) 123-4567
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Environmental Business Proposal -->
+                    <div class="col-md-4 col-sm-6 mb-4" data-category="eco">
+                        <div class="card shadow-sm">
+                            <img src="~/images/eco-building-logo-vector-21435282.jpg" class="card-img-top" alt="GreenEarth Solutions Logo">
+                            <div class="card-body">
+                                <h5 class="card-title">GreenEarth Solutions</h5>
+                                <p class="card-text">
+                                    Committed to reducing waste through innovative recycling solutions tailored for urban environments.
+                                </p>
+                                <p class="card-text">
+                                    <strong>Contact:</strong> hello@greenearth.com<br>
+                                    <strong>Phone:</strong> (555) 234-5678
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Culinary Business Proposal -->
+                    <div class="col-md-4 col-sm-6 mb-4" data-category="food">
+                        <div class="card shadow-sm">
+                            <img src="~/images/chef-hat-logo-icon-vector-600nw-2297100465.webp" class="card-img-top" alt="TasteCraft Logo">
+                            <div class="card-body">
+                                <h5 class="card-title">TasteCraft</h5>
+                                <p class="card-text">
+                                    A culinary hub specializing in farm-to-table experiences, bringing fresh local produce to gourmet cuisine.
+                                </p>
+                                <p class="card-text">
+                                    <strong>Contact:</strong> contact@tastecraft.com<br>
+                                    <strong>Phone:</strong> (555) 345-6789
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Additional Business: Tech -->
+        <div class="col-md-4 col-sm-6 mb-4" data-category="tech">
+            <div class="card shadow-sm">
+                <img src="~/images/tech-solutions-logo.jpg" class="card-img-top" alt="FutureTech Logo">
+                <div class="card-body">
+                    <h5 class="card-title">FutureTech Solutions</h5>
+                    <p class="card-text">
+                        Delivering next-gen cloud computing and AI solutions for small businesses and startups.
+                    </p>
+                    <p class="card-text">
+                        <strong>Contact:</strong> futuretech@solutions.com<br>
+                        <strong>Phone:</strong> (555) 456-7890
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Business: Environmental -->
+        <div class="col-md-4 col-sm-6 mb-4" data-category="eco">
+            <div class="card shadow-sm">
+                <img src="~/images/solar-logo.jpg" class="card-img-top" alt="SolarHub Logo">
+                <div class="card-body">
+                    <h5 class="card-title">SolarHub Innovations</h5>
+                    <p class="card-text">
+                        Empowering communities with affordable and sustainable solar energy solutions.
+                    </p>
+                    <p class="card-text">
+                        <strong>Contact:</strong> support@solarhub.com<br>
+                        <strong>Phone:</strong> (555) 567-8901
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Business: Culinary -->
+        <div class="col-md-4 col-sm-6 mb-4" data-category="food">
+            <div class="card shadow-sm">
+                <img src="~/images/catering-logo.jpg" class="card-img-top" alt="GourmetBites Logo">
+                <div class="card-body">
+                    <h5 class="card-title">GourmetBites Catering</h5>
+                    <p class="card-text">
+                        Specializing in exclusive event catering with a focus on unique and personalized menus.
+                    </p>
+                    <p class="card-text">
+                        <strong>Contact:</strong> gourmetbites@catering.com<br>
+                        <strong>Phone:</strong> (555) 678-9012
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form to Add New Business -->
+    <div class="row my-5">
+        <div class="col-12">
+            <h3 class="text-center text-dark mb-3">Showcase Your Business Here</h3>
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <!-- Business Name -->
+                    <div class="form-group mb-3">
+                        <label for="BusinessName" class="form-label">Business Name</label>
+                        <input type="text" class="form-control" id="BusinessName" name="BusinessName" placeholder="Enter your business name" required>
+                        <span asp-validation-for="BusinessName" class="text-danger"></span>
+                    </div>
+
+                    <!-- Business Description -->
+                    <div class="form-group mb-3">
+                        <label for="BusinessDescription" class="form-label">Business Description</label>
+                        <textarea class="form-control" id="BusinessDescription" name="BusinessDescription" rows="3" placeholder="Describe your business" required></textarea>
+                        <span asp-validation-for="BusinessDescription" class="text-danger"></span>
+                    </div>
+
+                    <!-- Contact Details -->
+                    <div class="form-group mb-3">
+                        <label for="ContactDetails" class="form-label">Contact Details</label>
+                        <textarea class="form-control" id="ContactDetails" name="ContactDetails" rows="3" placeholder="Provide your contact details" required></textarea>
+                        <span asp-validation-for="ContactDetails" class="text-danger"></span>
+                    </div>
+
+                    <!-- Upload Business Logo -->
+                    <div class="form-group mb-4">
+                        <label for="BusinessLogo" class="form-label">Upload Business Logo</label>
+                        <input type="file" class="form-control-file" id="BusinessLogo" name="BusinessLogo" accept="image/*" required>
+                        <span asp-validation-for="BusinessLogo" class="text-danger"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-5">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- CSS for Hover Effect on Logo -->
+    <style>
+        .card:hover .card-img-top {
+            opacity: 1;
+        }
+
+        .card-img-top {
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+    </style>
+
+    <!-- JavaScript for Filter Functionality -->
+    <script>
+        // Filter Functionality
+        document.getElementById("filterCategory").addEventListener("change", function () {
+            var selectedCategory = this.value;
+            var businessCards = document.querySelectorAll("#businessShowcase .col-md-4");
+
+            businessCards.forEach(function (card) {
+                if (selectedCategory === "all" || card.getAttribute("data-category") === selectedCategory) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+
+        // Logic to add dynamically submitted business cards (example simulation)
+        function addBusinessCard(name, description, contact, logoSrc, category) {
+            var showcase = document.getElementById("businessShowcase");
+
+            // Create the card container
+            var cardCol = document.createElement("div");
+            cardCol.className = "col-md-4 col-sm-6 mb-4";
+            cardCol.setAttribute("data-category", category);
+
+            // Create the card element
+            var card = document.createElement("div");
+            card.className = "card shadow-sm";
+
+            // Create the image with hover effect
+            var img = document.createElement("img");
+            img.src = logoSrc;
+            img.className = "card-img-top";
+            img.alt = name + " Logo";
+
+            // Add the card body with business details
+            var cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+            var title = document.createElement("h5");
+            title.className = "card-title";
+            title.innerText = name;
+
+            var desc = document.createElement("p");
+            desc.className = "card-text";
+            desc.innerText = description;
+
+            var contactInfo = document.createElement("p");
+            contactInfo.className = "card-text";
+            contactInfo.innerHTML = "<strong>Contact:</strong> " + contact;
+
+            // Append elements together
+            cardBody.appendChild(title);
+            cardBody.appendChild(desc);
+            cardBody.appendChild(contactInfo);
+            card.appendChild(img);
+            card.appendChild(cardBody);
+            cardCol.appendChild(card);
+
+            // Append the card to the showcase
+            showcase.appendChild(cardCol);
+        }
+
+        // Example call to add a business card (replace with actual form submission data)
+        // addBusinessCard("Example Corp", "Innovative solutions for the future.", "contact@example.com", "/path/to/logo.jpg", "tech");
+    </script>
+</form>
+
+
+
+
+
