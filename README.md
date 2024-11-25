@@ -11,7 +11,7 @@
 <p>Feature 1 - User Authentication:
 A secure, role-based login system ensures personalized access for students, mentors, and administrators. Each user has tailored privileges, streamlining their experience on the platform.</p>
 
-![User Auth](https://github.com/user-attachments/assets/89a23de9-5b29-412b-afa4-c5d581459192)
+![User Auth](https://github.com/user-attachments/assets/c475724d-0483-4507-835e-663a593c21b3)
 
 <p>Feature 2 - Resource Accessibility:
 Students can access a wealth of business-related materials, including business proposal templates and guides to funding. These resources are organized and easy to navigate, helping users gain clarity on complex entrepreneurial tasks.</p>
@@ -41,7 +41,7 @@ Mentors can provide structured, actionable feedback on submitted business propos
 <p>Feature 7 - Business Showcase:
 A unique feature that allows students to showcase their businesses on the platform, sharing their entrepreneurial journey, achievements, and products or services with their peers, mentors, and potential investors.</p>
 
-![Business Showcase](https://github.com/user-attachments/assets/dabcc03b-1b59-4413-8188-5c7e34a9c20a)
+![Business Showcase](https://github.com/user-attachments/assets/f78fad8b-0462-4146-a44d-2c1fcf3899af)
 
 <div style="text-align: center;">
     <h1>Usage of the ECC Platform</h1>
