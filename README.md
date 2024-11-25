@@ -33,8 +33,6 @@ A unique feature that allows students to showcase their businesses on the platfo
     <h1>Usage of the ECC Platform</h1>
 </div>
 
-# **Entrepreneurship Support Platform**
-
 The Entrepreneurship Support Platform is a comprehensive tool designed to empower students on their entrepreneurial journey by providing essential resources, mentorship, and networking opportunities.
 
 ## **Features**
