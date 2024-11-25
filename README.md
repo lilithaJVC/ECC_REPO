@@ -16,20 +16,32 @@ A secure, role-based login system ensures personalized access for students, ment
 <p>Feature 2 - Resource Accessibility:
 Students can access a wealth of business-related materials, including business proposal templates and guides to funding. These resources are organized and easy to navigate, helping users gain clarity on complex entrepreneurial tasks.</p>
 
+![Screenshot (304)](https://github.com/user-attachments/assets/89faa4b8-7f40-43a9-b4b5-130404c2ba80)
+
 <p>Feature 3 - Business Proposal Submission:
 The platform enables students to upload their business proposals directly to mentors for evaluation and feedback, providing a clear pathway for improvement and growth.</p>
+
+![Screenshot (305)](https://github.com/user-attachments/assets/53ac1573-15f6-42c3-be54-306176b60e23)
 
 <p>Feature 4 - Funding Guide Submission:
 Students can submit detailed funding plans to mentors, ensuring they receive expert guidance in sourcing and managing financial resources.</p>
 
+![Screenshot (306)](https://github.com/user-attachments/assets/6d3a7194-0ae0-4db1-bf88-f516c413501a)
+
 <p>Feature 5 - Networking Opportunities:
 A dedicated networking feature fosters collaboration between like-minded students, encouraging them to share ideas, form teams, and support each other's entrepreneurial endeavors.</p>
+
+![Screenshot (307)](https://github.com/user-attachments/assets/30fa1dc0-57d5-4f01-b3f7-15f99b8bf8e7)
 
 <p>Feature 6 - Feedback Mechanism:
 Mentors can provide structured, actionable feedback on submitted business proposals and funding guides, enabling students to refine their strategies and improve their chances of success.</p>
 
+![Screenshot (308)](https://github.com/user-attachments/assets/13e0a683-7cd1-470a-bd0d-3b7d434d954f)
+
 <p>Feature 7 - Business Showcase:
 A unique feature that allows students to showcase their businesses on the platform, sharing their entrepreneurial journey, achievements, and products or services with their peers, mentors, and potential investors.</p>
+
+![Uploading Screenshot (309).png…]()
 
 <div style="text-align: center;">
     <h1>Usage of the ECC Platform</h1>
