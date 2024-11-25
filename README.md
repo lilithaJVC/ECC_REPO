@@ -11,6 +11,8 @@
 <p>Feature 1 - User Authentication:
 A secure, role-based login system ensures personalized access for students, mentors, and administrators. Each user has tailored privileges, streamlining their experience on the platform.</p>
 
+![User Auth](https://github.com/user-attachments/assets/89a23de9-5b29-412b-afa4-c5d581459192)
+
 <p>Feature 2 - Resource Accessibility:
 Students can access a wealth of business-related materials, including business proposal templates and guides to funding. These resources are organized and easy to navigate, helping users gain clarity on complex entrepreneurial tasks.</p>
 
