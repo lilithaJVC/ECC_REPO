@@ -41,7 +41,7 @@ Mentors can provide structured, actionable feedback on submitted business propos
 <p>Feature 7 - Business Showcase:
 A unique feature that allows students to showcase their businesses on the platform, sharing their entrepreneurial journey, achievements, and products or services with their peers, mentors, and potential investors.</p>
 
-![Uploading Screenshot (309).png…]()
+![Business Showcase](https://github.com/user-attachments/assets/dabcc03b-1b59-4413-8188-5c7e34a9c20a)
 
 <div style="text-align: center;">
     <h1>Usage of the ECC Platform</h1>
