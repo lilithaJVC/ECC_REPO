@@ -1,18 +1,21 @@
 ﻿@model ECC_APP_2.Models.BussinessProposalTemplate
 
 @{
-    ViewData["Title"] = "BusinessProposal";
+    ViewData["Title"] = "Business Proposal";
     ViewBag.HideNavbar = true;
 }
 
-<h1>Business Proposal</h1>
+<h1 class="text-center mb-4">Business Proposal</h1>
 
-<h4>BussinessProposalTemplate</h4>
+<h4>Bussiness Proposal Template</h4>
 <hr />
-<div class="row">
-    <div class="col-md-6">
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
         <form asp-action="BusinessProposal" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Form Fields -->
             <div class="form-group">
                 <label asp-for="ExecutiveSummary" class="control-label"></label>
                 <input asp-for="ExecutiveSummary" class="form-control" />
@@ -54,44 +57,49 @@
                 <span asp-validation-for="Appendix" class="text-danger"></span>
             </div>
 
-            <!-- Organizing buttons with spacing -->
-            <div class="form-group">
-                <input type="submit" value="Submit Proposal" class="btn btn-secondary mr-2" />
-                <input type="submit" value="Download Business Proposal" class="btn btn-secondary mr-2" />
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <input type="submit" value="Submit Proposal" class="btn btn-success" />
+                <form asp-action="Resources" method="get" class="ml-2">
+                    <input type="submit" value="Back to Resources" class="btn btn-secondary" />
+                </form>
             </div>
         </form>
 
-        <div class="text-success">
+        <div class="text-success mt-3">
             @ViewBag.Message
         </div>
     </div>
 </div>
 
-<!-- Back button to navigate to Resources -->
-<div class="form-group">
-    <form asp-action="Resources" method="get">
-        <input type="submit" value="Back to Resources" class="btn btn-secondary" />
-    </form>
-</div>
-
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @@await Html.RenderPartialAsync("_ValidationScriptsPartial")
 }
 
 <style>
+    h1 {
+        font-size: 2rem;
+        color: #343a40;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
     .btn-secondary {
-        background-color: #006400; /* Grey color */
+        background-color: #6c757d;
+        border-color: #6c757d;
         color: white;
-        border: none;
     }
 
         .btn-secondary:hover {
-            background-color: #5a6268; /* Darker grey on hover */
+            background-color: #5a6268;
+            border-color: #545b62;
         }
-
-    .mr-2 {
-        margin-right: 0.5rem; /* Right margin for spacing */
-    }
 </style>
