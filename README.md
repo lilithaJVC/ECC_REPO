@@ -163,5 +163,5 @@ The Entrepreneurship Support Platform is a comprehensive tool designed to empowe
 
 <ul><strong>Demonstration Video:</strong></ul>
 <ul>
- YouTube Link:
+ YouTube Link: https://youtu.be/o2J2mdbcrD0 
 </ul>
