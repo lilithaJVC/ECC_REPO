@@ -36,6 +36,17 @@ A unique feature that allows students to showcase their businesses on the platfo
 </p>
 
 <div style="text-align: center;">
+    <h1>Project Overview </h1>
+</div>
+<p>User Authentication: Ensures secure, role-based access for students, mentors, and administrators.</p>
+<p>Resource Accessibility: Students can access business proposal templates, and chat with peers.</p>
+<p>Business Proposal Submissions: Students can submit their proposals to mentors for feedback.</p>
+<p>Funding Guide Submissions: Students can submit their funding plans to mentors for review.</p>
+<p>Networking: Facilitates collaboration between students for idea sharing.</p>
+<p>Feedback Mechanism: Mentors provide feedback on business proposals and funding guides.</p>
+<p>Business Showcase: Users can show off their buinesses to other students</p>
+
+<div style="text-align: center;">
     <h1>Technology Stack Details</h1>
 </div>
 
