@@ -99,8 +99,6 @@ The Entrepreneurship Support Platform is a comprehensive tool designed to empowe
 - **Scalable Infrastructure**  
   - Designed to accommodate growing user bases and expanding functionality.  
 
----
-
 <li></li>
 <div style="text-align: center;">
     <h1>Project Overview </h1>
