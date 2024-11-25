@@ -32,9 +32,76 @@ A unique feature that allows students to showcase their businesses on the platfo
 <div style="text-align: center;">
     <h1>Usage of the ECC Platform</h1>
 </div>
-<p>
-</p>
+# **Entrepreneurship Support Platform**
 
+The Entrepreneurship Support Platform is a comprehensive tool designed to empower students on their entrepreneurial journey by providing essential resources, mentorship, and networking opportunities.
+
+---
+
+## **Features**
+
+### **For Students**
+- **Access Resources**  
+  - Download business proposal templates and funding guides to structure and refine your ideas.  
+  - Utilize pre-designed templates to simplify the documentation process.  
+
+- **Submit Proposals**  
+  - Upload business proposals and funding plans for mentor feedback.  
+  - Receive detailed guidance to improve and align your plans with industry standards.  
+
+- **Collaborate and Network**  
+  - Connect with fellow students to exchange ideas, build teams, and share experiences.  
+  - Join discussions and brainstorm to innovate collaboratively.  
+
+- **Showcase Businesses**  
+  - Present your business ideas and achievements on the Business Showcase page.  
+  - Gain visibility among peers, mentors, and potential investors.  
+
+---
+
+### **For Mentors**
+- **Review Submissions**  
+  - Access student-submitted business proposals and funding guides.  
+  - Provide actionable feedback to help students strengthen their plans.  
+
+- **Offer Guidance**  
+  - Use the integrated chat function to mentor students, answer questions, and provide tailored advice.  
+
+- **Evaluate Ideas**  
+  - Review showcased businesses and identify students with potential for advanced opportunities or funding.  
+
+---
+
+### **For Administrators**
+- **Manage Users**  
+  - Control role-based access for students, mentors, and administrators.  
+  - Ensure a secure environment by managing account privileges.  
+
+- **Monitor Activity**  
+  - Oversee submissions, feedback, and user interactions for platform integrity.  
+
+- **Maintain Content**  
+  - Regularly update resources, business templates, and platform guidelines.  
+
+---
+
+## **General Platform Features**
+- **User Authentication**  
+  - Secure login ensures access to features based on user roles.  
+  - Protects user data and platform integrity.  
+
+- **Responsive Design**  
+  - Accessible on desktops, tablets, and smartphones.  
+  - Optimized for seamless navigation across devices.  
+
+- **Dynamic Feedback System**  
+  - Students receive real-time notifications when mentors provide feedback.  
+
+- **Scalable Infrastructure**  
+  - Designed to accommodate growing user bases and expanding functionality.  
+
+---
+<li></li>
 <div style="text-align: center;">
     <h1>Project Overview </h1>
 </div>
